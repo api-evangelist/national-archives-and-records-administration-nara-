@@ -1,15 +1,22 @@
-name: national-archives-and-records-administration-nara-
-description: Needs a description.
-image: https://kinlane-productions2.s3.amazonaws.com/apis-json-icons/apis-json.png
-url: https://example.com/apis/apis.yml
-type: Contract
+aid: national-archives-and-records-administration-nara-
+name: National Archives and Records Administration (NARA)
+description: The National Archives and Records Administration (NARA) is the nation's record keeper, preserving and providing access to federal government records that document the rights of American citizens and the actions of their government.
+type: Index
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+url: https://www.archives.gov/developer
 created: '2024-12-25'
-modified: '2024-12-25'
-specificationVersion: '0.18'
+modified: '2026-03-16'
+specificationVersion: '0.19'
 tags:
-  - Tag
+  - Federal Government
+  - Archives
+  - Records
 apis: []
-common: []
+common:
+  - type: Website
+    url: https://www.archives.gov/
+  - type: Portal
+    url: https://www.archives.gov/developer
 maintainers:
-  - FN: API Evangelist
-    email: info@apievangelist.com
+  - FN: Kin Lane
+    email: kin@apievangelist.com
