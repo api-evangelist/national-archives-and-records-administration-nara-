@@ -1,0 +1,328 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: NextGen Catalog API — Comments
+  description: 'NextGen Catalog API — Comments. 7 operations. Lead operation: Add a comment.. Self-contained Naftiko capability
+    covering one National Archives And Records Administration Nara business surface.'
+  tags:
+  - National Archives And Records Administration Nara
+  - Comments
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NATIONAL_ARCHIVES_AND_RECORDS_ADMINISTRATION_NARA_API_KEY: NATIONAL_ARCHIVES_AND_RECORDS_ADMINISTRATION_NARA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: national-archives-and-records-administration-nara--comments
+    baseUri: https://catalog.archives.gov/api/v2
+    description: NextGen Catalog API — Comments business capability. Self-contained, no shared references.
+    resources:
+    - name: comments
+      path: /comments/
+      operations:
+      - name: post
+        method: POST
+        description: Add a comment.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: comments-naId-naId
+      path: /comments/naId/{naId}
+      operations:
+      - name: get
+        method: GET
+        description: Get comments by their parent record's naId.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: naId
+          in: path
+          type: string
+          description: naId of parent record whose comments to return
+          required: true
+    - name: comments-search
+      path: /comments/search
+      operations:
+      - name: get
+        method: GET
+        description: Get search results for comment data by sending a request with search parameters to the catalog.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: comments-userId-userId
+      path: /comments/userId/{userId}
+      operations:
+      - name: get
+        method: GET
+        description: Get comments by their contributor's userId.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: userId
+          in: path
+          type: string
+          description: userId of contributor whose comments to return
+          required: true
+    - name: comments-contributionId
+      path: /comments/{contributionId}
+      operations:
+      - name: patch
+        method: PATCH
+        description: Update a comment.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: contributionId
+          in: path
+          type: string
+          description: contributionId of comment to update
+          required: true
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+      - name: delete
+        method: DELETE
+        description: Deactivate/remove a comment.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: contributionId
+          in: path
+          type: string
+          description: contributionId of a comment to be deactivated/removed.
+          required: true
+        - name: userId
+          in: body
+          type: string
+          description: userId of the user that created the comment to be deactivated/removed.
+          required: true
+        - name: justificationId
+          in: body
+          type: number
+          description: justificationId for the comment being deactivated/removed. Defaults to
+        - name: actionNotes
+          in: body
+          type: string
+          description: Additional notes for the comment being deactivated/removed. Defaults to the empty string.
+    - name: comments-id
+      path: /comments/{id}
+      operations:
+      - name: get
+        method: GET
+        description: Get a single comment object by comment id.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: national-archives-and-records-administration-nara--comments-rest
+    port: 8080
+    description: REST adapter for NextGen Catalog API — Comments. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/comments
+      name: comments
+      description: REST surface for comments.
+      operations:
+      - method: POST
+        name: post
+        description: Add a comment.
+        call: national-archives-and-records-administration-nara--comments.post
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/comments/naid/{naid}
+      name: comments-naid-naid
+      description: REST surface for comments-naId-naId.
+      operations:
+      - method: GET
+        name: get
+        description: Get comments by their parent record's naId.
+        call: national-archives-and-records-administration-nara--comments.get
+        with:
+          naId: rest.naId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/comments/search
+      name: comments-search
+      description: REST surface for comments-search.
+      operations:
+      - method: GET
+        name: get
+        description: Get search results for comment data by sending a request with search parameters to the catalog.
+        call: national-archives-and-records-administration-nara--comments.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/comments/userid/{userid}
+      name: comments-userid-userid
+      description: REST surface for comments-userId-userId.
+      operations:
+      - method: GET
+        name: get
+        description: Get comments by their contributor's userId.
+        call: national-archives-and-records-administration-nara--comments.get
+        with:
+          userId: rest.userId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/comments/{contributionid}
+      name: comments-contributionid
+      description: REST surface for comments-contributionId.
+      operations:
+      - method: PATCH
+        name: patch
+        description: Update a comment.
+        call: national-archives-and-records-administration-nara--comments.patch
+        with:
+          contributionId: rest.contributionId
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+      - method: DELETE
+        name: delete
+        description: Deactivate/remove a comment.
+        call: national-archives-and-records-administration-nara--comments.delete
+        with:
+          contributionId: rest.contributionId
+          userId: rest.userId
+          justificationId: rest.justificationId
+          actionNotes: rest.actionNotes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/comments/{id}
+      name: comments-id
+      description: REST surface for comments-id.
+      operations:
+      - method: GET
+        name: get
+        description: Get a single comment object by comment id.
+        call: national-archives-and-records-administration-nara--comments.get
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: national-archives-and-records-administration-nara--comments-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for NextGen Catalog API — Comments. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: add-comment
+      description: Add a comment.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: national-archives-and-records-administration-nara--comments.post
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-comments-their-parent-record-s
+      description: Get comments by their parent record's naId.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: national-archives-and-records-administration-nara--comments.get
+      with:
+        naId: tools.naId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-search-results-comment-data
+      description: Get search results for comment data by sending a request with search parameters to the catalog.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: national-archives-and-records-administration-nara--comments.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-comments-their-contributor-s-userid
+      description: Get comments by their contributor's userId.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: national-archives-and-records-administration-nara--comments.get
+      with:
+        userId: tools.userId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-comment
+      description: Update a comment.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: national-archives-and-records-administration-nara--comments.patch
+      with:
+        contributionId: tools.contributionId
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deactivate-remove-comment
+      description: Deactivate/remove a comment.
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: national-archives-and-records-administration-nara--comments.delete
+      with:
+        contributionId: tools.contributionId
+        userId: tools.userId
+        justificationId: tools.justificationId
+        actionNotes: tools.actionNotes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-single-comment-object-comment
+      description: Get a single comment object by comment id.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: national-archives-and-records-administration-nara--comments.get
+      outputParameters:
+      - type: object
+        mapping: $.

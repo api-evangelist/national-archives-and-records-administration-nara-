@@ -1,0 +1,173 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: NextGen Catalog API — Online Availability
+  description: 'NextGen Catalog API — Online Availability. 4 operations. Lead operation: Get all online availability information..
+    Self-contained Naftiko capability covering one National Archives And Records Administration Nara business surface.'
+  tags:
+  - National Archives And Records Administration Nara
+  - Online Availability
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NATIONAL_ARCHIVES_AND_RECORDS_ADMINISTRATION_NARA_API_KEY: NATIONAL_ARCHIVES_AND_RECORDS_ADMINISTRATION_NARA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: national-archives-and-records-administration-nara--online-availability
+    baseUri: https://catalog.archives.gov/api/v2
+    description: NextGen Catalog API — Online Availability business capability. Self-contained, no shared references.
+    resources:
+    - name: online-availability
+      path: /online-availability
+      operations:
+      - name: get
+        method: GET
+        description: Get all online availability information.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: online-availability-delete
+      path: /online-availability/delete
+      operations:
+      - name: delete
+        method: DELETE
+        description: Completely remove online availability information for a given record naId.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: online-availability-naId-naId
+      path: /online-availability/naId/{naId}
+      operations:
+      - name: get
+        method: GET
+        description: Get all online availability information for a record with the given naId.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: online-availability-update
+      path: /online-availability/update
+      operations:
+      - name: put
+        method: PUT
+        description: Update or insert online availability information given a record's naId.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+  exposes:
+  - type: rest
+    namespace: national-archives-and-records-administration-nara--online-availability-rest
+    port: 8080
+    description: REST adapter for NextGen Catalog API — Online Availability. One Spectral-compliant resource per consumed
+      operation, prefixed with /v1.
+    resources:
+    - path: /v1/online-availability
+      name: online-availability
+      description: REST surface for online-availability.
+      operations:
+      - method: GET
+        name: get
+        description: Get all online availability information.
+        call: national-archives-and-records-administration-nara--online-availability.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/online-availability/delete
+      name: online-availability-delete
+      description: REST surface for online-availability-delete.
+      operations:
+      - method: DELETE
+        name: delete
+        description: Completely remove online availability information for a given record naId.
+        call: national-archives-and-records-administration-nara--online-availability.delete
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/online-availability/naid/{naid}
+      name: online-availability-naid-naid
+      description: REST surface for online-availability-naId-naId.
+      operations:
+      - method: GET
+        name: get
+        description: Get all online availability information for a record with the given naId.
+        call: national-archives-and-records-administration-nara--online-availability.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/online-availability/update
+      name: online-availability-update
+      description: REST surface for online-availability-update.
+      operations:
+      - method: PUT
+        name: put
+        description: Update or insert online availability information given a record's naId.
+        call: national-archives-and-records-administration-nara--online-availability.put
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: national-archives-and-records-administration-nara--online-availability-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for NextGen Catalog API — Online Availability. One tool per consumed operation, routed inline
+      through this capability's consumes block.
+    tools:
+    - name: get-all-online-availability-information
+      description: Get all online availability information.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: national-archives-and-records-administration-nara--online-availability.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: completely-remove-online-availability-information
+      description: Completely remove online availability information for a given record naId.
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: national-archives-and-records-administration-nara--online-availability.delete
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-all-online-availability-information-2
+      description: Get all online availability information for a record with the given naId.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: national-archives-and-records-administration-nara--online-availability.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: update-insert-online-availability-information
+      description: Update or insert online availability information given a record's naId.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: true
+      call: national-archives-and-records-administration-nara--online-availability.put
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.

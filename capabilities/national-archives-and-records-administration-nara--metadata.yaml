@@ -1,0 +1,78 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: NextGen Catalog API — Metadata
+  description: 'NextGen Catalog API — Metadata. 1 operations. Lead operation: Get digital object IDs by matching Ancestry
+    metadata in partner-metadata index.. Self-contained Naftiko capability covering one National Archives And Records Administration
+    Nara business surface.'
+  tags:
+  - National Archives And Records Administration Nara
+  - Metadata
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NATIONAL_ARCHIVES_AND_RECORDS_ADMINISTRATION_NARA_API_KEY: NATIONAL_ARCHIVES_AND_RECORDS_ADMINISTRATION_NARA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: national-archives-and-records-administration-nara--metadata
+    baseUri: https://catalog.archives.gov/api/v2
+    description: NextGen Catalog API — Metadata business capability. Self-contained, no shared references.
+    resources:
+    - name: metadata-naid-availability-naid-naId
+      path: /metadata/naid-availability/naid/{naId}
+      operations:
+      - name: get
+        method: GET
+        description: Get digital object IDs by matching Ancestry metadata in partner-metadata index.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: naId
+          in: path
+          type: string
+          description: The naid to search for in the partner-metadata index.
+          required: true
+  exposes:
+  - type: rest
+    namespace: national-archives-and-records-administration-nara--metadata-rest
+    port: 8080
+    description: REST adapter for NextGen Catalog API — Metadata. One Spectral-compliant resource per consumed operation,
+      prefixed with /v1.
+    resources:
+    - path: /v1/metadata/naid-availability/naid/{naid}
+      name: metadata-naid-availability-naid-naid
+      description: REST surface for metadata-naid-availability-naid-naId.
+      operations:
+      - method: GET
+        name: get
+        description: Get digital object IDs by matching Ancestry metadata in partner-metadata index.
+        call: national-archives-and-records-administration-nara--metadata.get
+        with:
+          naId: rest.naId
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: national-archives-and-records-administration-nara--metadata-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for NextGen Catalog API — Metadata. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-digital-object-ids-matching
+      description: Get digital object IDs by matching Ancestry metadata in partner-metadata index.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: national-archives-and-records-administration-nara--metadata.get
+      with:
+        naId: tools.naId
+      outputParameters:
+      - type: object
+        mapping: $.

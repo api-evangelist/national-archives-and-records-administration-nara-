@@ -1,0 +1,270 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: NextGen Catalog API — Records
+  description: 'NextGen Catalog API — Records. 7 operations. Lead operation: Get records which are immediate children of a
+    specified parentNaId.. Self-contained Naftiko capability covering one National Archives And Records Administration Nara
+    business surface.'
+  tags:
+  - National Archives And Records Administration Nara
+  - Records
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NATIONAL_ARCHIVES_AND_RECORDS_ADMINISTRATION_NARA_API_KEY: NATIONAL_ARCHIVES_AND_RECORDS_ADMINISTRATION_NARA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: national-archives-and-records-administration-nara--records
+    baseUri: https://catalog.archives.gov/api/v2
+    description: NextGen Catalog API — Records business capability. Self-contained, no shared references.
+    resources:
+    - name: records-parentNaId-parentNaId
+      path: /records/parentNaId/{parentNaId}
+      operations:
+      - name: get
+        method: GET
+        description: Get records which are immediate children of a specified parentNaId.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: parentNaId
+          in: path
+          type: string
+          description: id of parent whose immediate children to return
+          required: true
+    - name: records-search
+      path: /records/search
+      operations:
+      - name: get
+        method: GET
+        description: Get records by using url parameters to perform a catalog search.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: records-search-by-comment
+      path: /records/search/by-comment
+      operations:
+      - name: get
+        method: GET
+        description: Get records related to comments by using url parameters to perform a catalog search.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: records-search-by-contribution
+      path: /records/search/by-contribution
+      operations:
+      - name: get
+        method: GET
+        description: Get records related to contributions by using url parameters to perform a catalog search.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: records-search-by-other-extracted-text
+      path: /records/search/by-other-extracted-text
+      operations:
+      - name: get
+        method: GET
+        description: Get records by using other extracted text to perform a catalog search.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: records-search-by-tag
+      path: /records/search/by-tag
+      operations:
+      - name: get
+        method: GET
+        description: Get records related to tags by using url parameters to perform a catalog search.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: records-search-by-transcription
+      path: /records/search/by-transcription
+      operations:
+      - name: get
+        method: GET
+        description: Get records related to transcriptions by using url parameters to perform a catalog search.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: national-archives-and-records-administration-nara--records-rest
+    port: 8080
+    description: REST adapter for NextGen Catalog API — Records. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/records/parentnaid/{parentnaid}
+      name: records-parentnaid-parentnaid
+      description: REST surface for records-parentNaId-parentNaId.
+      operations:
+      - method: GET
+        name: get
+        description: Get records which are immediate children of a specified parentNaId.
+        call: national-archives-and-records-administration-nara--records.get
+        with:
+          parentNaId: rest.parentNaId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/records/search
+      name: records-search
+      description: REST surface for records-search.
+      operations:
+      - method: GET
+        name: get
+        description: Get records by using url parameters to perform a catalog search.
+        call: national-archives-and-records-administration-nara--records.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/records/search/by-comment
+      name: records-search-by-comment
+      description: REST surface for records-search-by-comment.
+      operations:
+      - method: GET
+        name: get
+        description: Get records related to comments by using url parameters to perform a catalog search.
+        call: national-archives-and-records-administration-nara--records.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/records/search/by-contribution
+      name: records-search-by-contribution
+      description: REST surface for records-search-by-contribution.
+      operations:
+      - method: GET
+        name: get
+        description: Get records related to contributions by using url parameters to perform a catalog search.
+        call: national-archives-and-records-administration-nara--records.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/records/search/by-other-extracted-text
+      name: records-search-by-other-extracted-text
+      description: REST surface for records-search-by-other-extracted-text.
+      operations:
+      - method: GET
+        name: get
+        description: Get records by using other extracted text to perform a catalog search.
+        call: national-archives-and-records-administration-nara--records.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/records/search/by-tag
+      name: records-search-by-tag
+      description: REST surface for records-search-by-tag.
+      operations:
+      - method: GET
+        name: get
+        description: Get records related to tags by using url parameters to perform a catalog search.
+        call: national-archives-and-records-administration-nara--records.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/records/search/by-transcription
+      name: records-search-by-transcription
+      description: REST surface for records-search-by-transcription.
+      operations:
+      - method: GET
+        name: get
+        description: Get records related to transcriptions by using url parameters to perform a catalog search.
+        call: national-archives-and-records-administration-nara--records.get
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: national-archives-and-records-administration-nara--records-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for NextGen Catalog API — Records. One tool per consumed operation, routed inline through this
+      capability's consumes block.
+    tools:
+    - name: get-records-which-are-immediate
+      description: Get records which are immediate children of a specified parentNaId.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: national-archives-and-records-administration-nara--records.get
+      with:
+        parentNaId: tools.parentNaId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-records-using-url-parameters
+      description: Get records by using url parameters to perform a catalog search.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: national-archives-and-records-administration-nara--records.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-records-related-comments-using
+      description: Get records related to comments by using url parameters to perform a catalog search.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: national-archives-and-records-administration-nara--records.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-records-related-contributions-using
+      description: Get records related to contributions by using url parameters to perform a catalog search.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: national-archives-and-records-administration-nara--records.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-records-using-other-extracted
+      description: Get records by using other extracted text to perform a catalog search.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: national-archives-and-records-administration-nara--records.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-records-related-tags-using
+      description: Get records related to tags by using url parameters to perform a catalog search.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: national-archives-and-records-administration-nara--records.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-records-related-transcriptions-using
+      description: Get records related to transcriptions by using url parameters to perform a catalog search.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: national-archives-and-records-administration-nara--records.get
+      outputParameters:
+      - type: object
+        mapping: $.

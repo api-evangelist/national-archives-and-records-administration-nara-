@@ -1,0 +1,286 @@
+naftiko: 1.0.0-alpha2
+info:
+  label: NextGen Catalog API — Tags
+  description: 'NextGen Catalog API — Tags. 6 operations. Lead operation: Add a tag.. Self-contained Naftiko capability covering
+    one National Archives And Records Administration Nara business surface.'
+  tags:
+  - National Archives And Records Administration Nara
+  - Tags
+  created: '2026-05-19'
+  modified: '2026-05-19'
+binds:
+- namespace: env
+  keys:
+    NATIONAL_ARCHIVES_AND_RECORDS_ADMINISTRATION_NARA_API_KEY: NATIONAL_ARCHIVES_AND_RECORDS_ADMINISTRATION_NARA_API_KEY
+capability:
+  consumes:
+  - type: http
+    namespace: national-archives-and-records-administration-nara--tags
+    baseUri: https://catalog.archives.gov/api/v2
+    description: NextGen Catalog API — Tags business capability. Self-contained, no shared references.
+    resources:
+    - name: tags
+      path: /tags/
+      operations:
+      - name: post
+        method: POST
+        description: Add a tag.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: body
+          in: body
+          type: object
+          description: Request body (JSON).
+          required: true
+    - name: tags-:contributionId
+      path: /tags/:contributionId
+      operations:
+      - name: delete
+        method: DELETE
+        description: Deactivate/remove a tag.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: contributionId
+          in: path
+          type: string
+          description: contributionId of a tag to be deactivated/removed.
+          required: true
+        - name: userId
+          in: body
+          type: string
+          description: userId of the user that created the tag to be deactivated/removed.
+          required: true
+        - name: justificationId
+          in: body
+          type: number
+          description: justificationId for the tag being deactivated/removed. Defaults to
+        - name: actionNotes
+          in: body
+          type: string
+          description: Additional notes for the tag being deactivated/removed. Defaults to the empty string.
+    - name: tags-naId-naId
+      path: /tags/naId/{naId}
+      operations:
+      - name: get
+        method: GET
+        description: Get tags by their parent record's naId.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: naId
+          in: path
+          type: string
+          description: naId of parent record whose tags to return
+          required: true
+    - name: tags-search
+      path: /tags/search
+      operations:
+      - name: get
+        method: GET
+        description: Get search results for tag data by sending a request with search parameters to the catalog.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+    - name: tags-userId-userId
+      path: /tags/userId/{userId}
+      operations:
+      - name: get
+        method: GET
+        description: Get tags by their contributor's userId.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+        inputParameters:
+        - name: userId
+          in: path
+          type: string
+          description: userId of tag to return
+          required: true
+    - name: tags-id
+      path: /tags/{id}
+      operations:
+      - name: get
+        method: GET
+        description: Get a single tag object by tag id.
+        outputRawFormat: json
+        outputParameters:
+        - name: result
+          type: object
+          value: $.
+  exposes:
+  - type: rest
+    namespace: national-archives-and-records-administration-nara--tags-rest
+    port: 8080
+    description: REST adapter for NextGen Catalog API — Tags. One Spectral-compliant resource per consumed operation, prefixed
+      with /v1.
+    resources:
+    - path: /v1/tags
+      name: tags
+      description: REST surface for tags.
+      operations:
+      - method: POST
+        name: post
+        description: Add a tag.
+        call: national-archives-and-records-administration-nara--tags.post
+        with:
+          body: rest.body
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tags/contributionid
+      name: tags-contributionid
+      description: REST surface for tags-:contributionId.
+      operations:
+      - method: DELETE
+        name: delete
+        description: Deactivate/remove a tag.
+        call: national-archives-and-records-administration-nara--tags.delete
+        with:
+          contributionId: rest.contributionId
+          userId: rest.userId
+          justificationId: rest.justificationId
+          actionNotes: rest.actionNotes
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tags/naid/{naid}
+      name: tags-naid-naid
+      description: REST surface for tags-naId-naId.
+      operations:
+      - method: GET
+        name: get
+        description: Get tags by their parent record's naId.
+        call: national-archives-and-records-administration-nara--tags.get
+        with:
+          naId: rest.naId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tags/search
+      name: tags-search
+      description: REST surface for tags-search.
+      operations:
+      - method: GET
+        name: get
+        description: Get search results for tag data by sending a request with search parameters to the catalog.
+        call: national-archives-and-records-administration-nara--tags.get
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tags/userid/{userid}
+      name: tags-userid-userid
+      description: REST surface for tags-userId-userId.
+      operations:
+      - method: GET
+        name: get
+        description: Get tags by their contributor's userId.
+        call: national-archives-and-records-administration-nara--tags.get
+        with:
+          userId: rest.userId
+        outputParameters:
+        - type: object
+          mapping: $.
+    - path: /v1/tags/{id}
+      name: tags-id
+      description: REST surface for tags-id.
+      operations:
+      - method: GET
+        name: get
+        description: Get a single tag object by tag id.
+        call: national-archives-and-records-administration-nara--tags.get
+        outputParameters:
+        - type: object
+          mapping: $.
+  - type: mcp
+    namespace: national-archives-and-records-administration-nara--tags-mcp
+    port: 9090
+    transport: http
+    description: MCP adapter for NextGen Catalog API — Tags. One tool per consumed operation, routed inline through this capability's
+      consumes block.
+    tools:
+    - name: add-tag
+      description: Add a tag.
+      hints:
+        readOnly: false
+        destructive: false
+        idempotent: false
+      call: national-archives-and-records-administration-nara--tags.post
+      with:
+        body: tools.body
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: deactivate-remove-tag
+      description: Deactivate/remove a tag.
+      hints:
+        readOnly: false
+        destructive: true
+        idempotent: true
+      call: national-archives-and-records-administration-nara--tags.delete
+      with:
+        contributionId: tools.contributionId
+        userId: tools.userId
+        justificationId: tools.justificationId
+        actionNotes: tools.actionNotes
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-tags-their-parent-record-s
+      description: Get tags by their parent record's naId.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: national-archives-and-records-administration-nara--tags.get
+      with:
+        naId: tools.naId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-search-results-tag-data
+      description: Get search results for tag data by sending a request with search parameters to the catalog.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: national-archives-and-records-administration-nara--tags.get
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-tags-their-contributor-s-userid
+      description: Get tags by their contributor's userId.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: national-archives-and-records-administration-nara--tags.get
+      with:
+        userId: tools.userId
+      outputParameters:
+      - type: object
+        mapping: $.
+    - name: get-single-tag-object-tag
+      description: Get a single tag object by tag id.
+      hints:
+        readOnly: true
+        destructive: false
+        idempotent: true
+      call: national-archives-and-records-administration-nara--tags.get
+      outputParameters:
+      - type: object
+        mapping: $.
