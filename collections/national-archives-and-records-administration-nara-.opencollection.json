@@ -1,0 +1,2460 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NextGen Catalog API",
+    "version": "0.2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Records",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get records by using url parameters to perform a catalog search.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/records/search",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases (\"\")."
+              },
+              {
+                "name": "page",
+                "value": "20",
+                "type": "query",
+                "description": "Page number of the paginated result set in which to return."
+              },
+              {
+                "name": "limit",
+                "value": "75",
+                "type": "query",
+                "description": "Maximum number of results returned for each page of paginated data."
+              },
+              {
+                "name": "searchAfter",
+                "value": "12345",
+                "type": "query",
+                "description": "Enables deep pagination to retrieve records beyond the first 10,000 results.  Not compatible with sort, or page parameters.\n\nFor the inital request use `searchAfter=`* and for all subsequent requests set `searchAfter` to the value of the sort array in the last member of `body.hits.hits` for each page.\n"
+              },
+              {
+                "name": "sourceIncludes",
+                "value": "naId,title,digitalObjects.objectUrl",
+                "type": "query",
+                "description": "Limits the response by specifying which fields from `_source.record` should be included in the response."
+              },
+              {
+                "name": "title",
+                "value": "",
+                "type": "query",
+                "description": "A title search string used to search for a record. Matches record.title fields within decsription records and record.heading fields within authority records."
+              },
+              {
+                "name": "title_is",
+                "value": "",
+                "type": "query",
+                "description": "An exact title of a record. Fully matches record.title fields within description records and record.heading fields within authority records."
+              },
+              {
+                "name": "naId",
+                "value": "146919092, 146919093",
+                "type": "query",
+                "description": "An array of NARA-specific identifiers, each of which is unique to a single record."
+              },
+              {
+                "name": "naId_is",
+                "value": "146919092",
+                "type": "query",
+                "description": "An exact NARA-specific identifier to locate a specific record. This currently functions exactly as naId."
+              },
+              {
+                "name": "digitalObjectCount",
+                "value": "",
+                "type": "query",
+                "description": "Gets a count of Digital Objects"
+              },
+              {
+                "name": "availableOnline",
+                "value": "",
+                "type": "query",
+                "description": "Refers to records at the Item and File Unit levels which contain digital objects and can be viewed online"
+              },
+              {
+                "name": "levelOfDescription",
+                "value": "",
+                "type": "query",
+                "description": "Describes the NARA-specific hierarchical level in which a record exists."
+              },
+              {
+                "name": "personOrOrg",
+                "value": "",
+                "type": "query",
+                "description": "Refers to the heading of authoity records, or headings of roles in archival descriptions. Results can be either descriptions or authority records."
+              },
+              {
+                "name": "dataSource",
+                "value": "",
+                "type": "query",
+                "description": "Describes the type of record as either a description or an authority."
+              },
+              {
+                "name": "typeOfMaterials",
+                "value": "",
+                "type": "query",
+                "description": "Describes the type(s) of materials associated with an Archival Description"
+              },
+              {
+                "name": "controlNumbers",
+                "value": "1667751",
+                "type": "query",
+                "description": "Specifies an All Control Numbers search string used to search for an archival record and returns Archival Descriptions that contain the keywords in one of the following fields:\n\n* record.accessionNumbers.keyword\n* record.localIdentifier.keyword\n* record.importRecordControlNumber.keyword\n* record.internalTransferNumbers.keyword\n* record.naId\n* record.recordsCenterTransferNumbers.keyword\n* record.variantControlNumbers.number.keyword\n* record.microformPublications.identifier.keyword\n"
+              },
+              {
+                "name": "localIdentifier",
+                "value": "21-A-1, 21-A-2",
+                "type": "query",
+                "description": "A search query string used to search on record.localIdentifier.keyword and returns Archival Descriptions that contain the keywords in the Local Identifier field."
+              },
+              {
+                "name": "localIdentifier_is",
+                "value": "121-BA-7112C",
+                "type": "query",
+                "description": "Specifies an exact, full Local Identifier associated with an archival record and returns an Archival Description which contain this ID."
+              },
+              {
+                "name": "microformPublicationsIdentifier",
+                "value": "M236, T498",
+                "type": "query",
+                "description": "A search query string used to search on record.microformPublications.identifier.keyword and returns Archival Descriptions that contain the keywords in the Microform Publication Identifier field."
+              },
+              {
+                "name": "microformPublicationsIdentifier_is",
+                "value": "M236",
+                "type": "query",
+                "description": "Specifies an exact, full Microform Publications Identifier associated with an archival record and returns an Archival Description which contain this ID."
+              },
+              {
+                "name": "variantControlNumber_is",
+                "value": "HD1-318515834",
+                "type": "query",
+                "description": "Specifies an exact, full Variant Control Number associated with an archival record and returns an Archival Description which contain this Variant Control Number."
+              },
+              {
+                "name": "variantControlType",
+                "value": "HMS Asset ID",
+                "type": "query",
+                "description": "Specifies an type of Variant Control Number associated with archival record(s), and returns all Archival Descriptions which contain a Variant Control Type with these keywords."
+              },
+              {
+                "name": "variantControlType_is",
+                "value": "HMS Asset ID",
+                "type": "query",
+                "description": "Specifies an exact type of Variant Control Number associated with archival record(s) and returns all Archival Descriptions which contain this exact Variant Control Type."
+              },
+              {
+                "name": "controlGroup",
+                "value": "358",
+                "type": "query",
+                "description": "Specifies a Control Group number associated with an archival record and returns an Archival Description or Archival Descriptions within this Control Group."
+              },
+              {
+                "name": "collectionIdentifier",
+                "value": "DDE-1021",
+                "type": "query",
+                "description": "A parameter which searches records against the record.collectionIdentifier and record.ancestors.collectionIdentifier fields."
+              },
+              {
+                "name": "recordGroupNumber",
+                "value": "428",
+                "type": "query",
+                "description": "A parameter which searches records against the record.recordGroupNumber and record.ancestors.recordGroupNumber fields."
+              },
+              {
+                "name": "creators",
+                "value": "Department of Defense. Department of the Navy. Naval Photographic Center. (12/1/1959 - ca. 1998)",
+                "type": "query",
+                "description": "A parameter which searches records against the record.creators.heading fields."
+              },
+              {
+                "name": "objectType",
+                "value": "JPG, PDF",
+                "type": "query",
+                "description": "A parameter which searches records against the record.digitalObjects.objectType field. Accepts multiple values separated by commas."
+              },
+              {
+                "name": "referenceUnits",
+                "value": "National Archives at College Park - Motion Pictures",
+                "type": "query",
+                "description": "A parameter which searches records against the record.physicalOccurrences.referenceUnits.name fields. Accepts multiple values separated by commas."
+              },
+              {
+                "name": "geographicReference",
+                "value": "Katmai, Mount (Alaska)",
+                "type": "query",
+                "description": "A parameter which searches records against the record.subjects.heading fields where the record.subjects.authorityType field is equal to geographicPlaceName."
+              },
+              {
+                "name": "ancestorNaId",
+                "value": "75284",
+                "type": "query",
+                "description": "Specifies the naId of an ancestor object in the hierarchy, by which to limit the search"
+              },
+              {
+                "name": "debug",
+                "value": "true",
+                "type": "query",
+                "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+              },
+              {
+                "name": "abbreviated",
+                "value": "true",
+                "type": "query",
+                "description": "Abbreviated results flag, which when true, returns a shorter version of the results."
+              },
+              {
+                "name": "startDate",
+                "value": "1920-01-01",
+                "type": "query",
+                "description": "Date representing the start date of a range of dates. Must be in YYYY-MM-DD, YYYY-MM, or YYYY format and must be in the same format as endDate parameter, if one is provided.\nOnly ancestors with levelOfDescription as 'series' will have their date fields searched.\n\nSearches the following date fields:\n* record.productionDates.logicalDate\n* record.copyrightDates.logicalDate\n* record.releaseDates.logicalDate\n* record.broadcastDates.logicalDate\n* record.coverageStartDate.logicalDate\n* record.coverageEndDate.logicalDate\n* record.inclusiveStartDate.logicalDate\n* record.inclusiveEndDate.logicalDate\n* record.ancestors.inclusiveStartDate.logicalDate\n* record.ancestors.inclusiveEndDate.logicalDate\n"
+              },
+              {
+                "name": "endDate",
+                "value": "2022-10-06",
+                "type": "query",
+                "description": "Date representing the end date of a range of dates. Must be in YYYY-MM-DD, YYYY-MM, or YYYY format and must be in the same format as startDate parameter, if one is provided.\nOnly ancestors with levelOfDescription as 'series' will have their date fields searched.\n\nSearches the following date fields:\n* record.productionDates.logicalDate\n* record.copyrightDates.logicalDate\n* record.releaseDates.logicalDate\n* record.broadcastDates.logicalDate\n* record.coverageStartDate.logicalDate\n* record.coverageEndDate.logicalDate\n* record.inclusiveStartDate.logicalDate\n* record.inclusiveEndDate.logicalDate\n* record.ancestors.inclusiveStartDate.logicalDate\n* record.ancestors.inclusiveEndDate.logicalDate\n"
+              },
+              {
+                "name": "fieldName_exists",
+                "value": "levelOfDescription_exists=true",
+                "type": "query",
+                "description": "A parameter specifying any field name in the form of [fieldName]_exists where, when equal to true, returns results where that field exists with non-null data. If false, returns results where the field does not exist. Accepts nested fields at any level, for example `ancestors.inclusiveEndDate_exists=true`"
+              },
+              {
+                "name": "contributions_exist",
+                "value": "",
+                "type": "query",
+                "description": "When equal to true, returns results which have contributions. If false, returns results which do not have any contributions."
+              },
+              {
+                "name": "tags_exist",
+                "value": "",
+                "type": "query",
+                "description": "When equal to true, returns results which have tags. If false, returns results which do not have any tags."
+              },
+              {
+                "name": "transcriptions_exist",
+                "value": "",
+                "type": "query",
+                "description": "When equal to true, returns results which have transcriptions. If false, returns results which do not have any transcriptions."
+              },
+              {
+                "name": "comments_exist",
+                "value": "",
+                "type": "query",
+                "description": "When equal to true, returns results which have comments. If false, returns results which do not have any comments."
+              },
+              {
+                "name": "exactDate",
+                "value": "2022-10-06",
+                "type": "query",
+                "description": "A single date. Must be in YYYY-MM-DD format.  Cannot be used with other date search parameters.  Used to search for records with dates that match exactly or that match the year and month but do not have a day\nOnly ancestors with levelOfDescription as 'series' will have their date fields searched.\n\nSearches the following date fields:\n* record.productionDates\n* record.copyrightDates\n* record.releaseDates\n* record.broadcastDates\n* record.coverageStartDate\n* record.coverageEndDate\n* record.inclusiveStartDate\n* record.inclusiveEndDate\n* record.ancestors.inclusiveStartDate\n* record.ancestors.inclusiveEndDate\n"
+              },
+              {
+                "name": "fieldName_is_not",
+                "value": "title_is_not=1974%20Ottawa%20NWR",
+                "type": "query",
+                "description": "A parameter specifying any field name in the form of [fieldName]_is_not where, when equal to the given value, will be excluded from the search results. Including nonexistent/invalid fields will return an appropriate error response."
+              },
+              {
+                "name": "recurringDateDay",
+                "value": "31",
+                "type": "query",
+                "description": "A day in DD format. Often used with recurringDateMonth. Used to search for records with date fields that match the day, regardless of the year.\nOnly ancestors with levelOfDescription as 'series' will have their date fields searched.\n\nSearches the following date fields:\n* record.productionDates.day\n* record.copyrightDates.day\n* record.releaseDates.day\n* record.broadcastDates.day\n* record.coverageStartDate.day\n* record.coverageEndDate.day\n* record.inclusiveStartDate.day\n* record.inclusiveEndDate.day\n* record.ancestors.inclusiveStartDate.day\n* record.ancestors.inclusiveEndDate.day\n"
+              },
+              {
+                "name": "recurringDateMonth",
+                "value": "12",
+                "type": "query",
+                "description": "A month in MM format. Often used with recurringDateDay. Used to search for recorrds with date fields that match the month, regardless of the year.\nOnly ancestors with levelOfDescription as 'series' will have their date fields searched.\n\nSearches the following date fields\n* record.productionDates.month\n* record.copyrightDates.month\n* record.releaseDates.month\n* record.broadcastDates.month\n* record.coverageStartDate.month\n* record.coverageEndDate.month\n* record.inclusiveStartDate.month\n* record.inclusiveEndDate.month\n* record.ancestors.inclusiveStartDate.month\n* record.ancestors.inclusiveEndDate.month\n"
+              },
+              {
+                "name": "beginCongress",
+                "value": "2",
+                "type": "query",
+                "description": "Filters search results to just those from this congress or later. Based on `record.beginCongress` field."
+              },
+              {
+                "name": "endCongress",
+                "value": "100",
+                "type": "query",
+                "description": "Filters search results to just those from this congress or earlier. Based on `record.endCongress` field."
+              },
+              {
+                "name": "congressNumber",
+                "value": "55",
+                "type": "query",
+                "description": "Filters search results to whose range of congresses includes this value. Based on `record.beginCongress` and `record.endCongress`. Cannot be used with other congress parameters."
+              },
+              {
+                "name": "tagContribution",
+                "value": "",
+                "type": "query",
+                "description": "A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases (\"\") and searches for a tag contribution."
+              },
+              {
+                "name": "commentContribution",
+                "value": "",
+                "type": "query",
+                "description": "A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases (\"\") and searches for a comment contribution."
+              },
+              {
+                "name": "transcriptionContribution",
+                "value": "",
+                "type": "query",
+                "description": "A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases (\"\") and searches for a transcription contribution."
+              },
+              {
+                "name": "extractedTextContribution",
+                "value": "",
+                "type": "query",
+                "description": "A contribution search string used to search for a record. Matches the otherExtractedText.contribution or extractedText fields within digitalObjects."
+              },
+              {
+                "name": "includeExtractedText",
+                "value": "true",
+                "type": "query",
+                "description": "Allows for the inclusion of OCR text extracted from the digital object in `record.digitalObjects.extractedText` to be included in the response if any exists. Defaults to false."
+              },
+              {
+                "name": "includeOtherExtractedText",
+                "value": "true",
+                "type": "query",
+                "description": "Allows for the inclusion of other extracted text contributed by NARA partners in `record.digitalObjects.otherExtractedText` to be included in the response if any exists. Defaults to false."
+              },
+              {
+                "name": "ingestTimeStart",
+                "value": "2025-01-13",
+                "type": "query",
+                "description": "The ingestTimeStart parameter specifies the date or timestamp for fetching data.\n\nDate only format: YYYY-MM-DD\n    When provided in this format, the time defaults to 00:00:00.000000.\n    Example: 2025-01-13 → interpreted as 2025-01-13 00:00:00.000000\n\n Full timestamp format: YYYY-MM-DD HH:mm:ss.SSSSSS\n     When provided in this format, data will be fetched for the exact timestamp specified.\n     Example: 2025-01-13 14:30:15.123456 → data fetched at this precise datetime\n\nBehavior:\n   If both ingestTimeStart and ingestTimeEnd are provided, description records within that date/time range are retrieved.\n   If only ingestTimeStart is provided, description records on and after that date/time are retrieved.\n   If only ingestTimeEnd is provided, description records on and before that date/time are retrieved.\n"
+              },
+              {
+                "name": "ingestTimeEnd",
+                "value": "2025-01-13",
+                "type": "query",
+                "description": "The ingestTimeEnd parameter specifies the date or timestamp for fetching data.\n\nDate only format: YYYY-MM-DD\n    When provided in this format, the time defaults to 23:59:59.999999\n    Example: 2025-01-13 → interpreted as 2025-01-13 23:59:59.999999\n\n Full timestamp format: YYYY-MM-DD HH:mm:ss.SSSSSS\n     When provided in this format, data will be fetched for the exact timestamp specified.\n     Example: 2025-01-13 14:30:15.123456 → data fetched at this precise datetime\n\nBehavior:\n   If both ingestTimeStart and ingestTimeEnd are provided, description records within that date/time range are retrieved.\n   If only ingestTimeStart is provided, description records on and after that date/time are retrieved.\n   If only ingestTimeEnd is provided, description records on and before that date/time are retrieved.\n"
+              }
+            ]
+          },
+          "docs": "Get records by using url parameters to perform a catalog search. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get records by using other extracted text to perform a catalog search.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/records/search/by-other-extracted-text",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases (\"\")."
+              },
+              {
+                "name": "page",
+                "value": "20",
+                "type": "query",
+                "description": "Page number of the paginated result set in which to return."
+              },
+              {
+                "name": "limit",
+                "value": "75",
+                "type": "query",
+                "description": "Maximum number of results returned for each page of paginated data."
+              }
+            ]
+          },
+          "docs": "Get records by using other extracted text to perform a catalog search. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get records related to contributions by using url parameters to perform a catalog search.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/records/search/by-contribution",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases (\"\")."
+              },
+              {
+                "name": "id",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "An individual contribution's unique identifier which maps to the record.contributionId field"
+              },
+              {
+                "name": "userName",
+                "value": "johndoe1",
+                "type": "query",
+                "description": "Contributor's screen name which maps to the record.contributor.userName field"
+              },
+              {
+                "name": "userId",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "Contributor's unique identifier which maps to the record.contributor.userId field"
+              },
+              {
+                "name": "naId",
+                "value": "146919092, 146919093",
+                "type": "query",
+                "description": "An array of NARA-specific identifiers, each of which is unique to a single record."
+              },
+              {
+                "name": "debug",
+                "value": "true",
+                "type": "query",
+                "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+              },
+              {
+                "name": "abbreviated",
+                "value": "true",
+                "type": "query",
+                "description": "Abbreviated results flag, which when true, returns a shorter version of the results."
+              }
+            ]
+          },
+          "docs": "Get records related to contributions by using url parameters to perform a catalog search. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get records related to tags by using url parameters to perform a catalog search.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/records/search/by-tag",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases (\"\")."
+              },
+              {
+                "name": "id",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "An individual contribution's unique identifier which maps to the record.contributionId field"
+              },
+              {
+                "name": "userName",
+                "value": "johndoe1",
+                "type": "query",
+                "description": "Contributor's screen name which maps to the record.contributor.userName field"
+              },
+              {
+                "name": "userId",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "Contributor's unique identifier which maps to the record.contributor.userId field"
+              },
+              {
+                "name": "naId",
+                "value": "146919092, 146919093",
+                "type": "query",
+                "description": "An array of NARA-specific identifiers, each of which is unique to a single record."
+              },
+              {
+                "name": "page",
+                "value": "20",
+                "type": "query",
+                "description": "Page number of the paginated result set in which to return."
+              },
+              {
+                "name": "limit",
+                "value": "75",
+                "type": "query",
+                "description": "Maximum number of results returned for each page of paginated data."
+              },
+              {
+                "name": "tag_is",
+                "value": "Bill Clinton",
+                "type": "query",
+                "description": "Specifies exactly the tag by which to match the search to."
+              },
+              {
+                "name": "debug",
+                "value": "true",
+                "type": "query",
+                "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+              },
+              {
+                "name": "abbreviated",
+                "value": "true",
+                "type": "query",
+                "description": "Abbreviated results flag, which when true, returns a shorter version of the results."
+              }
+            ]
+          },
+          "docs": "Get records related to tags by using url parameters to perform a catalog search. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get records related to transcriptions by using url parameters to perform a catalog search.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/records/search/by-transcription",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases (\"\")."
+              },
+              {
+                "name": "id",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "An individual contribution's unique identifier which maps to the record.contributionId field"
+              },
+              {
+                "name": "userName",
+                "value": "johndoe1",
+                "type": "query",
+                "description": "Contributor's screen name which maps to the record.contributor.userName field"
+              },
+              {
+                "name": "userId",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "Contributor's unique identifier which maps to the record.contributor.userId field"
+              },
+              {
+                "name": "naId",
+                "value": "146919092, 146919093",
+                "type": "query",
+                "description": "An array of NARA-specific identifiers, each of which is unique to a single record."
+              },
+              {
+                "name": "page",
+                "value": "20",
+                "type": "query",
+                "description": "Page number of the paginated result set in which to return."
+              },
+              {
+                "name": "limit",
+                "value": "75",
+                "type": "query",
+                "description": "Maximum number of results returned for each page of paginated data."
+              },
+              {
+                "name": "debug",
+                "value": "true",
+                "type": "query",
+                "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+              },
+              {
+                "name": "abbreviated",
+                "value": "true",
+                "type": "query",
+                "description": "Abbreviated results flag, which when true, returns a shorter version of the results."
+              }
+            ]
+          },
+          "docs": "Get records related to transcriptions by using url parameters to perform a catalog search. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get records related to comments by using url parameters to perform a catalog search.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/records/search/by-comment",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases (\"\")."
+              },
+              {
+                "name": "id",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "An individual contribution's unique identifier which maps to the record.contributionId field"
+              },
+              {
+                "name": "userName",
+                "value": "johndoe1",
+                "type": "query",
+                "description": "Contributor's screen name which maps to the record.contributor.userName field"
+              },
+              {
+                "name": "userId",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "Contributor's unique identifier which maps to the record.contributor.userId field"
+              },
+              {
+                "name": "naId",
+                "value": "146919092, 146919093",
+                "type": "query",
+                "description": "An array of NARA-specific identifiers, each of which is unique to a single record."
+              },
+              {
+                "name": "page",
+                "value": "20",
+                "type": "query",
+                "description": "Page number of the paginated result set in which to return."
+              },
+              {
+                "name": "limit",
+                "value": "75",
+                "type": "query",
+                "description": "Maximum number of results returned for each page of paginated data."
+              },
+              {
+                "name": "debug",
+                "value": "true",
+                "type": "query",
+                "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+              },
+              {
+                "name": "abbreviated",
+                "value": "true",
+                "type": "query",
+                "description": "Abbreviated results flag, which when true, returns a shorter version of the results."
+              }
+            ]
+          },
+          "docs": "Get records related to comments by using url parameters to perform a catalog search. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get records which are immediate children of a specified parentNaId.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/records/parentNaId/:parentNaId",
+            "params": [
+              {
+                "name": "parentNaId",
+                "value": "7005",
+                "type": "path",
+                "description": "id of parent whose immediate children to return"
+              },
+              {
+                "name": "controlGroup",
+                "value": "358",
+                "type": "query",
+                "description": "Specifies a Control Group number associated with an archival record and returns an Archival Description or Archival Descriptions within this Control Group."
+              },
+              {
+                "name": "page",
+                "value": "20",
+                "type": "query",
+                "description": "Page number of the paginated result set in which to return."
+              },
+              {
+                "name": "limit",
+                "value": "75",
+                "type": "query",
+                "description": "Maximum number of results returned for each page of paginated data."
+              },
+              {
+                "name": "debug",
+                "value": "true",
+                "type": "query",
+                "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+              },
+              {
+                "name": "abbreviated",
+                "value": "true",
+                "type": "query",
+                "description": "Abbreviated results flag, which when true, returns a shorter version of the results."
+              },
+              {
+                "name": "ingestTimeStart",
+                "value": "2025-01-13",
+                "type": "query",
+                "description": "The ingestTimeStart parameter specifies the date or timestamp for fetching data.\n\nDate only format: YYYY-MM-DD\n    When provided in this format, the time defaults to 00:00:00.000000.\n    Example: 2025-01-13 → interpreted as 2025-01-13 00:00:00.000000\n\n Full timestamp format: YYYY-MM-DD HH:mm:ss.SSSSSS\n     When provided in this format, data will be fetched for the exact timestamp specified.\n     Example: 2025-01-13 14:30:15.123456 → data fetched at this precise datetime\n\nBehavior:\n   If both ingestTimeStart and ingestTimeEnd are provided, description records within that date/time range are retrieved.\n   If only ingestTimeStart is provided, description records on and after that date/time are retrieved.\n   If only ingestTimeEnd is provided, description records on and before that date/time are retrieved.\n"
+              },
+              {
+                "name": "ingestTimeEnd",
+                "value": "2025-01-13",
+                "type": "query",
+                "description": "The ingestTimeEnd parameter specifies the date or timestamp for fetching data.\n\nDate only format: YYYY-MM-DD\n    When provided in this format, the time defaults to 23:59:59.999999\n    Example: 2025-01-13 → interpreted as 2025-01-13 23:59:59.999999\n\n Full timestamp format: YYYY-MM-DD HH:mm:ss.SSSSSS\n     When provided in this format, data will be fetched for the exact timestamp specified.\n     Example: 2025-01-13 14:30:15.123456 → data fetched at this precise datetime\n\nBehavior:\n   If both ingestTimeStart and ingestTimeEnd are provided, description records within that date/time range are retrieved.\n   If only ingestTimeStart is provided, description records on and after that date/time are retrieved.\n   If only ingestTimeEnd is provided, description records on and before that date/time are retrieved.\n"
+              }
+            ]
+          },
+          "docs": "Get records which are immediate children of a specified parentNaId. Returns a JSON result."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Tags",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get search results for tag data by sending a request with search parameters to the catalog.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/tags/search",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases (\"\")."
+              },
+              {
+                "name": "id",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "An individual contribution's unique identifier which maps to the record.contributionId field"
+              },
+              {
+                "name": "userName",
+                "value": "johndoe1",
+                "type": "query",
+                "description": "Contributor's screen name which maps to the record.contributor.userName field"
+              },
+              {
+                "name": "userId",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "Contributor's unique identifier which maps to the record.contributor.userId field"
+              },
+              {
+                "name": "naId",
+                "value": "146919092, 146919093",
+                "type": "query",
+                "description": "An array of NARA-specific identifiers, each of which is unique to a single record."
+              },
+              {
+                "name": "debug",
+                "value": "true",
+                "type": "query",
+                "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+              }
+            ]
+          },
+          "docs": "Get search results for tag data by sending a request with search parameters to the catalog. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get a single tag object by tag id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/tags/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "An individual contribution's unique identifier which maps to the record.contributionId field"
+              },
+              {
+                "name": "debug",
+                "value": "true",
+                "type": "query",
+                "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+              }
+            ]
+          },
+          "docs": "Get a single tag object by tag id. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get tags by their parent record's naId.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/tags/naId/:naId",
+            "params": [
+              {
+                "name": "naId",
+                "value": "31124739",
+                "type": "path",
+                "description": "naId of parent record whose tags to return"
+              },
+              {
+                "name": "debug",
+                "value": "true",
+                "type": "query",
+                "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+              }
+            ]
+          },
+          "docs": "Get tags by their parent record's naId. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get tags by their contributor's userId.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/tags/userId/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "5b18f857-29d7-31a9-b944-f4e68c12fd3f",
+                "type": "path",
+                "description": "userId of tag to return"
+              },
+              {
+                "name": "debug",
+                "value": "true",
+                "type": "query",
+                "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+              }
+            ]
+          },
+          "docs": "Get tags by their contributor's userId. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Add a tag.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://catalog.archives.gov/api/v2/tags/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a tag to a record."
+        },
+        {
+          "info": {
+            "name": "Deactivate/remove a tag.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://catalog.archives.gov/api/v2/tags/:contributionId",
+            "params": [
+              {
+                "name": "contributionId",
+                "value": "e3fe99d2-7af7-11ec-90d6-0242ac120003",
+                "type": "path",
+                "description": "contributionId of a tag to be deactivated/removed."
+              }
+            ]
+          },
+          "docs": "Change the status of a tag to 'inactive' or 'removed'. Normal tags will be made inactive. Administrator tags will be removed."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Comments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get search results for comment data by sending a request with search parameters to the catalog.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/comments/search",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases (\"\")."
+              },
+              {
+                "name": "id",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "An individual contribution's unique identifier which maps to the record.contributionId field"
+              },
+              {
+                "name": "userName",
+                "value": "johndoe1",
+                "type": "query",
+                "description": "Contributor's screen name which maps to the record.contributor.userName field"
+              },
+              {
+                "name": "userId",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "Contributor's unique identifier which maps to the record.contributor.userId field"
+              },
+              {
+                "name": "naId",
+                "value": "146919092, 146919093",
+                "type": "query",
+                "description": "An array of NARA-specific identifiers, each of which is unique to a single record."
+              },
+              {
+                "name": "debug",
+                "value": "true",
+                "type": "query",
+                "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+              }
+            ]
+          },
+          "docs": "Get search results for comment data by sending a request with search parameters to the catalog. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get a single comment object by comment id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/comments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "An individual contribution's unique identifier which maps to the record.contributionId field"
+              },
+              {
+                "name": "debug",
+                "value": "true",
+                "type": "query",
+                "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+              }
+            ]
+          },
+          "docs": "Get a single comment object by comment id. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get comments by their parent record's naId.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/comments/naId/:naId",
+            "params": [
+              {
+                "name": "naId",
+                "value": "57664721",
+                "type": "path",
+                "description": "naId of parent record whose comments to return"
+              },
+              {
+                "name": "debug",
+                "value": "true",
+                "type": "query",
+                "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+              }
+            ]
+          },
+          "docs": "Get comments by their parent record's naId. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get comments by their contributor's userId.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/comments/userId/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "5b18f857-29d7-31a9-b944-f4e68c12fd3f",
+                "type": "path",
+                "description": "userId of contributor whose comments to return"
+              },
+              {
+                "name": "debug",
+                "value": "true",
+                "type": "query",
+                "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+              }
+            ]
+          },
+          "docs": "Get comments by their contributor's userId. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Add a comment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://catalog.archives.gov/api/v2/comments/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a comment to a record."
+        },
+        {
+          "info": {
+            "name": "Update a comment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://catalog.archives.gov/api/v2/comments/:contributionId",
+            "params": [
+              {
+                "name": "contributionId",
+                "value": "cf831974-7af7-11ec-90d6-0242ac120003",
+                "type": "path",
+                "description": "contributionId of comment to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a comment on a record."
+        },
+        {
+          "info": {
+            "name": "Deactivate/remove a comment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://catalog.archives.gov/api/v2/comments/:contributionId",
+            "params": [
+              {
+                "name": "contributionId",
+                "value": "e3fe99d2-7af7-11ec-90d6-0242ac120003",
+                "type": "path",
+                "description": "contributionId of a comment to be deactivated/removed."
+              }
+            ]
+          },
+          "docs": "Change the status of a comment to 'inactive' or 'removed'. Normal comments will be made inactive. Administrator comments will be removed."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Transcriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get search results for transcriptions data by sending a request with search parameters to the catalog.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/transcriptions/search",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases (\"\")."
+              },
+              {
+                "name": "id",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "An individual contribution's unique identifier which maps to the record.contributionId field"
+              },
+              {
+                "name": "userName",
+                "value": "johndoe1",
+                "type": "query",
+                "description": "Contributor's screen name which maps to the record.contributor.userName field"
+              },
+              {
+                "name": "userId",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "Contributor's unique identifier which maps to the record.contributor.userId field"
+              },
+              {
+                "name": "naId",
+                "value": "146919092, 146919093",
+                "type": "query",
+                "description": "An array of NARA-specific identifiers, each of which is unique to a single record."
+              },
+              {
+                "name": "debug",
+                "value": "true",
+                "type": "query",
+                "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+              }
+            ]
+          },
+          "docs": "Get search results for transcriptions data by sending a request with search parameters to the catalog. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get a single transcription object by transcription id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/transcriptions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "An individual contribution's unique identifier which maps to the record.contributionId field"
+              },
+              {
+                "name": "debug",
+                "value": "true",
+                "type": "query",
+                "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+              }
+            ]
+          },
+          "docs": "Get a single transcription object by transcription id. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get transcriptions by their parent record's naId.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/transcriptions/naId/:naId",
+            "params": [
+              {
+                "name": "naId",
+                "value": "893506",
+                "type": "path",
+                "description": "naId of parent record whose transcriptions to return"
+              },
+              {
+                "name": "debug",
+                "value": "true",
+                "type": "query",
+                "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+              }
+            ]
+          },
+          "docs": "Get transcriptions by their parent record's naId. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get transcriptions by their contributor's userId.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/transcriptions/userId/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "5b18f857-29d7-31a9-b944-f4e68c12fd3f",
+                "type": "path",
+                "description": "userId of contributor whose transcriptions to return"
+              },
+              {
+                "name": "debug",
+                "value": "true",
+                "type": "query",
+                "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+              }
+            ]
+          },
+          "docs": "Get transcriptions by their contributor's userId. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Add a transcription.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://catalog.archives.gov/api/v2/transcriptions/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a transcription to a record."
+        },
+        {
+          "info": {
+            "name": "Add or update a transcription.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://catalog.archives.gov/api/v2/transcriptions/",
+            "params": [
+              {
+                "name": "publish",
+                "value": "true",
+                "type": "query",
+                "description": "publish flag which when true indicates that a transcription should be published"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a transcription to a record."
+        },
+        {
+          "info": {
+            "name": "Get the history of a transcription.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://catalog.archives.gov/api/v2/transcriptions/history/:parentContributionId",
+            "params": [
+              {
+                "name": "parentContributionId",
+                "value": "232a3c9d-d0b5-32cb-a2d7-26c9eeab57a3",
+                "type": "query",
+                "description": "parentContributionId indicating the transcription of which to request the history."
+              }
+            ]
+          },
+          "docs": "Get the history of a transcription to a record."
+        },
+        {
+          "info": {
+            "name": "Activate a transcription.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://catalog.archives.gov/api/v2/transcriptions/:contributionId/justificationId/:justificationId",
+            "params": [
+              {
+                "name": "contributionId",
+                "value": "e3fe99d2-7af7-11ec-90d6-0242ac120003",
+                "type": "path",
+                "description": "contributionId of a transcription to be activated."
+              },
+              {
+                "name": "justificationId",
+                "value": "5",
+                "type": "path",
+                "description": "justificationId of the reason a transcription is being activated."
+              }
+            ]
+          },
+          "docs": "Activate a transcription, deactivate any other versions if they exist."
+        },
+        {
+          "info": {
+            "name": "Deactivate a transcription.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://catalog.archives.gov/api/v2/transcriptions/:contributionId/justificationId/:justificationId",
+            "params": [
+              {
+                "name": "contributionId",
+                "value": "e3fe99d2-7af7-11ec-90d6-0242ac120003",
+                "type": "path",
+                "description": "contributionId of a transcription to be deactivated."
+              },
+              {
+                "name": "justificationId",
+                "value": "5",
+                "type": "path",
+                "description": "justificationId of the reason a transcription is being deactivated."
+              },
+              {
+                "name": "autoActivate",
+                "value": "true",
+                "type": "query",
+                "description": "autoActivate tag which when true has the API choose a previous transcription to activate"
+              }
+            ]
+          },
+          "docs": "Deactivate a transcription, reactivate the previous version if it exists."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Contributions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get contribution data directly from the database.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/contributions/",
+            "params": [
+              {
+                "name": "userId",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "Contributor's unique identifier which maps to the record.contributor.userId field"
+              },
+              {
+                "name": "status",
+                "value": "active",
+                "type": "query",
+                "description": "Contribution's status which maps to the status field in the MySQL database"
+              },
+              {
+                "name": "contributionType",
+                "value": "tag",
+                "type": "query",
+                "description": "Contribution type which maps to the contributionType field in the MySQL database"
+              },
+              {
+                "name": "targetNaId",
+                "value": "1667758",
+                "type": "query",
+                "description": "Contribution's target record's unique identifier which maps to the targetNaId field in the MySQL database"
+              },
+              {
+                "name": "createdAt",
+                "value": "2020-01-01 07:00:00",
+                "type": "query",
+                "description": "Contribution's date of creation by which to filter"
+              },
+              {
+                "name": "updatedAt",
+                "value": "2020-01-02 07:00:00",
+                "type": "query",
+                "description": "Contribution's date of modification by which to filter"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort order:\n * `contribution.asc` - Sort by contribution, ascending from A to Z\n * `contribution.desc` - Sort by contribution, descending from Z to A\n * `createdAt.asc` - Sort by created date, ascending\n * `createdAt.desc` - Sort by created date, descending\n * `updatedAt.asc` - Sort by updated date, ascending\n * `updatedAt.desc` - Sort by updated date, descending\n * `count.asc` - Sort by aggregated tag counts, ascending, ONLY works when contributionType = tag is present\n * `count.desc` - Sort by aggregated tag counts, descending, ONLY works when contributionType = tag is present\n"
+              },
+              {
+                "name": "includeTotalCount",
+                "value": "true",
+                "type": "query",
+                "description": "Returns the total count of results in each result."
+              }
+            ]
+          },
+          "docs": "Get contribution data directly from the database. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Update a contribution.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://catalog.archives.gov/api/v2/contributions/",
+            "params": [
+              {
+                "name": "review",
+                "value": "true",
+                "type": "query",
+                "description": "review flag which when true indicates that a contribution should be reviewed"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a contribution to a record."
+        },
+        {
+          "info": {
+            "name": "Get search results for contributions data by sending a request with search parameters to the catalog.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/contributions/search",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases (\"\")."
+              },
+              {
+                "name": "id",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "An individual contribution's unique identifier which maps to the record.contributionId field"
+              },
+              {
+                "name": "userName",
+                "value": "johndoe1",
+                "type": "query",
+                "description": "Contributor's screen name which maps to the record.contributor.userName field"
+              },
+              {
+                "name": "userId",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "Contributor's unique identifier which maps to the record.contributor.userId field"
+              },
+              {
+                "name": "naId",
+                "value": "146919092, 146919093",
+                "type": "query",
+                "description": "An array of NARA-specific identifiers, each of which is unique to a single record."
+              },
+              {
+                "name": "debug",
+                "value": "true",
+                "type": "query",
+                "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+              },
+              {
+                "name": "searchAfter",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "Enables deep pagination to retrieve records beyond the first 10,000 results.  Not compatible with sort, or page parameters.\n\nFor the inital request use `searchAfter=*` and for all subsequent requests set `searchAfter` to the value of the sort array in the last member of `body.hits.hits` for each page.\n"
+              }
+            ]
+          },
+          "docs": "Get search results for contributions data by sending a request with search parameters to the catalog. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get contribution data by target object id directly from the database.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/contributions/targetObjectId/:targetObjectId",
+            "params": [
+              {
+                "name": "targetObjectId",
+                "value": "45710028",
+                "type": "path",
+                "description": "Contribution's target objects's unique identifier which maps to the targetObjectId field in the MySQL database"
+              },
+              {
+                "name": "status",
+                "value": "active",
+                "type": "query",
+                "description": "Contribution's status which maps to the status field in the MySQL database"
+              },
+              {
+                "name": "contributionType",
+                "value": "tag",
+                "type": "query",
+                "description": "Contribution type which maps to the contributionType field in the MySQL database"
+              },
+              {
+                "name": "targetPageNum",
+                "value": "1",
+                "type": "query",
+                "description": "Contribution's target page number which maps to the targetPageNum field in the MySQL database"
+              }
+            ]
+          },
+          "docs": "Get contribution data by target object id directly from the database. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get contribution data by parent contribution id directly from the database.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/contributions/parentContributionId/:parentContributionId",
+            "params": [
+              {
+                "name": "parentContributionId",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "path",
+                "description": "A contribution's parent contribution's unique uuid identifier, which maps to the parentContributorId field in the MySQL database"
+              },
+              {
+                "name": "status",
+                "value": "active",
+                "type": "query",
+                "description": "Contribution's status which maps to the status field in the MySQL database"
+              },
+              {
+                "name": "contributionType",
+                "value": "tag",
+                "type": "query",
+                "description": "Contribution type which maps to the contributionType field in the MySQL database"
+              },
+              {
+                "name": "targetNaId",
+                "value": "1667758",
+                "type": "query",
+                "description": "Contribution's target record's unique identifier which maps to the targetNaId field in the MySQL database"
+              },
+              {
+                "name": "createdAt",
+                "value": "2020-01-01 07:00:00",
+                "type": "query",
+                "description": "Contribution's date of creation by which to filter"
+              },
+              {
+                "name": "updatedAt",
+                "value": "2020-01-02 07:00:00",
+                "type": "query",
+                "description": "Contribution's date of modification by which to filter"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort order:\n * `contribution.asc` - Sort by contribution, ascending from A to Z\n * `contribution.desc` - Sort by contribution, descending from Z to A\n * `createdAt.asc` - Sort by created date, ascending\n * `createdAt.desc` - Sort by created date, descending\n * `updatedAt.asc` - Sort by updated date, ascending\n * `updatedAt.desc` - Sort by updated date, descending\n * `count.asc` - Sort by aggregated tag counts, ascending, ONLY works when contributionType = tag is present\n * `count.desc` - Sort by aggregated tag counts, descending, ONLY works when contributionType = tag is present\n"
+              }
+            ]
+          },
+          "docs": "Get contribution data by parent contribution id directly from the database. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get contribution data by contribution id directly from the database.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/contributions/contributionId/:contributionId",
+            "params": [
+              {
+                "name": "contributionId",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "path",
+                "description": "An individual contribution's unique uuid identifier which maps to the contributorId field in the MySQL database"
+              },
+              {
+                "name": "status",
+                "value": "active",
+                "type": "query",
+                "description": "Contribution's status which maps to the status field in the MySQL database"
+              },
+              {
+                "name": "contributionType",
+                "value": "tag",
+                "type": "query",
+                "description": "Contribution type which maps to the contributionType field in the MySQL database"
+              }
+            ]
+          },
+          "docs": "Get contribution data by contribution id directly from the database. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get contribution data by user id directly from the database.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/contributions/userId/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "Contributor's unique identifier which maps to the userId field in the MySQL database"
+              },
+              {
+                "name": "status",
+                "value": "active",
+                "type": "query",
+                "description": "Contribution's status which maps to the status field in the MySQL database"
+              },
+              {
+                "name": "contributionType",
+                "value": "tag",
+                "type": "query",
+                "description": "Contribution type which maps to the contributionType field in the MySQL database"
+              },
+              {
+                "name": "updatedAt",
+                "value": "tag",
+                "type": "query",
+                "description": "Compares provided timestamp to records updated timestamp, which maps to the updatedAt field in the MySQL database"
+              },
+              {
+                "name": "targetNaId",
+                "value": "1667758",
+                "type": "query",
+                "description": "Contribution's target record's unique identifier which maps to the targetNaId field in the MySQL database"
+              },
+              {
+                "name": "createdAt",
+                "value": "2020-01-01 07:00:00",
+                "type": "query",
+                "description": "Contribution's date of creation by which to filter"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort order:\n * `contribution.asc` - Sort by contribution, ascending from A to Z\n * `contribution.desc` - Sort by contribution, descending from Z to A\n * `createdAt.asc` - Sort by created date, ascending\n * `createdAt.desc` - Sort by created date, descending\n * `updatedAt.asc` - Sort by updated date, ascending\n * `updatedAt.desc` - Sort by updated date, descending\n * `count.asc` - Sort by aggregated tag counts, ascending, ONLY works when contributionType = tag is present\n * `count.desc` - Sort by aggregated tag counts, descending, ONLY works when contributionType = tag is present\n"
+              }
+            ]
+          },
+          "docs": "Get contribution data by user id directly from the database. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get contribution data by target naId directly from the database.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/contributions/targetNaId/:targetNaId",
+            "params": [
+              {
+                "name": "targetNaId",
+                "value": "1667758",
+                "type": "path",
+                "description": "Contribution's target record's unique identifier which maps to the targetNaId field in the MySQL database"
+              },
+              {
+                "name": "status",
+                "value": "active",
+                "type": "query",
+                "description": "Contribution's status which maps to the status field in the MySQL database"
+              },
+              {
+                "name": "contributionType",
+                "value": "tag",
+                "type": "query",
+                "description": "Contribution type which maps to the contributionType field in the MySQL database"
+              },
+              {
+                "name": "createdAt",
+                "value": "2020-01-01 07:00:00",
+                "type": "query",
+                "description": "Contribution's date of creation by which to filter"
+              },
+              {
+                "name": "updatedAt",
+                "value": "2020-01-02 07:00:00",
+                "type": "query",
+                "description": "Contribution's date of modification by which to filter"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort order:\n * `contribution.asc` - Sort by contribution, ascending from A to Z\n * `contribution.desc` - Sort by contribution, descending from Z to A\n * `createdAt.asc` - Sort by created date, ascending\n * `createdAt.desc` - Sort by created date, descending\n * `updatedAt.asc` - Sort by updated date, ascending\n * `updatedAt.desc` - Sort by updated date, descending\n * `count.asc` - Sort by aggregated tag counts, ascending, ONLY works when contributionType = tag is present\n * `count.desc` - Sort by aggregated tag counts, descending, ONLY works when contributionType = tag is present\n"
+              }
+            ]
+          },
+          "docs": "Get contribution data by target naId directly from the database. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Deactivate/remove a contribution.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://catalog.archives.gov/api/v2/contributions/delete"
+          },
+          "docs": "Change the status of a contribution to 'inactive'"
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get public account data by account id directly from the database.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/users/userId/:userId"
+          },
+          "docs": "Get public account data by account id directly from the database. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get public account data by account id directly from the database.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/users/userName/:userName"
+          },
+          "docs": "Get public account data by account id directly from the database. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get public account data directly from the database",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/users",
+            "params": [
+              {
+                "name": "userId",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "User id of the user account."
+              },
+              {
+                "name": "email",
+                "value": "johndoe@example.com",
+                "type": "query",
+                "description": "Email address of the user account."
+              },
+              {
+                "name": "userName",
+                "value": "johndoe1",
+                "type": "query",
+                "description": "Username of the user account."
+              },
+              {
+                "name": "fullName",
+                "value": "John Doe",
+                "type": "query",
+                "description": "Full name of the user account."
+              },
+              {
+                "name": "role",
+                "value": "contributor",
+                "type": "query",
+                "description": "Role of the user account."
+              },
+              {
+                "name": "status",
+                "value": "active",
+                "type": "query",
+                "description": "Status of the user account."
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "Number of records to be returned on a page. Defaults to 5."
+              },
+              {
+                "name": "page",
+                "value": "2",
+                "type": "query",
+                "description": "Page number of records to display. Defaults to 1."
+              },
+              {
+                "name": "sortCol",
+                "value": "userName",
+                "type": "query",
+                "description": "Column name to sort the results by. Optional."
+              },
+              {
+                "name": "sortOrder",
+                "value": "asc",
+                "type": "query",
+                "description": "Sort order, ascending or descending. Defaults to \"asc\" if not specified."
+              }
+            ]
+          },
+          "docs": "Provide any combination of the parameters below to return all users that match this criteria. Use asterisks for wildcards. Values are NOT case sensitive."
+        },
+        {
+          "info": {
+            "name": "Update the timestamp of the last time the user viewed their notifications.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://catalog.archives.gov/api/v2/users/lastViewedNotificationsAt/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "path",
+                "description": "userId of the user who's lastViewedNotificationsAt is being updated."
+              }
+            ]
+          },
+          "docs": "Update the timestamp of the last time the user viewed their notifications, by userId, to the current time."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Justifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get justifications directly from the database.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/justifications",
+            "params": [
+              {
+                "name": "associatedTable",
+                "value": "constributions",
+                "type": "path",
+                "description": "The table to which a justification is associated in the MySQL database"
+              }
+            ]
+          },
+          "docs": "Get justifications directly from the database. Returns a JSON result."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Statistics",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Retrieve statistics related to user contributions.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/records/stats"
+          },
+          "docs": "Fetches aggregated statistics for different contribution types (e.g., comments, tags, transcriptions) across various record types (e.g., authorityRecords, digitalObjects, descriptions). The results include a breakdown by contribution type and grand totals."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Utilities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch JSON data from S3 based on a provided URL.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://catalog.archives.gov/api/v2/fetch-coords",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint receives an S3 URL pointing to a resource, modifies the URL to target a JSON file instead of an image, and returns the content of the JSON file."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Other Extracted Text",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get search results for active contribution data by sending a request to the catalog with other extracted text as a search parameter.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/other-extracted-text/search",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "A search query string which accepts exact phrases or similar matches (\"\")."
+              },
+              {
+                "name": "id",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "An individual contribution's unique identifier which maps to the record.contributionId field"
+              },
+              {
+                "name": "userId",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "Contributor's unique identifier which maps to the record.contributor.userId field"
+              },
+              {
+                "name": "userName",
+                "value": "johndoe1",
+                "type": "query",
+                "description": "Contributor's screen name which maps to the record.contributor.userName field"
+              },
+              {
+                "name": "naId",
+                "value": "146919092, 146919093",
+                "type": "query",
+                "description": "An array of NARA-specific identifiers, each of which is unique to a single record."
+              },
+              {
+                "name": "status",
+                "value": "active",
+                "type": "query",
+                "description": "Contribution's status which maps to the status field in the MySQL database"
+              },
+              {
+                "name": "createdAt",
+                "value": "2020-01-01 07:00:00",
+                "type": "query",
+                "description": "Contribution's date of creation by which to filter"
+              },
+              {
+                "name": "updatedAt",
+                "value": "2020-01-02 07:00:00",
+                "type": "query",
+                "description": "Contribution's date of modification by which to filter"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort order:\n * `contribution.asc` - Sort by contribution, ascending from A to Z\n * `contribution.desc` - Sort by contribution, descending from Z to A\n * `createdAt.asc` - Sort by created date, ascending\n * `createdAt.desc` - Sort by created date, descending\n * `updatedAt.asc` - Sort by updated date, ascending\n * `updatedAt.desc` - Sort by updated date, descending\n * `count.asc` - Sort by aggregated tag counts, ascending, ONLY works when contributionType = tag is present\n * `count.desc` - Sort by aggregated tag counts, descending, ONLY works when contributionType = tag is present\n"
+              },
+              {
+                "name": "includeTotalCount",
+                "value": "true",
+                "type": "query",
+                "description": "Returns the total count of results in each result."
+              }
+            ]
+          },
+          "docs": "Get search results for active contribution data by sending a request to the catalog with other extracted text as a search parameter. It returns a JSON result."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Online Availability",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all online availability information.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/online-availability",
+            "params": [
+              {
+                "name": "availability",
+                "value": "fullyDigitized, unrestrictedOnly",
+                "type": "query",
+                "description": "An array of online availability values"
+              },
+              {
+                "name": "availabilityStatus",
+                "value": "active, inactive",
+                "type": "query",
+                "description": "An array of online availability status values"
+              },
+              {
+                "name": "naId",
+                "value": "146919092, 146919093",
+                "type": "query",
+                "description": "An array of NARA-specific identifiers, each of which is unique to a single record."
+              },
+              {
+                "name": "limit",
+                "value": "75",
+                "type": "query",
+                "description": "Maximum number of results returned for each page of paginated data."
+              },
+              {
+                "name": "page",
+                "value": "20",
+                "type": "query",
+                "description": "Page number of the paginated result set in which to return."
+              }
+            ]
+          },
+          "docs": "Get all online availability information."
+        },
+        {
+          "info": {
+            "name": "Get all online availability information for a record with the given naId.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/online-availability/naId/:naId",
+            "params": [
+              {
+                "name": "naId",
+                "value": "146919092",
+                "type": "path",
+                "description": "Unique, NARA-specific identifier given to each record."
+              }
+            ]
+          },
+          "docs": "Get all online availability information for a record with the given naId."
+        },
+        {
+          "info": {
+            "name": "Update or insert online availability information given a record's naId.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://catalog.archives.gov/api/v2/online-availability/update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update or insert online availability information given a record's naId."
+        },
+        {
+          "info": {
+            "name": "Completely remove online availability information for a given record naId.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://catalog.archives.gov/api/v2/online-availability/delete",
+            "params": [
+              {
+                "name": "naId",
+                "value": "146919092, 146919093",
+                "type": "query",
+                "description": "An array of NARA-specific identifiers, each of which is unique to a single record."
+              }
+            ]
+          },
+          "docs": "Completely remove online availability information for a given record naId."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update user information given a user's email.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://catalog.archives.gov/api/v2/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update user information given a user. Requires an administrative account and a justification. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Update a users username given their userId.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://catalog.archives.gov/api/v2/users/username",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update user information given a user's userId. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Recieve the users notifications.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/users/notifications/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "path",
+                "description": "userId of the user recieving notifications."
+              },
+              {
+                "name": "countOnly",
+                "value": "true",
+                "type": "query",
+                "description": "Recieve only the count of notifications, and none of the contributions."
+              },
+              {
+                "name": "date",
+                "value": "2022-02-22",
+                "type": "query",
+                "description": "Recieve only the notifications past a certain date. Date must be in YYYY-MM-DD format."
+              },
+              {
+                "name": "limit",
+                "value": "5",
+                "type": "query",
+                "description": "Limit the amount of returned notifications."
+              },
+              {
+                "name": "page",
+                "value": "2",
+                "type": "query",
+                "description": "Page number for pagination of notifications. Page size is denoted by limit, defaults to 5. For example, if page = 3 notifications 10-14 will be returned."
+              }
+            ]
+          },
+          "docs": "Recieve the users notifications, including edited transcriptions, moderated contributions, and replies to comments. Notifications are contributions, with an additional field 'notificationType' to denote type."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Announcements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of active announcements.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/announcements/latest"
+          },
+          "docs": "Retrieve a paginated list of announcements."
+        },
+        {
+          "info": {
+            "name": "Get a list of announcements.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/announcements",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number of announcements to retrieve."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of announcements to display per page."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "The status of the announcements to filter by."
+              },
+              {
+                "name": "sortCol",
+                "value": "",
+                "type": "query",
+                "description": "The column to sort the announcements by."
+              },
+              {
+                "name": "sortOrder",
+                "value": "",
+                "type": "query",
+                "description": "The order of sorting (ascending or descending)."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of announcements."
+        },
+        {
+          "info": {
+            "name": "Create a new announcement.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://catalog.archives.gov/api/v2/announcements",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allows a moderator to create a new announcement. The announcement is initially created with a status of 'DRAFT'."
+        },
+        {
+          "info": {
+            "name": "Update an existing announcement.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://catalog.archives.gov/api/v2/announcements/:announcement_id",
+            "params": [
+              {
+                "name": "announcement_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the announcement to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allows a moderator to update an existing announcement."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Partner",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new partner.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://catalog.archives.gov/api/v2/partners/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allows a moderator to create a new partner. The partner is initially created with a status of 'ACTIVE'."
+        },
+        {
+          "info": {
+            "name": "Search for partners",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/partners/search",
+            "params": [
+              {
+                "name": "partnerNameId",
+                "value": "0360214c-55b4-4819-8f28-206b24cca41a",
+                "type": "query",
+                "description": "partnerNameId of the partner being searched"
+              },
+              {
+                "name": "fullName",
+                "value": "Demo Partner",
+                "type": "query",
+                "description": "Full name of the partner being searched"
+              },
+              {
+                "name": "userId",
+                "value": "3fa85f64-5717-4562-b3fc-2c963f66afa",
+                "type": "query",
+                "description": "userId of the user that associated with the partner"
+              }
+            ]
+          },
+          "docs": "Allows users to search for partners via userId , partner name, partnerNameId or all"
+        },
+        {
+          "info": {
+            "name": "Update partner name.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://catalog.archives.gov/api/v2/partners/update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allows a moderator to update partner's full name and status."
+        },
+        {
+          "info": {
+            "name": "Get partner contributions by partnerNameId.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/partners/contributions/partnerNameId/:partnerNameId",
+            "params": [
+              {
+                "name": "partnerNameId",
+                "value": "0360214c-55b4-4819-8f28-206b24cca41a",
+                "type": "path",
+                "description": "The unique identifier of the partner."
+              },
+              {
+                "name": "page",
+                "value": "20",
+                "type": "query",
+                "description": "Page number of the paginated result set in which to return."
+              },
+              {
+                "name": "limit",
+                "value": "75",
+                "type": "query",
+                "description": "Maximum number of results returned for each page of paginated data."
+              }
+            ]
+          },
+          "docs": "Allows a moderator to get partner contributions by partnerNameId."
+        },
+        {
+          "info": {
+            "name": "Get partner contributions by fullName.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/partners/contributions/fullName/:fullName",
+            "params": [
+              {
+                "name": "fullName",
+                "value": "NARA Partner",
+                "type": "path",
+                "description": "The fullName of the partner."
+              },
+              {
+                "name": "page",
+                "value": "20",
+                "type": "query",
+                "description": "Page number of the paginated result set in which to return."
+              },
+              {
+                "name": "limit",
+                "value": "75",
+                "type": "query",
+                "description": "Maximum number of results returned for each page of paginated data."
+              }
+            ]
+          },
+          "docs": "Allows a moderator to get partner contributions by id."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Metadata",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get digital object IDs by matching Ancestry metadata in partner-metadata index.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/metadata/naid-availability/naid/:naId",
+            "params": [
+              {
+                "name": "naId",
+                "value": "",
+                "type": "path",
+                "description": "The naid to search for in the partner-metadata index."
+              }
+            ]
+          },
+          "docs": "Returns a list of digital object IDs that match the given naid in the partner-metadata index."
+        }
+      ]
+    },
+    {
+      "info": {
+        "name": "Extracted Text",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get extracted text for a given naid and digital object ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/extractedText/:naId",
+            "params": [
+              {
+                "name": "naId",
+                "value": "146919092",
+                "type": "path",
+                "description": "Unique, NARA-specific identifier given to each record."
+              },
+              {
+                "name": "objectId",
+                "value": "152951242",
+                "type": "query",
+                "description": "Unique ID given to an object"
+              },
+              {
+                "name": "page",
+                "value": "20",
+                "type": "query",
+                "description": "Page number of the paginated result set in which to return."
+              },
+              {
+                "name": "limit",
+                "value": "75",
+                "type": "query",
+                "description": "Maximum number of results returned for each page of paginated data."
+              }
+            ]
+          },
+          "docs": "Returns a list of extracted text for a given naid and digital object ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
