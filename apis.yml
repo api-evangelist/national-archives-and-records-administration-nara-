@@ -4,7 +4,7 @@ description: >-
   The National Archives and Records Administration (NARA) is the nation's record keeper, preserving and providing access
   to federal government records that document the rights of American citizens and the actions of their government.
 type: Index
-image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
 url: https://www.archives.gov/developer
 created: '2024-12-25'
 modified: '2026-05-19'
@@ -20,7 +20,7 @@ apis:
     description: >-
       The National Archives Catalog API is a read-write web API for the National Archives Catalog used to perform
       fielded search of archival metadata, bulk export of metadata and digital media, and post contributions to records.
-    image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
     humanURL: https://www.archives.gov/research/catalog/help/api
     baseURL: https://catalog.archives.gov/api/v2/
     tags:
