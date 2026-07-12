@@ -40,6 +40,8 @@ apis:
       - type: SourceCode
         url: https://github.com/usnationalarchives/Catalog-API
 common:
+  - type: DomainSecurity
+    url: security/national-archives-and-records-administration-nara--domain-security.yml
   - type: LinkedIn
     url: https://www.linkedin.com/company/usnatarchives
   - type: Website
