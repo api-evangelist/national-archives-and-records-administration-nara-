@@ -1,0 +1,42 @@
+openapi: 3.0.0
+info:
+  title: NextGen Catalog Accounts Metadata API
+  version: 0.2.0
+  description: "\nThis is the NextGen Catalog API application made with Express and documented with Swagger.\n\nThis API requires the use of an API key in order to access. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For example, the request might look like\n\n    curl --location --request GET 'https://catalog.archives.gov/api/v2/records/search?q=constitution'\n    --header 'Content-Type: application/json'\n    --header 'x-api-key: API_KEY'\n\nwhere API_KEY is the key string of your API key.\n\nFor write operations, in addition to the API key, a user ID in the format of a Universally Unique Identifier (UUID) is required in the body of the request. For example, a request to POST a tag might look like:\n\n    curl --location --request POST 'https://catalog.archives.gov/api/v2/tags'\n    --header 'Content-Type: application/json'\n    --data-raw '{\n    \"tag\": \"example tag\",\n    \"targetNaId\": 1667751,\n    \"userId\": \"USER_UUID\"\n    }'\nwhere USER_UUID is the UUID of the user.\n\nPlease contact O&M at Catalog_API@nara.gov for an API Key."
+servers:
+- url: https://catalog.archives.gov/api/v2/
+tags:
+- name: Metadata
+paths:
+  /metadata/naid-availability/naid/{naId}:
+    get:
+      summary: Get digital object IDs by matching Ancestry metadata in partner-metadata index.
+      description: Returns a list of digital object IDs that match the given naid in the partner-metadata index.
+      tags:
+      - Metadata
+      parameters:
+      - name: naId
+        in: path
+        required: true
+        schema:
+          type: string
+        description: The naid to search for in the partner-metadata index.
+      responses:
+        '200':
+          description: A list of digital object IDs.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  ids:
+                    type: array
+                    items:
+                      type: string
+                    description: List of matching digital object IDs.
+        '400':
+          description: Bad Request. Invalid naid provided.
+        '404':
+          description: No matching records found.
+        '500':
+          description: Internal server error.

@@ -1,0 +1,1130 @@
+openapi: 3.0.0
+info:
+  title: NextGen Catalog Accounts Records API
+  version: 0.2.0
+  description: "\nThis is the NextGen Catalog API application made with Express and documented with Swagger.\n\nThis API requires the use of an API key in order to access. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For example, the request might look like\n\n    curl --location --request GET 'https://catalog.archives.gov/api/v2/records/search?q=constitution'\n    --header 'Content-Type: application/json'\n    --header 'x-api-key: API_KEY'\n\nwhere API_KEY is the key string of your API key.\n\nFor write operations, in addition to the API key, a user ID in the format of a Universally Unique Identifier (UUID) is required in the body of the request. For example, a request to POST a tag might look like:\n\n    curl --location --request POST 'https://catalog.archives.gov/api/v2/tags'\n    --header 'Content-Type: application/json'\n    --data-raw '{\n    \"tag\": \"example tag\",\n    \"targetNaId\": 1667751,\n    \"userId\": \"USER_UUID\"\n    }'\nwhere USER_UUID is the UUID of the user.\n\nPlease contact O&M at Catalog_API@nara.gov for an API Key."
+servers:
+- url: https://catalog.archives.gov/api/v2/
+tags:
+- name: Records
+  description: Record description search and data retrieval
+paths:
+  /records/search:
+    get:
+      summary: Get records by using url parameters to perform a catalog search.
+      description: Get records by using url parameters to perform a catalog search. Returns a JSON result.
+      tags:
+      - Records
+      parameters:
+      - $ref: '#/components/parameters/paramQuery'
+      - $ref: '#/components/parameters/paramPage'
+      - $ref: '#/components/parameters/paramLimit'
+      - $ref: '#/components/parameters/paramSearchAfterRecord'
+      - $ref: '#/components/parameters/paramSourceIncludes'
+      - $ref: '#/components/parameters/paramTitle'
+      - $ref: '#/components/parameters/paramTitleIs'
+      - $ref: '#/components/parameters/paramNaId'
+      - $ref: '#/components/parameters/paramNaIdIs'
+      - $ref: '#/components/parameters/paramObjectCount'
+      - $ref: '#/components/parameters/paramOnline'
+      - $ref: '#/components/parameters/paramLevel'
+      - $ref: '#/components/parameters/paramPersonOrOrg'
+      - $ref: '#/components/parameters/paramSource'
+      - $ref: '#/components/parameters/paramMaterials'
+      - $ref: '#/components/parameters/paramControlNumbers'
+      - $ref: '#/components/parameters/paramLocalID'
+      - $ref: '#/components/parameters/paramLocalIDIs'
+      - $ref: '#/components/parameters/paramMicroformPublicationsID'
+      - $ref: '#/components/parameters/paramMicroformPublicationsIDIs'
+      - $ref: '#/components/parameters/paramControlNumberIs'
+      - $ref: '#/components/parameters/paramControlType'
+      - $ref: '#/components/parameters/paramControlTypeIs'
+      - $ref: '#/components/parameters/paramControlGroup'
+      - $ref: '#/components/parameters/paramCollectionIdentifier'
+      - $ref: '#/components/parameters/paramRecordGroupNumber'
+      - $ref: '#/components/parameters/paramCreators'
+      - $ref: '#/components/parameters/paramObjectType'
+      - $ref: '#/components/parameters/paramReferenceUnits'
+      - $ref: '#/components/parameters/paramGeographicReference'
+      - $ref: '#/components/parameters/paramAncestorNaId'
+      - $ref: '#/components/parameters/paramDebug'
+      - $ref: '#/components/parameters/paramAbbreviated'
+      - $ref: '#/components/parameters/paramStartDate'
+      - $ref: '#/components/parameters/paramEndDate'
+      - $ref: '#/components/parameters/paramFieldExists'
+      - $ref: '#/components/parameters/paramContributionsExist'
+      - $ref: '#/components/parameters/paramTagsExist'
+      - $ref: '#/components/parameters/paramTranscriptionsExist'
+      - $ref: '#/components/parameters/paramCommentsExist'
+      - $ref: '#/components/parameters/paramExactDate'
+      - $ref: '#/components/parameters/paramExcludeField'
+      - $ref: '#/components/parameters/paramRecurringDateDay'
+      - $ref: '#/components/parameters/paramRecurringDateMonth'
+      - $ref: '#/components/parameters/paramBeginCongress'
+      - $ref: '#/components/parameters/paramEndCongress'
+      - $ref: '#/components/parameters/paramCongressNumber'
+      - $ref: '#/components/parameters/paramTagContribution'
+      - $ref: '#/components/parameters/paramCommentContribution'
+      - $ref: '#/components/parameters/paramTranscriptionContribution'
+      - $ref: '#/components/parameters/paramExtractedTextContribution'
+      - $ref: '#/components/parameters/paramIncludeExtractedText'
+      - $ref: '#/components/parameters/paramIncludeOtherExtractedText'
+      - $ref: '#/components/parameters/paramIngestTimeStart'
+      - $ref: '#/components/parameters/paramIngestTimeEnd'
+      responses:
+        '200':
+          description: A body of response data containing full record objects if any were found.
+        '400':
+          description: Bad Request. Invalid search terms, revise terms.
+        '422':
+          description: Unprocessable Entity.
+  /records/search/by-other-extracted-text:
+    get:
+      summary: Get records by using other extracted text to perform a catalog search.
+      description: Get records by using other extracted text to perform a catalog search. Returns a JSON result.
+      tags:
+      - Records
+      parameters:
+      - $ref: '#/components/parameters/paramQuery'
+      - $ref: '#/components/parameters/paramPage'
+      - $ref: '#/components/parameters/paramLimit'
+      responses:
+        '200':
+          description: A body of response data containing full record objects if any were found.
+        '400':
+          description: Bad Request. Invalid search terms, revise terms.
+        '422':
+          description: Unprocessable Entity.
+  /records/search/by-contribution:
+    get:
+      summary: Get records related to contributions by using url parameters to perform a catalog search.
+      description: Get records related to contributions by using url parameters to perform a catalog search. Returns a JSON result.
+      tags:
+      - Records
+      parameters:
+      - $ref: '#/components/parameters/paramContQuery'
+      - $ref: '#/components/parameters/paramContId'
+      - $ref: '#/components/parameters/paramUserName'
+      - $ref: '#/components/parameters/paramUserId'
+      - $ref: '#/components/parameters/paramNaId'
+      - $ref: '#/components/parameters/paramDebug'
+      - $ref: '#/components/parameters/paramAbbreviated'
+      responses:
+        '200':
+          description: A body of response data containing full record objects if any were found.
+        '400':
+          description: Bad Request. Invalid search terms, revise terms.
+        '422':
+          description: Unprocessable Entity.
+  /records/search/by-tag:
+    get:
+      summary: Get records related to tags by using url parameters to perform a catalog search.
+      description: Get records related to tags by using url parameters to perform a catalog search. Returns a JSON result.
+      tags:
+      - Records
+      parameters:
+      - $ref: '#/components/parameters/paramContQuery'
+      - $ref: '#/components/parameters/paramContId'
+      - $ref: '#/components/parameters/paramUserName'
+      - $ref: '#/components/parameters/paramUserId'
+      - $ref: '#/components/parameters/paramNaId'
+      - $ref: '#/components/parameters/paramPage'
+      - $ref: '#/components/parameters/paramLimit'
+      - $ref: '#/components/parameters/paramTagIs'
+      - $ref: '#/components/parameters/paramDebug'
+      - $ref: '#/components/parameters/paramAbbreviated'
+      responses:
+        '200':
+          description: A body of response data containing full record objects if any were found.
+        '400':
+          description: Bad Request. Invalid search terms, revise terms.
+        '422':
+          description: Unprocessable Entity.
+  /records/search/by-transcription:
+    get:
+      summary: Get records related to transcriptions by using url parameters to perform a catalog search.
+      description: Get records related to transcriptions by using url parameters to perform a catalog search. Returns a JSON result.
+      tags:
+      - Records
+      parameters:
+      - $ref: '#/components/parameters/paramContQuery'
+      - $ref: '#/components/parameters/paramContId'
+      - $ref: '#/components/parameters/paramUserName'
+      - $ref: '#/components/parameters/paramUserId'
+      - $ref: '#/components/parameters/paramNaId'
+      - $ref: '#/components/parameters/paramPage'
+      - $ref: '#/components/parameters/paramLimit'
+      - $ref: '#/components/parameters/paramDebug'
+      - $ref: '#/components/parameters/paramAbbreviated'
+      responses:
+        '200':
+          description: A body of response data containing full record objects if any were found.
+        '400':
+          description: Bad Request. Invalid search terms, revise terms.
+        '422':
+          description: Unprocessable Entity.
+  /records/search/by-comment:
+    get:
+      summary: Get records related to comments by using url parameters to perform a catalog search.
+      description: Get records related to comments by using url parameters to perform a catalog search. Returns a JSON result.
+      tags:
+      - Records
+      parameters:
+      - $ref: '#/components/parameters/paramContQuery'
+      - $ref: '#/components/parameters/paramContId'
+      - $ref: '#/components/parameters/paramUserName'
+      - $ref: '#/components/parameters/paramUserId'
+      - $ref: '#/components/parameters/paramNaId'
+      - $ref: '#/components/parameters/paramPage'
+      - $ref: '#/components/parameters/paramLimit'
+      - $ref: '#/components/parameters/paramDebug'
+      - $ref: '#/components/parameters/paramAbbreviated'
+      responses:
+        '200':
+          description: A body of response data containing full record objects, if any were found.
+        '400':
+          description: Bad Request. Invalid search terms, revise terms.
+        '422':
+          description: Unprocessable Entity.
+  /records/parentNaId/{parentNaId}:
+    get:
+      summary: Get records which are immediate children of a specified parentNaId.
+      description: Get records which are immediate children of a specified parentNaId. Returns a JSON result.
+      tags:
+      - Records
+      parameters:
+      - in: path
+        name: parentNaId
+        schema:
+          type: string
+        required: true
+        description: id of parent whose immediate children to return
+        example: '7005'
+      - $ref: '#/components/parameters/paramControlGroup'
+      - $ref: '#/components/parameters/paramPage'
+      - $ref: '#/components/parameters/paramLimit'
+      - $ref: '#/components/parameters/paramDebug'
+      - $ref: '#/components/parameters/paramAbbreviated'
+      - $ref: '#/components/parameters/paramIngestionTimeStart'
+      - $ref: '#/components/parameters/paramIngestionTimeEnd'
+      responses:
+        '200':
+          description: A body of response data containing full record objects, if any were found.
+        '422':
+          description: Unprocessable Entity.
+components:
+  parameters:
+    paramControlTypeIs:
+      in: query
+      name: variantControlType_is
+      description: Specifies an exact type of Variant Control Number associated with archival record(s) and returns all Archival Descriptions which contain this exact Variant Control Type.
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: HMS Asset ID
+    paramFieldExists:
+      in: query
+      name: fieldName_exists
+      description: A parameter specifying any field name in the form of [fieldName]_exists where, when equal to true, returns results where that field exists with non-null data. If false, returns results where the field does not exist. Accepts nested fields at any level, for example `ancestors.inclusiveEndDate_exists=true`
+      required: false
+      schema:
+        maximum: 1024
+        type: boolean
+      example: levelOfDescription_exists=true
+    paramLimit:
+      in: query
+      name: limit
+      description: Maximum number of results returned for each page of paginated data.
+      required: false
+      schema:
+        default: 20
+        maximum: 1000
+        type: integer
+      example: 75
+    paramTagContribution:
+      in: query
+      name: tagContribution
+      description: A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases ("") and searches for a tag contribution.
+      required: false
+      schema:
+        maximum: 1024
+        type: string
+      examples:
+        simple:
+          value: spacecraft test
+          summary: Simple keyword
+          description: Returns results which contain one or more contributions with the words spacecraft, test. Note that the boolean operator AND is used by default.
+        bool:
+          value: spacecraft NOT test
+          summary: Boolean operators
+          description: Returns results which contain one or more contributions with the word spacecraft but do not contain the word test.
+        exact:
+          value: United States
+          summary: Exact phrase
+          description: Returns results which contain one or more contributions with the words "spacecraft" and "test" together.
+        stemming:
+          value: space*
+          summary: Stemming with wildcards
+          description: Returns results which contain one or more contributions with variations of the word "space", such as "spacecraft" and "spaces".
+    paramGeographicReference:
+      in: query
+      name: geographicReference
+      description: A parameter which searches records against the record.subjects.heading fields where the record.subjects.authorityType field is equal to geographicPlaceName.
+      required: false
+      schema:
+        maximum: 1024
+        type: string
+      example: Katmai, Mount (Alaska)
+    paramCreators:
+      in: query
+      name: creators
+      description: A parameter which searches records against the record.creators.heading fields.
+      required: false
+      schema:
+        maximum: 1024
+        type: string
+      example: Department of Defense. Department of the Navy. Naval Photographic Center. (12/1/1959 - ca. 1998)
+    paramLocalID:
+      in: query
+      name: localIdentifier
+      description: A search query string used to search on record.localIdentifier.keyword and returns Archival Descriptions that contain the keywords in the Local Identifier field.
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: 21-A-1, 21-A-2
+    paramPage:
+      in: query
+      name: page
+      description: Page number of the paginated result set in which to return.
+      required: false
+      schema:
+        default: 1
+        maximum: 10000
+        type: integer
+      example: 20
+    paramNaIdIs:
+      in: query
+      name: naId_is
+      description: An exact NARA-specific identifier to locate a specific record. This currently functions exactly as naId.
+      required: false
+      schema:
+        maximum: 30
+        type: integer
+      example: 146919092
+    paramUserName:
+      in: query
+      name: userName
+      description: Contributor's screen name which maps to the record.contributor.userName field
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: johndoe1
+    paramIngestTimeStart:
+      in: query
+      name: ingestTimeStart
+      description: "The ingestTimeStart parameter specifies the date or timestamp for fetching data.\n\nDate only format: YYYY-MM-DD\n    When provided in this format, the time defaults to 00:00:00.000000.\n    Example: 2025-01-13 → interpreted as 2025-01-13 00:00:00.000000\n\n Full timestamp format: YYYY-MM-DD HH:mm:ss.SSSSSS\n     When provided in this format, data will be fetched for the exact timestamp specified.\n     Example: 2025-01-13 14:30:15.123456 → data fetched at this precise datetime\n\nBehavior:\n   If both ingestTimeStart and ingestTimeEnd are provided, description records within that date/time range are retrieved.\n   If only ingestTimeStart is provided, description records on and after that date/time are retrieved.\n   If only ingestTimeEnd is provided, description records on and before that date/time are retrieved.\n"
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: '2025-01-13'
+    paramRecordGroupNumber:
+      in: query
+      name: recordGroupNumber
+      description: A parameter which searches records against the record.recordGroupNumber and record.ancestors.recordGroupNumber fields.
+      required: false
+      schema:
+        maximum: 1024
+        type: string
+      example: 428
+    paramContId:
+      in: query
+      name: id
+      description: An individual contribution's unique identifier which maps to the record.contributionId field
+      required: false
+      schema:
+        maximum: 50
+        type: string
+      example: 55555555-5555-5555-5555-555555555555
+    paramSource:
+      in: query
+      name: dataSource
+      description: Describes the type of record as either a description or an authority.
+      required: false
+      schema:
+        enum:
+        - description
+        - authority
+        type: string
+      examples:
+        description:
+          value: description
+          summary: Description
+          description: Returns Archival Descriptions
+        authority:
+          value: authority
+          summary: Authority
+          description: Returns Authority Records
+    paramExcludeField:
+      in: query
+      name: fieldName_is_not
+      description: A parameter specifying any field name in the form of [fieldName]_is_not where, when equal to the given value, will be excluded from the search results. Including nonexistent/invalid fields will return an appropriate error response.
+      required: false
+      schema:
+        maximum: 1024
+        type: string
+      example: title_is_not=1974%20Ottawa%20NWR
+    paramRecurringDateMonth:
+      in: query
+      name: recurringDateMonth
+      description: 'A month in MM format. Often used with recurringDateDay. Used to search for recorrds with date fields that match the month, regardless of the year.
+
+        Only ancestors with levelOfDescription as ''series'' will have their date fields searched.
+
+
+        Searches the following date fields
+
+        * record.productionDates.month
+
+        * record.copyrightDates.month
+
+        * record.releaseDates.month
+
+        * record.broadcastDates.month
+
+        * record.coverageStartDate.month
+
+        * record.coverageEndDate.month
+
+        * record.inclusiveStartDate.month
+
+        * record.inclusiveEndDate.month
+
+        * record.ancestors.inclusiveStartDate.month
+
+        * record.ancestors.inclusiveEndDate.month
+
+        '
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: 12
+    paramQuery:
+      in: query
+      name: q
+      description: A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases ("").
+      required: true
+      schema:
+        maximum: 1024
+        type: string
+      examples:
+        simple:
+          value: trucks photos
+          summary: Simple keyword
+          description: Returns results which contain trucks and photos. Note that the boolean operator AND is used by default.
+        bool:
+          value: John NOT Kennedy
+          summary: Boolean operators
+          description: Returns results which contain the word John but do not contain the word Kennedy.
+        exact:
+          value: United States
+          summary: Exact phrase
+          description: Returns result which contain "United" and "States" together.
+        stemming:
+          value: photo*
+          summary: Stemming with wildcards
+          description: Returns results which may contain "photo", "photograph", "photography", or other variations.
+        jsonexist:
+          value: record.authorityType:*
+          summary: JSON field exists
+          description: Returns results in which the declared data field exists.
+        jsoncontain:
+          value: record.authorityType:geo*
+          summary: JSON field contains
+          description: Returns results in which the declared data field contains the declared keyword(s).
+    paramControlType:
+      in: query
+      name: variantControlType
+      description: Specifies an type of Variant Control Number associated with archival record(s), and returns all Archival Descriptions which contain a Variant Control Type with these keywords.
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: HMS Asset ID
+    paramControlGroup:
+      in: query
+      name: controlGroup
+      description: Specifies a Control Group number associated with an archival record and returns an Archival Description or Archival Descriptions within this Control Group.
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: 358
+    paramTranscriptionContribution:
+      in: query
+      name: transcriptionContribution
+      description: A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases ("") and searches for a transcription contribution.
+      required: false
+      schema:
+        maximum: 1024
+        type: string
+      examples:
+        simple:
+          value: spacecraft test
+          summary: Simple keyword
+          description: Returns results which contain one or more contributions with the words spacecraft, test. Note that the boolean operator AND is used by default.
+        bool:
+          value: spacecraft NOT test
+          summary: Boolean operators
+          description: Returns results which contain one or more contributions with the word spacecraft but do not contain the word test.
+        exact:
+          value: United States
+          summary: Exact phrase
+          description: Returns results which contain one or more contributions with the words "spacecraft" and "test" together.
+        stemming:
+          value: space*
+          summary: Stemming with wildcards
+          description: Returns results which contain one or more contributions with variations of the word "space", such as "spacecraft" and "spaces".
+    paramTagsExist:
+      in: query
+      name: tags_exist
+      description: When equal to true, returns results which have tags. If false, returns results which do not have any tags.
+      required: false
+      schema:
+        type: boolean
+    paramSearchAfterRecord:
+      in: query
+      name: searchAfter
+      description: 'Enables deep pagination to retrieve records beyond the first 10,000 results.  Not compatible with sort, or page parameters.
+
+
+        For the inital request use `searchAfter=`* and for all subsequent requests set `searchAfter` to the value of the sort array in the last member of `body.hits.hits` for each page.
+
+        '
+      required: false
+      schema:
+        maximum: 100
+        type: integer
+      example: 12345
+    paramEndCongress:
+      in: query
+      name: endCongress
+      description: Filters search results to just those from this congress or earlier. Based on `record.endCongress` field.
+      required: false
+      schema:
+        maximum: 4
+        type: integer
+      example: 100
+    paramIncludeOtherExtractedText:
+      in: query
+      name: includeOtherExtractedText
+      description: Allows for the inclusion of other extracted text contributed by NARA partners in `record.digitalObjects.otherExtractedText` to be included in the response if any exists. Defaults to false.
+      required: false
+      schema:
+        maximum: 100
+        type: boolean
+      example: true
+    paramObjectCount:
+      in: query
+      name: digitalObjectCount
+      description: Gets a count of Digital Objects
+      required: false
+      schema:
+        default: false
+        type: boolean
+    paramTranscriptionsExist:
+      in: query
+      name: transcriptions_exist
+      description: When equal to true, returns results which have transcriptions. If false, returns results which do not have any transcriptions.
+      required: false
+      schema:
+        type: boolean
+    paramTitleIs:
+      in: query
+      name: title_is
+      description: An exact title of a record. Fully matches record.title fields within description records and record.heading fields within authority records.
+      required: false
+      schema:
+        maximum: 1024
+        type: string
+      examples:
+        full:
+          value: Truck and Truck-Tractor Registrations
+          summary: Full title
+          description: Returns results in which the title matches the search term(s) exactly.
+        partial:
+          value: Truck and
+          summary: Partial title
+          description: Does not return any results for partial title matches.
+    paramAncestorNaId:
+      in: query
+      name: ancestorNaId
+      description: Specifies the naId of an ancestor object in the hierarchy, by which to limit the search
+      required: false
+      schema:
+        maximum: 30
+        type: integer
+      example: 75284
+    paramSourceIncludes:
+      in: query
+      name: sourceIncludes
+      description: Limits the response by specifying which fields from `_source.record` should be included in the response.
+      required: false
+      schema:
+        type: string
+      example: naId,title,digitalObjects.objectUrl
+    paramIngestionTimeEnd:
+      in: query
+      name: ingestTimeEnd
+      description: "The ingestTimeEnd parameter specifies the date or timestamp for fetching data.\n\nDate only format: YYYY-MM-DD\n    When provided in this format, the time defaults to 23:59:59.999999\n    Example: 2025-01-13 → interpreted as 2025-01-13 23:59:59.999999\n\n Full timestamp format: YYYY-MM-DD HH:mm:ss.SSSSSS\n     When provided in this format, data will be fetched for the exact timestamp specified.\n     Example: 2025-01-13 14:30:15.123456 → data fetched at this precise datetime\n\nBehavior:\n   If both ingestTimeStart and ingestTimeEnd are provided, description records within that date/time range are retrieved.\n   If only ingestTimeStart is provided, description records on and after that date/time are retrieved.\n   If only ingestTimeEnd is provided, description records on and before that date/time are retrieved.\n"
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: '2025-01-13'
+    paramCommentsExist:
+      in: query
+      name: comments_exist
+      description: When equal to true, returns results which have comments. If false, returns results which do not have any comments.
+      required: false
+      schema:
+        type: boolean
+    paramOnline:
+      in: query
+      name: availableOnline
+      description: Refers to records at the Item and File Unit levels which contain digital objects and can be viewed online
+      required: false
+      schema:
+        default: false
+        type: boolean
+    paramCollectionIdentifier:
+      in: query
+      name: collectionIdentifier
+      description: A parameter which searches records against the record.collectionIdentifier and record.ancestors.collectionIdentifier fields.
+      required: false
+      schema:
+        maximum: 1024
+        type: string
+      example: DDE-1021
+    paramIngestionTimeStart:
+      in: query
+      name: ingestTimeStart
+      description: "The ingestTimeStart parameter specifies the date or timestamp for fetching data.\n\nDate only format: YYYY-MM-DD\n    When provided in this format, the time defaults to 00:00:00.000000.\n    Example: 2025-01-13 → interpreted as 2025-01-13 00:00:00.000000\n\n Full timestamp format: YYYY-MM-DD HH:mm:ss.SSSSSS\n     When provided in this format, data will be fetched for the exact timestamp specified.\n     Example: 2025-01-13 14:30:15.123456 → data fetched at this precise datetime\n\nBehavior:\n   If both ingestTimeStart and ingestTimeEnd are provided, description records within that date/time range are retrieved.\n   If only ingestTimeStart is provided, description records on and after that date/time are retrieved.\n   If only ingestTimeEnd is provided, description records on and before that date/time are retrieved.\n"
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: '2025-01-13'
+    paramReferenceUnits:
+      in: query
+      name: referenceUnits
+      description: A parameter which searches records against the record.physicalOccurrences.referenceUnits.name fields. Accepts multiple values separated by commas.
+      required: false
+      schema:
+        maximum: 1024
+        type: string
+      example: National Archives at College Park - Motion Pictures
+    paramMaterials:
+      in: query
+      name: typeOfMaterials
+      description: Describes the type(s) of materials associated with an Archival Description
+      required: false
+      schema:
+        enum:
+        - Photographs and other Graphic Materials
+        - Moving Images
+        - Textual Records
+        - Architectural and Engineering Drawings
+        - Data Files
+        - Maps and Charts
+        - Sound Recordings
+        - Artifacts
+        type: string
+      examples:
+        photo:
+          value: Photographs and other Graphic Materials
+          summary: Photographs and other Graphic Materials
+          description: Returns records described as photographs and/or other graphic materials
+        video:
+          value: Moving Images
+          summary: Moving Images
+          description: Returns records described as moving images
+        text:
+          value: Textual Records
+          summary: Textual Records
+          description: Returns records described as textual records
+        drawing:
+          value: Architectural and Engineering Drawings
+          summary: Architectural and Engineering Drawings
+          description: Returns records described as architectural and/or engineering drawings
+        data:
+          value: Data Files
+          summary: Data Files
+          description: Returns records described as data files
+        maps:
+          value: Maps and Charts
+          summary: Maps and Charts
+          description: Returns records described as maps and charts
+        audio:
+          value: Sound Recordings
+          summary: Sound Recordings
+          description: Returns records described as sound recordings or other audio
+        artifacts:
+          value: Artifacts
+          summary: Artifacts
+          description: Returns records described as artifacts or other physical objects
+    paramTagIs:
+      in: query
+      name: tag_is
+      description: Specifies exactly the tag by which to match the search to.
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: Bill Clinton
+    paramIngestTimeEnd:
+      in: query
+      name: ingestTimeEnd
+      description: "The ingestTimeEnd parameter specifies the date or timestamp for fetching data.\n\nDate only format: YYYY-MM-DD\n    When provided in this format, the time defaults to 23:59:59.999999\n    Example: 2025-01-13 → interpreted as 2025-01-13 23:59:59.999999\n\n Full timestamp format: YYYY-MM-DD HH:mm:ss.SSSSSS\n     When provided in this format, data will be fetched for the exact timestamp specified.\n     Example: 2025-01-13 14:30:15.123456 → data fetched at this precise datetime\n\nBehavior:\n   If both ingestTimeStart and ingestTimeEnd are provided, description records within that date/time range are retrieved.\n   If only ingestTimeStart is provided, description records on and after that date/time are retrieved.\n   If only ingestTimeEnd is provided, description records on and before that date/time are retrieved.\n"
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: '2025-01-13'
+    paramIncludeExtractedText:
+      in: query
+      name: includeExtractedText
+      description: Allows for the inclusion of OCR text extracted from the digital object in `record.digitalObjects.extractedText` to be included in the response if any exists. Defaults to false.
+      required: false
+      schema:
+        maximum: 100
+        type: boolean
+      example: true
+    paramControlNumbers:
+      in: query
+      name: controlNumbers
+      description: 'Specifies an All Control Numbers search string used to search for an archival record and returns Archival Descriptions that contain the keywords in one of the following fields:
+
+
+        * record.accessionNumbers.keyword
+
+        * record.localIdentifier.keyword
+
+        * record.importRecordControlNumber.keyword
+
+        * record.internalTransferNumbers.keyword
+
+        * record.naId
+
+        * record.recordsCenterTransferNumbers.keyword
+
+        * record.variantControlNumbers.number.keyword
+
+        * record.microformPublications.identifier.keyword
+
+        '
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: 1667751
+    paramLevel:
+      in: query
+      name: levelOfDescription
+      description: Describes the NARA-specific hierarchical level in which a record exists.
+      required: false
+      schema:
+        enum:
+        - recordGroup
+        - collection
+        - series
+        - fileUnit
+        - item
+        type: string
+      examples:
+        recordGroup:
+          value: recordGroup
+          summary: Record Group
+          description: Returns records at the Record Group level of the NARA-specific hierarchy
+        collection:
+          value: collection
+          summary: Collection
+          description: Returns records at the Collection level of the NARA-specific hierarchy
+        series:
+          value: series
+          summary: Series
+          description: Returns records at the Series level of the NARA-specific hierarchy
+        fileUnit:
+          value: fileUnit
+          summary: File Unit
+          description: Returns records at the File Unit level of the NARA-specific hierarchy
+        item:
+          value: item
+          summary: Item
+          description: Returns records at the Item level of the NARA-specific hierarchy
+    paramControlNumberIs:
+      in: query
+      name: variantControlNumber_is
+      description: Specifies an exact, full Variant Control Number associated with an archival record and returns an Archival Description which contain this Variant Control Number.
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: HD1-318515834
+    paramMicroformPublicationsIDIs:
+      in: query
+      name: microformPublicationsIdentifier_is
+      description: Specifies an exact, full Microform Publications Identifier associated with an archival record and returns an Archival Description which contain this ID.
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: M236
+    paramBeginCongress:
+      in: query
+      name: beginCongress
+      description: Filters search results to just those from this congress or later. Based on `record.beginCongress` field.
+      required: false
+      schema:
+        maximum: 4
+        type: integer
+      example: 2
+    paramStartDate:
+      in: query
+      name: startDate
+      description: 'Date representing the start date of a range of dates. Must be in YYYY-MM-DD, YYYY-MM, or YYYY format and must be in the same format as endDate parameter, if one is provided.
+
+        Only ancestors with levelOfDescription as ''series'' will have their date fields searched.
+
+
+        Searches the following date fields:
+
+        * record.productionDates.logicalDate
+
+        * record.copyrightDates.logicalDate
+
+        * record.releaseDates.logicalDate
+
+        * record.broadcastDates.logicalDate
+
+        * record.coverageStartDate.logicalDate
+
+        * record.coverageEndDate.logicalDate
+
+        * record.inclusiveStartDate.logicalDate
+
+        * record.inclusiveEndDate.logicalDate
+
+        * record.ancestors.inclusiveStartDate.logicalDate
+
+        * record.ancestors.inclusiveEndDate.logicalDate
+
+        '
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: '1920-01-01'
+    paramPersonOrOrg:
+      in: query
+      name: personOrOrg
+      description: Refers to the heading of authoity records, or headings of roles in archival descriptions. Results can be either descriptions or authority records.
+      required: false
+      schema:
+        type: string
+      examples:
+        simple:
+          value: Department of Justice
+          summary: Simple keyword
+          description: Returns results which contain Department, and Justice within the heading. Note that the boolean operator AND is used by default, but conjunctions are ignored.
+        bool:
+          value: John NOT Kennedy
+          summary: Boolean operators
+          description: Returns results which contain the word John but do not contain the word Kennedy, within in the heading.
+        exact:
+          value: United States
+          summary: Exact phrase
+          description: Returns result which contain "United" and "States" together, and within the heading.
+        stemming:
+          value: Cal*
+          summary: Stemming with wildcards
+          description: Returns results which may contain "cal", "California", or other variations within the heading.
+    paramDebug:
+      in: query
+      name: debug
+      description: Turns on debug mode, showing metadata in the response body, if set to true.
+      required: false
+      schema:
+        maximum: 100
+        type: boolean
+      example: true
+    paramCommentContribution:
+      in: query
+      name: commentContribution
+      description: A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases ("") and searches for a comment contribution.
+      required: false
+      schema:
+        maximum: 1024
+        type: string
+      examples:
+        simple:
+          value: spacecraft test
+          summary: Simple keyword
+          description: Returns results which contain one or more contributions with the words spacecraft, test. Note that the boolean operator AND is used by default.
+        bool:
+          value: spacecraft NOT test
+          summary: Boolean operators
+          description: Returns results which contain one or more contributions with the word spacecraft but do not contain the word test.
+        exact:
+          value: United States
+          summary: Exact phrase
+          description: Returns results which contain one or more contributions with the words "spacecraft" and "test" together.
+        stemming:
+          value: space*
+          summary: Stemming with wildcards
+          description: Returns results which contain one or more contributions with variations of the word "space", such as "spacecraft" and "spaces".
+    paramAbbreviated:
+      in: query
+      name: abbreviated
+      description: Abbreviated results flag, which when true, returns a shorter version of the results.
+      required: false
+      schema:
+        maximum: 100
+        type: boolean
+      example: true
+    paramMicroformPublicationsID:
+      in: query
+      name: microformPublicationsIdentifier
+      description: A search query string used to search on record.microformPublications.identifier.keyword and returns Archival Descriptions that contain the keywords in the Microform Publication Identifier field.
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: M236, T498
+    paramContributionsExist:
+      in: query
+      name: contributions_exist
+      description: When equal to true, returns results which have contributions. If false, returns results which do not have any contributions.
+      required: false
+      schema:
+        type: boolean
+    paramContQuery:
+      in: query
+      name: q
+      description: A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases ("").
+      required: false
+      schema:
+        maximum: 1024
+        type: string
+      examples:
+        simple:
+          value: we the people
+          summary: Simple keyword
+          description: Returns results which contain one or more contributions with the words we, the, and people. Note that the boolean operator AND is used by default.
+        bool:
+          value: people NOT we
+          summary: Boolean operators
+          description: Returns results which contain one or more contributions with the word people but do not contain the word we.
+        exact:
+          value: United States
+          summary: Exact phrase
+          description: Returns results which contain one or more contributions with the words "United" and "States" together.
+        stemming:
+          value: photo*
+          summary: Stemming with wildcards
+          description: Returns results which contain one or more contributions with variations of the word "photo", such as "photograph" and "photography".
+    paramNaId:
+      in: query
+      name: naId
+      description: An array of NARA-specific identifiers, each of which is unique to a single record.
+      required: false
+      schema:
+        maximum: 10000
+        type: string
+      example: 146919092, 146919093
+    paramUserId:
+      in: query
+      name: userId
+      description: Contributor's unique identifier which maps to the record.contributor.userId field
+      required: false
+      schema:
+        maximum: 50
+        type: string
+      example: 55555555-5555-5555-5555-555555555555
+    paramExtractedTextContribution:
+      in: query
+      name: extractedTextContribution
+      description: A contribution search string used to search for a record. Matches the otherExtractedText.contribution or extractedText fields within digitalObjects.
+      required: false
+      schema:
+        maximum: 1024
+        type: string
+      examples:
+        simple:
+          value: United States Constitution
+          summary: Simple keyword
+          description: Returns results which contain United, States, and Constitution within the title. Note that the boolean operator AND is used by default.
+    paramEndDate:
+      in: query
+      name: endDate
+      description: 'Date representing the end date of a range of dates. Must be in YYYY-MM-DD, YYYY-MM, or YYYY format and must be in the same format as startDate parameter, if one is provided.
+
+        Only ancestors with levelOfDescription as ''series'' will have their date fields searched.
+
+
+        Searches the following date fields:
+
+        * record.productionDates.logicalDate
+
+        * record.copyrightDates.logicalDate
+
+        * record.releaseDates.logicalDate
+
+        * record.broadcastDates.logicalDate
+
+        * record.coverageStartDate.logicalDate
+
+        * record.coverageEndDate.logicalDate
+
+        * record.inclusiveStartDate.logicalDate
+
+        * record.inclusiveEndDate.logicalDate
+
+        * record.ancestors.inclusiveStartDate.logicalDate
+
+        * record.ancestors.inclusiveEndDate.logicalDate
+
+        '
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: '2022-10-06'
+    paramCongressNumber:
+      in: query
+      name: congressNumber
+      description: Filters search results to whose range of congresses includes this value. Based on `record.beginCongress` and `record.endCongress`. Cannot be used with other congress parameters.
+      required: false
+      schema:
+        maximum: 4
+        type: integer
+      example: 55
+    paramExactDate:
+      in: query
+      name: exactDate
+      description: 'A single date. Must be in YYYY-MM-DD format.  Cannot be used with other date search parameters.  Used to search for records with dates that match exactly or that match the year and month but do not have a day
+
+        Only ancestors with levelOfDescription as ''series'' will have their date fields searched.
+
+
+        Searches the following date fields:
+
+        * record.productionDates
+
+        * record.copyrightDates
+
+        * record.releaseDates
+
+        * record.broadcastDates
+
+        * record.coverageStartDate
+
+        * record.coverageEndDate
+
+        * record.inclusiveStartDate
+
+        * record.inclusiveEndDate
+
+        * record.ancestors.inclusiveStartDate
+
+        * record.ancestors.inclusiveEndDate
+
+        '
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: '2022-10-06'
+    paramTitle:
+      in: query
+      name: title
+      description: A title search string used to search for a record. Matches record.title fields within decsription records and record.heading fields within authority records.
+      required: false
+      schema:
+        maximum: 1024
+        type: string
+      examples:
+        simple:
+          value: United States Constitution
+          summary: Simple keyword
+          description: Returns results which contain United, States, and Constitution within the title. Note that the boolean operator AND is used by default.
+        bool:
+          value: John NOT Kennedy
+          summary: Boolean operators
+          description: Returns results which contain the word John but do not contain the word Kennedy, within in the title.
+        exact:
+          value: United States
+          summary: Exact phrase
+          description: Returns result which contain "United" and "States" together, and within the title.
+        stemming:
+          value: Photo*
+          summary: Stemming with wildcards
+          description: Returns results which may contain "photo", "photograph", "photography", or other variations within the title.
+    paramObjectType:
+      in: query
+      name: objectType
+      description: A parameter which searches records against the record.digitalObjects.objectType field. Accepts multiple values separated by commas.
+      required: false
+      schema:
+        maximum: 50
+        type: string
+      example: JPG, PDF
+    paramLocalIDIs:
+      in: query
+      name: localIdentifier_is
+      description: Specifies an exact, full Local Identifier associated with an archival record and returns an Archival Description which contain this ID.
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: 121-BA-7112C
+    paramRecurringDateDay:
+      in: query
+      name: recurringDateDay
+      description: 'A day in DD format. Often used with recurringDateMonth. Used to search for records with date fields that match the day, regardless of the year.
+
+        Only ancestors with levelOfDescription as ''series'' will have their date fields searched.
+
+
+        Searches the following date fields:
+
+        * record.productionDates.day
+
+        * record.copyrightDates.day
+
+        * record.releaseDates.day
+
+        * record.broadcastDates.day
+
+        * record.coverageStartDate.day
+
+        * record.coverageEndDate.day
+
+        * record.inclusiveStartDate.day
+
+        * record.inclusiveEndDate.day
+
+        * record.ancestors.inclusiveStartDate.day
+
+        * record.ancestors.inclusiveEndDate.day
+
+        '
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: 31

@@ -1,0 +1,273 @@
+openapi: 3.0.0
+info:
+  title: NextGen Catalog Accounts Partner API
+  version: 0.2.0
+  description: "\nThis is the NextGen Catalog API application made with Express and documented with Swagger.\n\nThis API requires the use of an API key in order to access. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For example, the request might look like\n\n    curl --location --request GET 'https://catalog.archives.gov/api/v2/records/search?q=constitution'\n    --header 'Content-Type: application/json'\n    --header 'x-api-key: API_KEY'\n\nwhere API_KEY is the key string of your API key.\n\nFor write operations, in addition to the API key, a user ID in the format of a Universally Unique Identifier (UUID) is required in the body of the request. For example, a request to POST a tag might look like:\n\n    curl --location --request POST 'https://catalog.archives.gov/api/v2/tags'\n    --header 'Content-Type: application/json'\n    --data-raw '{\n    \"tag\": \"example tag\",\n    \"targetNaId\": 1667751,\n    \"userId\": \"USER_UUID\"\n    }'\nwhere USER_UUID is the UUID of the user.\n\nPlease contact O&M at Catalog_API@nara.gov for an API Key."
+servers:
+- url: https://catalog.archives.gov/api/v2/
+tags:
+- name: Partner
+paths:
+  /partners/create:
+    post:
+      summary: Create a new partner.
+      description: Allows a moderator to create a new partner. The partner is initially created with a status of 'ACTIVE'.
+      tags:
+      - Partner
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - status
+              - fullName
+              - userId
+              properties:
+                userId:
+                  format: uuid
+                  type: string
+                  example: 3fa85f64-5717-4562-b3fc-2c963f66afa
+                  description: The Id of the partner.
+                status:
+                  type: string
+                  example: ACTIVE
+                  description: The current status of the partner. Default is set to active.
+                fullName:
+                  type: string
+                  example: Demo Partner
+                  description: The full name of the partner.
+      responses:
+        '201':
+          description: The partner was created successfully. The response includes the created partner details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  partnerNameId:
+                    type: string
+                    example: 0360214c-55b4-4819-8f28-206b24cca41a
+                    description: The unique identifier of the partner.
+                    format: uuid
+                  userId:
+                    format: uuid
+                    type: string
+                    example: 3fa85f64-5717-4562-b3fc-2c963f66afa
+                    description: The Id of the partner.
+                  status:
+                    type: string
+                    example: ACTIVE
+                    description: The current status of the partner. Default is set to active.
+                  fullName:
+                    type: string
+                    example: Demo Partner
+                    description: The full name of the partner.
+        '400':
+          description: Validation error. This can occur if the request body does not match the expected format.
+        '500':
+          description: Internal server error.
+      security:
+      - ApiKeyAuth: []
+  /partners/search:
+    get:
+      summary: Search for partners
+      description: Allows users to search for partners via userId , partner name, partnerNameId or all
+      tags:
+      - Partner
+      parameters:
+      - in: query
+        name: partnerNameId
+        description: partnerNameId of the partner being searched
+        required: false
+        schema:
+          maximum: 50
+          type: string
+        example: 0360214c-55b4-4819-8f28-206b24cca41a
+      - in: query
+        name: fullName
+        description: Full name of the partner being searched
+        required: false
+        schema:
+          maximum: 100
+          type: string
+        example: Demo Partner
+      - in: query
+        name: userId
+        description: userId of the user that associated with the partner
+        required: false
+        schema:
+          maximum: 50
+          type: string
+        example: 3fa85f64-5717-4562-b3fc-2c963f66afa
+      responses:
+        '200':
+          description: List of the partners retrieved through the search criteria.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  partnerNameId:
+                    type: string
+                    description: The unique identifier of the partner.
+                    format: uuid
+                  userId:
+                    format: uuid
+                    type: string
+                    example: 3fa85f64-5717-4562-b3fc-2c963f66afa
+                    description: The Id of the partner.
+                  status:
+                    type: string
+                    example: ACTIVE
+                    description: The current status of the partner. Default is set to active.
+                  fullName:
+                    type: string
+                    example: Demo Partner
+                    description: The full name of the partner.
+        '400':
+          description: Validation error. This can occur if the request body does not match the expected format.
+        '500':
+          description: Internal server error.
+      security:
+      - ApiKeyAuth: []
+  /partners/update:
+    patch:
+      summary: Update partner name.
+      description: Allows a moderator to update partner's full name and status.
+      tags:
+      - Partner
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - partnerNameId
+              - userId
+              properties:
+                partnerNameId:
+                  type: string
+                  format: uuid
+                  example: 3fa85f64-5717-4562-b3fc-2c963f66afa
+                  description: Id of the partner to be updated.
+                status:
+                  type: string
+                  example: INACTIVE
+                  description: Current status of the partner to be updated.
+                userId:
+                  type: string
+                  format: uuid
+                  example: 0360214c-55b4-4819-8f28-206b24cca41a
+                  description: Id of the account to do the update.
+                fullName:
+                  type: string
+                  example: Demo Partner Changed
+                  description: Name of the partner to be updated.
+      responses:
+        '200':
+          description: The partner was updated successfully. The response includes the updated partner name.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  partnerNameId:
+                    type: string
+                    format: uuid
+                    example: 3fa85f64-5717-4562-b3fc-2c963f66afa
+                    description: The unique identifier of the partner.
+                  userId:
+                    type: string
+                    format: uuid
+                    example: 0360214c-55b4-4819-8f28-206b24cca41a
+                    description: The unique identifier of the user making the changes.
+                  fullName:
+                    type: string
+                    format: string
+                    example: Demo Partner Changed
+                    description: The new name of the partner.
+                  status:
+                    type: string
+                    format: string
+                    example: INACTIVE
+                    description: The status of the partner.
+        '400':
+          description: Validation error. This can occur if the request body does not match the expected format.
+        '500':
+          description: Internal server error.
+      security:
+      - ApiKeyAuth: []
+  /partners/contributions/partnerNameId/{partnerNameId}:
+    get:
+      summary: Get partner contributions by partnerNameId.
+      description: Allows a moderator to get partner contributions by partnerNameId.
+      tags:
+      - Partner
+      parameters:
+      - in: path
+        name: partnerNameId
+        type: string
+        format: uuid
+        required: true
+        description: The unique identifier of the partner.
+        example: 0360214c-55b4-4819-8f28-206b24cca41a
+      - $ref: '#/components/parameters/paramPage'
+      - $ref: '#/components/parameters/paramLimit'
+      responses:
+        '200':
+          description: List of the partner contributions retrieved successfully.
+        '400':
+          description: Validation error. This can occur if the request body does not match the expected format.
+        '500':
+          description: Internal server error.
+      security:
+      - ApiKeyAuth: []
+  /partners/contributions/fullName/{fullName}:
+    get:
+      summary: Get partner contributions by fullName.
+      description: Allows a moderator to get partner contributions by id.
+      tags:
+      - Partner
+      parameters:
+      - in: path
+        name: fullName
+        type: string
+        required: true
+        description: The fullName of the partner.
+        example: NARA Partner
+      - $ref: '#/components/parameters/paramPage'
+      - $ref: '#/components/parameters/paramLimit'
+      responses:
+        '200':
+          description: List of the partner contributions retrieved successfully.
+        '400':
+          description: Validation error. This can occur if the request body does not match the expected format.
+        '500':
+          description: Internal server error.
+      security:
+      - ApiKeyAuth: []
+components:
+  parameters:
+    paramLimit:
+      in: query
+      name: limit
+      description: Maximum number of results returned for each page of paginated data.
+      required: false
+      schema:
+        default: 20
+        maximum: 1000
+        type: integer
+      example: 75
+    paramPage:
+      in: query
+      name: page
+      description: Page number of the paginated result set in which to return.
+      required: false
+      schema:
+        default: 1
+        maximum: 10000
+        type: integer
+      example: 20

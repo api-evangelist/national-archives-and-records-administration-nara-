@@ -1,0 +1,53 @@
+openapi: 3.0.0
+info:
+  title: NextGen Catalog Accounts Utilities API
+  version: 0.2.0
+  description: "\nThis is the NextGen Catalog API application made with Express and documented with Swagger.\n\nThis API requires the use of an API key in order to access. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For example, the request might look like\n\n    curl --location --request GET 'https://catalog.archives.gov/api/v2/records/search?q=constitution'\n    --header 'Content-Type: application/json'\n    --header 'x-api-key: API_KEY'\n\nwhere API_KEY is the key string of your API key.\n\nFor write operations, in addition to the API key, a user ID in the format of a Universally Unique Identifier (UUID) is required in the body of the request. For example, a request to POST a tag might look like:\n\n    curl --location --request POST 'https://catalog.archives.gov/api/v2/tags'\n    --header 'Content-Type: application/json'\n    --data-raw '{\n    \"tag\": \"example tag\",\n    \"targetNaId\": 1667751,\n    \"userId\": \"USER_UUID\"\n    }'\nwhere USER_UUID is the UUID of the user.\n\nPlease contact O&M at Catalog_API@nara.gov for an API Key."
+servers:
+- url: https://catalog.archives.gov/api/v2/
+tags:
+- name: Utilities
+paths:
+  /fetch-coords:
+    post:
+      summary: Fetch JSON data from S3 based on a provided URL.
+      description: This endpoint receives an S3 URL pointing to a resource, modifies the URL to target a JSON file instead of an image, and returns the content of the JSON file.
+      tags:
+      - Utilities
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - s3Url
+              properties:
+                s3Url:
+                  type: string
+                  description: The S3 URL pointing to the original image file.
+                  example: https://s3.amazonaws.com/bucket-name/path/to/file.jpg
+      responses:
+        '200':
+          description: JSON data successfully retrieved from the specified S3 URL.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  averageConfidenceScore:
+                    type: number
+                    description: The average confidence score of the digital object transcription.
+                  data:
+                    type: object
+                    description: The structure of the JSON data can vary depending on the content of the file.
+                    example:
+                      DocumentMetadata:
+                        Pages: 1
+                      Blocks:
+                      - BlockType: PAGE
+                        Text: Example text
+        '400':
+          description: Invalid S3 URL format. Please check the URL and try again.
+        '500':
+          description: Server error occurred while fetching JSON from S3.

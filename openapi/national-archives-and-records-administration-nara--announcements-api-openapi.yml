@@ -1,0 +1,239 @@
+openapi: 3.0.0
+info:
+  title: NextGen Catalog Accounts Announcements API
+  version: 0.2.0
+  description: "\nThis is the NextGen Catalog API application made with Express and documented with Swagger.\n\nThis API requires the use of an API key in order to access. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For example, the request might look like\n\n    curl --location --request GET 'https://catalog.archives.gov/api/v2/records/search?q=constitution'\n    --header 'Content-Type: application/json'\n    --header 'x-api-key: API_KEY'\n\nwhere API_KEY is the key string of your API key.\n\nFor write operations, in addition to the API key, a user ID in the format of a Universally Unique Identifier (UUID) is required in the body of the request. For example, a request to POST a tag might look like:\n\n    curl --location --request POST 'https://catalog.archives.gov/api/v2/tags'\n    --header 'Content-Type: application/json'\n    --data-raw '{\n    \"tag\": \"example tag\",\n    \"targetNaId\": 1667751,\n    \"userId\": \"USER_UUID\"\n    }'\nwhere USER_UUID is the UUID of the user.\n\nPlease contact O&M at Catalog_API@nara.gov for an API Key."
+servers:
+- url: https://catalog.archives.gov/api/v2/
+tags:
+- name: Announcements
+  description: For important announcements
+paths:
+  /announcements/latest:
+    get:
+      summary: Get a list of active announcements.
+      description: Retrieve a paginated list of announcements.
+      tags:
+      - Announcements
+      responses:
+        '200':
+          description: A list of announcements.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  announcements:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Announcement'
+  /announcements:
+    get:
+      summary: Get a list of announcements.
+      description: Retrieve a paginated list of announcements.
+      tags:
+      - Announcements
+      parameters:
+      - in: query
+        name: page
+        schema:
+          type: integer
+          default: 1
+        description: The page number of announcements to retrieve.
+      - in: query
+        name: limit
+        schema:
+          type: integer
+          default: 10
+        description: The number of announcements to display per page.
+      - in: query
+        name: status
+        schema:
+          type: string
+          enum:
+          - ACTIVE
+          - DRAFT
+          - INACTIVE
+        description: The status of the announcements to filter by.
+      - in: query
+        name: sortCol
+        schema:
+          type: string
+          enum:
+          - status
+          - created_at
+          - updated_at
+          - user_name
+        description: The column to sort the announcements by.
+      - in: query
+        name: sortOrder
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+          default: desc
+        description: The order of sorting (ascending or descending).
+      responses:
+        '200':
+          description: A list of announcements.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  metadata:
+                    type: object
+                    properties:
+                      totalCount:
+                        type: integer
+                        description: The total number of announcements.
+                      activeCount:
+                        type: integer
+                        description: The number of active announcements.
+                      draftCount:
+                        type: integer
+                        description: The number of draft announcements.
+                      inactiveCount:
+                        type: integer
+                        description: The number of inactive announcements.
+                  announcements:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/Announcement'
+    post:
+      summary: Create a new announcement.
+      description: Allows a moderator to create a new announcement. The announcement is initially created with a status of 'DRAFT'.
+      tags:
+      - Announcements
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+              - announcement_text
+              properties:
+                announcement_text:
+                  type: string
+                  description: The content of the announcement.
+                notes:
+                  type: string
+                  description: Optional notes about the announcement.
+                user_id:
+                  type: integer
+                  description: The ID of the user who is creating the announcement.
+      responses:
+        '201':
+          description: Announcement created successfully. The response includes the created announcement details.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  announcement_id:
+                    type: integer
+                    description: The unique identifier of the announcement.
+                  created_at:
+                    type: string
+                    format: date-time
+                    description: The timestamp when the announcement was created.
+                  announcement_text:
+                    type: string
+                    description: The content of the announcement.
+                  notes:
+                    type: string
+                    description: Optional notes about the announcement.
+                  user_id:
+                    type: string
+                    description: The ID of the user who created the announcement.
+                  status:
+                    type: string
+                    description: The status of the announcement.
+        '400':
+          description: Validation error. This can occur if the request body does not match the expected format.
+        '500':
+          description: Internal server error.
+      security:
+      - ApiKeyAuth: []
+  /announcements/{announcement_id}:
+    put:
+      summary: Update an existing announcement.
+      description: Allows a moderator to update an existing announcement.
+      tags:
+      - Announcements
+      parameters:
+      - in: path
+        name: announcement_id
+        required: true
+        schema:
+          type: integer
+        description: The unique identifier of the announcement to update.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                announcement_text:
+                  type: string
+                  description: Updated content of the announcement.
+                status:
+                  type: string
+                  enum:
+                  - DRAFT
+                  - ACTIVE
+                  - INACTIVE
+                  description: Updated status of the announcement.
+                user_id:
+                  type: string
+                  format: uuid
+                  description: The ID of the user who is updating the announcement.
+                notes:
+                  type: string
+                  description: Optional notes about the announcement.
+      responses:
+        '200':
+          description: Announcement updated successfully. Returns the updated announcement object.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  announcement_id:
+                    type: integer
+                    description: The unique identifier of the announcement.
+                  announcement_text:
+                    type: string
+                    description: Content of the announcement.
+                  status:
+                    type: string
+                    description: Current status of the announcement.
+                  user_id:
+                    type: string
+                    format: uuid
+                    description: The ID of the user who updated the announcement.
+                  user_name:
+                    type: string
+                    description: The name of the user who updated the announcement.
+                  notes:
+                    type: string
+                    description: Optional notes about the announcement.
+                  created_at:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the announcement was created.
+                  updated_at:
+                    type: string
+                    format: date-time
+                    description: Timestamp when the announcement was last updated.
+        '400':
+          description: Validation error.
+        '404':
+          description: Announcement not found.
+        '500':
+          description: Internal server error.
+      security:
+      - ApiKeyAuth: []

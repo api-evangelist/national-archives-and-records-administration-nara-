@@ -1,0 +1,411 @@
+openapi: 3.0.0
+info:
+  title: NextGen Catalog Accounts Contributions API
+  version: 0.2.0
+  description: "\nThis is the NextGen Catalog API application made with Express and documented with Swagger.\n\nThis API requires the use of an API key in order to access. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For example, the request might look like\n\n    curl --location --request GET 'https://catalog.archives.gov/api/v2/records/search?q=constitution'\n    --header 'Content-Type: application/json'\n    --header 'x-api-key: API_KEY'\n\nwhere API_KEY is the key string of your API key.\n\nFor write operations, in addition to the API key, a user ID in the format of a Universally Unique Identifier (UUID) is required in the body of the request. For example, a request to POST a tag might look like:\n\n    curl --location --request POST 'https://catalog.archives.gov/api/v2/tags'\n    --header 'Content-Type: application/json'\n    --data-raw '{\n    \"tag\": \"example tag\",\n    \"targetNaId\": 1667751,\n    \"userId\": \"USER_UUID\"\n    }'\nwhere USER_UUID is the UUID of the user.\n\nPlease contact O&M at Catalog_API@nara.gov for an API Key."
+servers:
+- url: https://catalog.archives.gov/api/v2/
+tags:
+- name: Contributions
+  description: Contribution search and data retrieval; Contributions include Tags, Transcriptions, and Comments - search/retrieve contributions when you want to return any contribution type.
+paths:
+  /contributions/:
+    put:
+      summary: Update a contribution.
+      description: Update a contribution to a record.
+      tags:
+      - Contributions
+      requestBody:
+        description: Update a contribution to a record.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/contributionBody'
+      parameters:
+      - in: query
+        name: review
+        schema:
+          type: boolean
+        required: false
+        description: review flag which when true indicates that a contribution should be reviewed
+        example: 'true'
+      responses:
+        '200':
+          description: A response body containing confirmation that the transcription was added successfully.
+        '400':
+          description: Bad Request. Invalid search terms, revise terms.
+        '422':
+          description: An error response while processing the request to add a transcription.
+    get:
+      summary: Get contribution data directly from the database.
+      description: Get contribution data directly from the database. Returns a JSON result.
+      tags:
+      - Contributions
+      parameters:
+      - $ref: '#/components/parameters/paramUserId'
+      - $ref: '#/components/parameters/paramContStatus'
+      - $ref: '#/components/parameters/paramContType'
+      - $ref: '#/components/parameters/paramTargetNaIdFilter'
+      - $ref: '#/components/parameters/paramCreatedAtFilter'
+      - $ref: '#/components/parameters/paramUpdatedAtFilter'
+      - $ref: '#/components/parameters/paramSortBy'
+      - $ref: '#/components/parameters/paramIncludeTotalCount'
+      responses:
+        '200':
+          description: A body of response data containing contribution data from the database if any were found.
+        '422':
+          description: Unprocessable Entity.
+  /contributions/search:
+    get:
+      summary: Get search results for contributions data by sending a request with search parameters to the catalog.
+      description: Get search results for contributions data by sending a request with search parameters to the catalog. Returns a JSON result.
+      tags:
+      - Contributions
+      parameters:
+      - $ref: '#/components/parameters/paramContQuery'
+      - $ref: '#/components/parameters/paramContId'
+      - $ref: '#/components/parameters/paramUserName'
+      - $ref: '#/components/parameters/paramUserId'
+      - $ref: '#/components/parameters/paramNaId'
+      - $ref: '#/components/parameters/paramDebug'
+      - $ref: '#/components/parameters/paramSearchAfterContribution'
+      responses:
+        '200':
+          description: A body of response data containing full contribution objects if any were found.
+        '422':
+          description: Unprocessable Entity.
+  /contributions/targetObjectId/{targetObjectId}:
+    get:
+      summary: Get contribution data by target object id directly from the database.
+      description: Get contribution data by target object id directly from the database. Returns a JSON result.
+      tags:
+      - Contributions
+      parameters:
+      - $ref: '#/components/parameters/paramTargetObjectId'
+      - $ref: '#/components/parameters/paramContStatus'
+      - $ref: '#/components/parameters/paramContType'
+      - $ref: '#/components/parameters/paramTargetPageNum'
+      responses:
+        '200':
+          description: A body of response data containing contribution data from the database if any were found.
+        '422':
+          description: Unprocessable Entity.
+  /contributions/parentContributionId/{parentContributionId}:
+    get:
+      summary: Get contribution data by parent contribution id directly from the database.
+      description: Get contribution data by parent contribution id directly from the database. Returns a JSON result.
+      tags:
+      - Contributions
+      parameters:
+      - $ref: '#/components/parameters/paramParentContUuid'
+      - $ref: '#/components/parameters/paramContStatus'
+      - $ref: '#/components/parameters/paramContType'
+      - $ref: '#/components/parameters/paramTargetNaIdFilter'
+      - $ref: '#/components/parameters/paramCreatedAtFilter'
+      - $ref: '#/components/parameters/paramUpdatedAtFilter'
+      - $ref: '#/components/parameters/paramSortBy'
+      responses:
+        '200':
+          description: A body of response data containing contribution data from the database if any were found.
+        '422':
+          description: Unprocessable Entity.
+  /contributions/contributionId/{contributionId}:
+    get:
+      summary: Get contribution data by contribution id directly from the database.
+      description: Get contribution data by contribution id directly from the database. Returns a JSON result.
+      tags:
+      - Contributions
+      parameters:
+      - $ref: '#/components/parameters/paramContUuid'
+      - $ref: '#/components/parameters/paramContStatus'
+      - $ref: '#/components/parameters/paramContType'
+      responses:
+        '200':
+          description: A body of response data containing contribution data from the database if any were found.
+        '422':
+          description: Unprocessable Entity.
+  /contributions/userId/{userId}:
+    get:
+      summary: Get contribution data by user id directly from the database.
+      description: Get contribution data by user id directly from the database. Returns a JSON result.
+      tags:
+      - Contributions
+      parameters:
+      - $ref: '#/components/parameters/paramContUserId'
+      - $ref: '#/components/parameters/paramContStatus'
+      - $ref: '#/components/parameters/paramContType'
+      - $ref: '#/components/parameters/updatedAfter'
+      - $ref: '#/components/parameters/paramTargetNaIdFilter'
+      - $ref: '#/components/parameters/paramCreatedAtFilter'
+      - $ref: '#/components/parameters/paramUpdatedAtFilter'
+      - $ref: '#/components/parameters/paramSortBy'
+      responses:
+        '200':
+          description: A body of response data containing contribution data from the database if any were found.
+        '422':
+          description: Unprocessable Entity.
+  /contributions/targetNaId/{targetNaId}:
+    get:
+      summary: Get contribution data by target naId directly from the database.
+      description: Get contribution data by target naId directly from the database. Returns a JSON result.
+      tags:
+      - Contributions
+      parameters:
+      - $ref: '#/components/parameters/paramTargetNaId'
+      - $ref: '#/components/parameters/paramContStatus'
+      - $ref: '#/components/parameters/paramContType'
+      - $ref: '#/components/parameters/paramCreatedAtFilter'
+      - $ref: '#/components/parameters/paramUpdatedAtFilter'
+      - $ref: '#/components/parameters/paramSortBy'
+      responses:
+        '200':
+          description: A body of response data containing contribution data from the database if any were found.
+        '422':
+          description: Unprocessable Entity.
+  /contributions/delete:
+    delete:
+      summary: Deactivate/remove a contribution.
+      description: Change the status of a contribution to 'inactive'
+      tags:
+      - Contributions
+      parameters:
+      - in: body
+        name: contributionList
+        schema:
+          type: array
+        required: true
+        description: Array containing contributionIds of the contribution to be deactivated/removed.
+        example:
+        - e3fe99d2-7af7-11ec-90d6-0242ac120003
+        - 3fa85f64-5717-4562-b3fc-2c963f66afa
+      - in: body
+        name: userId
+        schema:
+          type: string
+        required: true
+        description: Moderator's unique identifier which maps to the userId field in the MySQL database
+        example: 55555555-5555-5555-5555-555555555555
+      responses:
+        '200':
+          description: A response body containing confirmation that the contribution was deactivated/removed successfully.
+        '409':
+          description: An error response while processing the request to deactivate/remove the contribution.
+components:
+  parameters:
+    paramTargetNaId:
+      in: path
+      name: targetNaId
+      description: Contribution's target record's unique identifier which maps to the targetNaId field in the MySQL database
+      required: true
+      schema:
+        maximum: 30
+        type: integer
+      example: 1667758
+    paramContUserId:
+      in: query
+      name: userId
+      description: Contributor's unique identifier which maps to the userId field in the MySQL database
+      required: true
+      schema:
+        maximum: 36
+        type: string
+      example: 55555555-5555-5555-5555-555555555555
+    paramUserName:
+      in: query
+      name: userName
+      description: Contributor's screen name which maps to the record.contributor.userName field
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: johndoe1
+    updatedAfter:
+      in: query
+      name: updatedAt
+      description: Compares provided timestamp to records updated timestamp, which maps to the updatedAt field in the MySQL database
+      required: false
+      schema:
+        maximum: 30
+        type: string
+      example: tag
+    paramContId:
+      in: query
+      name: id
+      description: An individual contribution's unique identifier which maps to the record.contributionId field
+      required: false
+      schema:
+        maximum: 50
+        type: string
+      example: 55555555-5555-5555-5555-555555555555
+    paramContUuid:
+      in: path
+      name: contributionId
+      description: An individual contribution's unique uuid identifier which maps to the contributorId field in the MySQL database
+      required: true
+      schema:
+        maximum: 50
+        type: string
+      example: 55555555-5555-5555-5555-555555555555
+    paramParentContUuid:
+      in: path
+      name: parentContributionId
+      description: A contribution's parent contribution's unique uuid identifier, which maps to the parentContributorId field in the MySQL database
+      required: true
+      schema:
+        maximum: 50
+        type: string
+      example: 55555555-5555-5555-5555-555555555555
+    paramIncludeTotalCount:
+      in: query
+      name: includeTotalCount
+      description: Returns the total count of results in each result.
+      required: false
+      schema:
+        maximum: 100
+        type: boolean
+      example: true
+    paramCreatedAtFilter:
+      in: query
+      name: createdAt
+      description: Contribution's date of creation by which to filter
+      required: false
+      schema:
+        maximum: 30
+        type: string
+      example: '2020-01-01 07:00:00'
+    paramUpdatedAtFilter:
+      in: query
+      name: updatedAt
+      description: Contribution's date of modification by which to filter
+      required: false
+      schema:
+        maximum: 30
+        type: string
+      example: '2020-01-02 07:00:00'
+    paramContType:
+      in: query
+      name: contributionType
+      description: Contribution type which maps to the contributionType field in the MySQL database
+      required: false
+      schema:
+        maximum: 20
+        type: string
+      example: tag
+    paramTargetPageNum:
+      in: query
+      name: targetPageNum
+      description: Contribution's target page number which maps to the targetPageNum field in the MySQL database
+      required: false
+      schema:
+        maximum: 30
+        type: integer
+      example: 1
+    paramDebug:
+      in: query
+      name: debug
+      description: Turns on debug mode, showing metadata in the response body, if set to true.
+      required: false
+      schema:
+        maximum: 100
+        type: boolean
+      example: true
+    paramContStatus:
+      in: query
+      name: status
+      description: Contribution's status which maps to the status field in the MySQL database
+      required: false
+      schema:
+        maximum: 30
+        type: string
+      example: active
+    paramTargetObjectId:
+      in: path
+      name: targetObjectId
+      description: Contribution's target objects's unique identifier which maps to the targetObjectId field in the MySQL database
+      required: true
+      schema:
+        maximum: 30
+        type: integer
+      example: 45710028
+    paramContQuery:
+      in: query
+      name: q
+      description: A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases ("").
+      required: false
+      schema:
+        maximum: 1024
+        type: string
+      examples:
+        simple:
+          value: we the people
+          summary: Simple keyword
+          description: Returns results which contain one or more contributions with the words we, the, and people. Note that the boolean operator AND is used by default.
+        bool:
+          value: people NOT we
+          summary: Boolean operators
+          description: Returns results which contain one or more contributions with the word people but do not contain the word we.
+        exact:
+          value: United States
+          summary: Exact phrase
+          description: Returns results which contain one or more contributions with the words "United" and "States" together.
+        stemming:
+          value: photo*
+          summary: Stemming with wildcards
+          description: Returns results which contain one or more contributions with variations of the word "photo", such as "photograph" and "photography".
+    paramNaId:
+      in: query
+      name: naId
+      description: An array of NARA-specific identifiers, each of which is unique to a single record.
+      required: false
+      schema:
+        maximum: 10000
+        type: string
+      example: 146919092, 146919093
+    paramUserId:
+      in: query
+      name: userId
+      description: Contributor's unique identifier which maps to the record.contributor.userId field
+      required: false
+      schema:
+        maximum: 50
+        type: string
+      example: 55555555-5555-5555-5555-555555555555
+    paramSearchAfterContribution:
+      in: query
+      name: searchAfter
+      description: 'Enables deep pagination to retrieve records beyond the first 10,000 results.  Not compatible with sort, or page parameters.
+
+
+        For the inital request use `searchAfter=*` and for all subsequent requests set `searchAfter` to the value of the sort array in the last member of `body.hits.hits` for each page.
+
+        '
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: 55555555-5555-5555-5555-555555555555
+    paramSortBy:
+      in: query
+      name: sortBy
+      required: false
+      schema:
+        maximum: 30
+        type: string
+        enum:
+        - contribution.asc
+        - contribution.desc
+        - createdAt.asc
+        - createdAt.desc
+        - updatedAt.asc
+        - updatedAt.desc
+      description: "Sort order:\n * `contribution.asc` - Sort by contribution, ascending from A to Z\n * `contribution.desc` - Sort by contribution, descending from Z to A\n * `createdAt.asc` - Sort by created date, ascending\n * `createdAt.desc` - Sort by created date, descending\n * `updatedAt.asc` - Sort by updated date, ascending\n * `updatedAt.desc` - Sort by updated date, descending\n * `count.asc` - Sort by aggregated tag counts, ascending, ONLY works when contributionType = tag is present\n * `count.desc` - Sort by aggregated tag counts, descending, ONLY works when contributionType = tag is present\n"
+    paramTargetNaIdFilter:
+      in: query
+      name: targetNaId
+      description: Contribution's target record's unique identifier which maps to the targetNaId field in the MySQL database
+      required: false
+      schema:
+        maximum: 30
+        type: string
+      example: 1667758

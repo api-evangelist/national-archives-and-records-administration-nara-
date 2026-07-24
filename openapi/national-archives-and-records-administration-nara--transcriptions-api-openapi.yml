@@ -1,0 +1,330 @@
+openapi: 3.0.0
+info:
+  title: NextGen Catalog Accounts Transcriptions API
+  version: 0.2.0
+  description: "\nThis is the NextGen Catalog API application made with Express and documented with Swagger.\n\nThis API requires the use of an API key in order to access. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For example, the request might look like\n\n    curl --location --request GET 'https://catalog.archives.gov/api/v2/records/search?q=constitution'\n    --header 'Content-Type: application/json'\n    --header 'x-api-key: API_KEY'\n\nwhere API_KEY is the key string of your API key.\n\nFor write operations, in addition to the API key, a user ID in the format of a Universally Unique Identifier (UUID) is required in the body of the request. For example, a request to POST a tag might look like:\n\n    curl --location --request POST 'https://catalog.archives.gov/api/v2/tags'\n    --header 'Content-Type: application/json'\n    --data-raw '{\n    \"tag\": \"example tag\",\n    \"targetNaId\": 1667751,\n    \"userId\": \"USER_UUID\"\n    }'\nwhere USER_UUID is the UUID of the user.\n\nPlease contact O&M at Catalog_API@nara.gov for an API Key."
+servers:
+- url: https://catalog.archives.gov/api/v2/
+tags:
+- name: Transcriptions
+  description: Transcription search and data retrieval
+paths:
+  /transcriptions/search:
+    get:
+      summary: Get search results for transcriptions data by sending a request with search parameters to the catalog.
+      description: Get search results for transcriptions data by sending a request with search parameters to the catalog. Returns a JSON result.
+      tags:
+      - Transcriptions
+      parameters:
+      - $ref: '#/components/parameters/paramContQuery'
+      - $ref: '#/components/parameters/paramContId'
+      - $ref: '#/components/parameters/paramUserName'
+      - $ref: '#/components/parameters/paramUserId'
+      - $ref: '#/components/parameters/paramNaId'
+      - $ref: '#/components/parameters/paramDebug'
+      responses:
+        '200':
+          description: A body of response data containing full transcription objects if any were found.
+        '400':
+          description: Bad Request. Invalid search terms, revise terms.
+        '422':
+          description: Unprocessable Entity.
+  /transcriptions/{id}:
+    get:
+      summary: Get a single transcription object by transcription id.
+      description: Get a single transcription object by transcription id. Returns a JSON result.
+      tags:
+      - Transcriptions
+      parameters:
+      - in: path
+        $ref: '#/components/parameters/paramContId'
+      - $ref: '#/components/parameters/paramDebug'
+      responses:
+        '200':
+          description: A body of response data containing a transcription object if it was found.
+        '422':
+          description: Unprocessable Entity.
+  /transcriptions/naId/{naId}:
+    get:
+      summary: Get transcriptions by their parent record's naId.
+      description: Get transcriptions by their parent record's naId. Returns a JSON result.
+      tags:
+      - Transcriptions
+      parameters:
+      - in: path
+        name: naId
+        schema:
+          type: string
+        required: true
+        description: naId of parent record whose transcriptions to return
+        example: '893506'
+      - $ref: '#/components/parameters/paramDebug'
+      responses:
+        '200':
+          description: A body of response data containing transcriptions objects if any were found.
+        '422':
+          description: Unprocessable Entity.
+  /transcriptions/userId/{userId}:
+    get:
+      summary: Get transcriptions by their contributor's userId.
+      description: Get transcriptions by their contributor's userId. Returns a JSON result.
+      tags:
+      - Transcriptions
+      parameters:
+      - in: path
+        name: userId
+        schema:
+          type: string
+        required: true
+        description: userId of contributor whose transcriptions to return
+        example: 5b18f857-29d7-31a9-b944-f4e68c12fd3f
+      - $ref: '#/components/parameters/paramDebug'
+      responses:
+        '200':
+          description: A body of response data containing transcription objects if any were found.
+        '422':
+          description: Unprocessable Entity.
+  /transcriptions/:
+    put:
+      summary: Add or update a transcription.
+      description: Add a transcription to a record.
+      tags:
+      - Transcriptions
+      requestBody:
+        description: Add a transcription to a record.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transcriptionBody'
+      parameters:
+      - in: query
+        name: publish
+        schema:
+          type: boolean
+        required: false
+        description: publish flag which when true indicates that a transcription should be published
+        example: 'true'
+      responses:
+        '200':
+          description: A response body containing confirmation that the transcription was added successfully.
+        '400':
+          description: Bad Request. Invalid search terms, revise terms.
+        '422':
+          description: An error response while processing the request to add a transcription.
+    post:
+      summary: Add a transcription.
+      description: Add a transcription to a record.
+      tags:
+      - Transcriptions
+      requestBody:
+        description: Add a transcription to a record.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/transcriptionBody'
+      responses:
+        '200':
+          description: A response body containing confirmation that the transcription was added successfully.
+        '400':
+          description: Bad Request. Invalid search terms, revise terms.
+        '422':
+          description: An error response while processing the request to add a transcription.
+  /transcriptions/history/:parentContributionId:
+    post:
+      summary: Get the history of a transcription.
+      description: Get the history of a transcription to a record.
+      tags:
+      - Transcriptions
+      parameters:
+      - in: query
+        name: parentContributionId
+        schema:
+          type: string
+        required: true
+        description: parentContributionId indicating the transcription of which to request the history.
+        example: 232a3c9d-d0b5-32cb-a2d7-26c9eeab57a3
+      responses:
+        '200':
+          description: A response body containing the transcription historyPos.
+        '400':
+          description: Bad Request. Invalid parentContributionId.
+  /transcriptions/:contributionId/justificationId/:justificationId:
+    delete:
+      summary: Deactivate a transcription.
+      description: Deactivate a transcription, reactivate the previous version if it exists.
+      tags:
+      - Transcriptions
+      parameters:
+      - in: path
+        name: contributionId
+        schema:
+          type: string
+        required: true
+        description: contributionId of a transcription to be deactivated.
+        example: e3fe99d2-7af7-11ec-90d6-0242ac120003
+      - in: path
+        name: justificationId
+        schema:
+          type: integer
+        required: true
+        description: justificationId of the reason a transcription is being deactivated.
+        example: 5
+      - in: query
+        name: autoActivate
+        schema:
+          type: boolean
+        required: false
+        description: autoActivate tag which when true has the API choose a previous transcription to activate
+        example: true
+      - in: body
+        name: userId
+        schema:
+          type: string
+        required: true
+        description: userId of the user that created the transcription to be deactivated.
+        example: 55555555-5555-5555-5555-555555555555
+      - in: body
+        name: actionNotes
+        schema:
+          type: string
+        required: false
+        description: Additional notes for the transcription being deactivated. Defaults to the empty string.
+        example: Comment removed at users request.
+      responses:
+        '200':
+          description: A response body containing confirmation that the transcription was deactivated successfully.
+        '409':
+          description: An error response while processing the request to deactivate a transcription.
+    post:
+      summary: Activate a transcription.
+      description: Activate a transcription, deactivate any other versions if they exist.
+      tags:
+      - Transcriptions
+      parameters:
+      - in: path
+        name: contributionId
+        schema:
+          type: string
+        required: true
+        description: contributionId of a transcription to be activated.
+        example: e3fe99d2-7af7-11ec-90d6-0242ac120003
+      - in: path
+        name: justificationId
+        schema:
+          type: integer
+        required: true
+        description: justificationId of the reason a transcription is being activated.
+        example: 5
+      - in: body
+        name: userId
+        schema:
+          type: string
+        required: true
+        description: userId of the user that created the comment to be deactivated.
+        example: 55555555-5555-5555-5555-555555555555
+      responses:
+        '200':
+          description: A response body containing confirmation that the transcription was activated successfully.
+        '403':
+          description: Insufficient user permissions to change a transcription's status
+        '409':
+          description: An error response while processing the request to activate a transcription.
+components:
+  parameters:
+    paramDebug:
+      in: query
+      name: debug
+      description: Turns on debug mode, showing metadata in the response body, if set to true.
+      required: false
+      schema:
+        maximum: 100
+        type: boolean
+      example: true
+    paramUserName:
+      in: query
+      name: userName
+      description: Contributor's screen name which maps to the record.contributor.userName field
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: johndoe1
+    paramContQuery:
+      in: query
+      name: q
+      description: A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases ("").
+      required: false
+      schema:
+        maximum: 1024
+        type: string
+      examples:
+        simple:
+          value: we the people
+          summary: Simple keyword
+          description: Returns results which contain one or more contributions with the words we, the, and people. Note that the boolean operator AND is used by default.
+        bool:
+          value: people NOT we
+          summary: Boolean operators
+          description: Returns results which contain one or more contributions with the word people but do not contain the word we.
+        exact:
+          value: United States
+          summary: Exact phrase
+          description: Returns results which contain one or more contributions with the words "United" and "States" together.
+        stemming:
+          value: photo*
+          summary: Stemming with wildcards
+          description: Returns results which contain one or more contributions with variations of the word "photo", such as "photograph" and "photography".
+    paramNaId:
+      in: query
+      name: naId
+      description: An array of NARA-specific identifiers, each of which is unique to a single record.
+      required: false
+      schema:
+        maximum: 10000
+        type: string
+      example: 146919092, 146919093
+    paramUserId:
+      in: query
+      name: userId
+      description: Contributor's unique identifier which maps to the record.contributor.userId field
+      required: false
+      schema:
+        maximum: 50
+        type: string
+      example: 55555555-5555-5555-5555-555555555555
+    paramContId:
+      in: query
+      name: id
+      description: An individual contribution's unique identifier which maps to the record.contributionId field
+      required: false
+      schema:
+        maximum: 50
+        type: string
+      example: 55555555-5555-5555-5555-555555555555
+  schemas:
+    transcriptionBody:
+      type: object
+      properties:
+        transcription:
+          type: string
+          example: a properly encoded/escaped transcription
+          maximum: 4294967295
+        targetNaId:
+          type: integer
+          example: 31124739
+        targetObjectId:
+          type: integer
+          example: 77852917
+        userId:
+          type: string
+          example: c2558dff-bf46-3e28-8aff-29913227beb2
+        status:
+          type: string
+          default: active
+          example: inactive
+      required:
+      - transcription
+      - targetNaId
+      - userId

@@ -1,0 +1,167 @@
+openapi: 3.0.0
+info:
+  title: NextGen Catalog Accounts API
+  version: 0.2.0
+  description: "\nThis is the NextGen Catalog API application made with Express and documented with Swagger.\n\nThis API requires the use of an API key in order to access. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For example, the request might look like\n\n    curl --location --request GET 'https://catalog.archives.gov/api/v2/records/search?q=constitution'\n    --header 'Content-Type: application/json'\n    --header 'x-api-key: API_KEY'\n\nwhere API_KEY is the key string of your API key.\n\nFor write operations, in addition to the API key, a user ID in the format of a Universally Unique Identifier (UUID) is required in the body of the request. For example, a request to POST a tag might look like:\n\n    curl --location --request POST 'https://catalog.archives.gov/api/v2/tags'\n    --header 'Content-Type: application/json'\n    --data-raw '{\n    \"tag\": \"example tag\",\n    \"targetNaId\": 1667751,\n    \"userId\": \"USER_UUID\"\n    }'\nwhere USER_UUID is the UUID of the user.\n\nPlease contact O&M at Catalog_API@nara.gov for an API Key."
+servers:
+- url: https://catalog.archives.gov/api/v2/
+tags:
+- name: Accounts
+paths:
+  /users/userId/{userId}:
+    get:
+      summary: Get public account data by account id directly from the database.
+      description: Get public account data by account id directly from the database. Returns a JSON result.
+      tags:
+      - Accounts
+      responses:
+        '200':
+          description: A body of response data containing public account data from the database if any were found.
+        '422':
+          description: Unprocessable Entity.
+  /users/userName/{userName}:
+    get:
+      summary: Get public account data by account id directly from the database.
+      description: Get public account data by account id directly from the database. Returns a JSON result.
+      tags:
+      - Accounts
+      responses:
+        '200':
+          description: A body of response data containing public account data from the database if any were found.
+        '422':
+          description: Unprocessable Entity.
+  /users:
+    get:
+      summary: Get public account data directly from the database
+      description: Provide any combination of the parameters below to return all users that match this criteria. Use asterisks for wildcards. Values are NOT case sensitive.
+      x-role: public
+      tags:
+      - Accounts
+      parameters:
+      - in: query
+        name: userId
+        schema:
+          type: string
+        description: User id of the user account.
+        example: 55555555-5555-5555-5555-555555555555
+      - in: query
+        name: email
+        schema:
+          type: string
+        description: Email address of the user account.
+        example: johndoe@example.com
+      - in: query
+        name: userName
+        schema:
+          type: string
+        description: Username of the user account.
+        example: johndoe1
+      - in: query
+        name: fullName
+        schema:
+          type: string
+        description: Full name of the user account.
+        example: John Doe
+      - in: query
+        name: role
+        schema:
+          type: string
+        description: Role of the user account.
+        example: contributor
+      - in: query
+        name: status
+        schema:
+          type: string
+          enum:
+          - active
+          - deactivated
+        description: Status of the user account.
+        example: active
+      - in: query
+        name: limit
+        schema:
+          type: integer
+        description: Number of records to be returned on a page. Defaults to 5.
+        example: 100
+      - in: query
+        name: page
+        schema:
+          type: integer
+        description: Page number of records to display. Defaults to 1.
+        example: 2
+      - in: query
+        name: sortCol
+        schema:
+          type: string
+        description: Column name to sort the results by. Optional.
+        example: userName
+      - in: query
+        name: sortOrder
+        schema:
+          type: string
+          enum:
+          - asc
+          - desc
+        description: Sort order, ascending or descending. Defaults to "asc" if not specified.
+        example: asc
+      responses:
+        '200':
+          description: A body of response data containing user records from the database that match search criteria.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  criteria:
+                    type: object
+                  metadata:
+                    type: object
+                    properties:
+                      totalCount:
+                        type: integer
+                        description: The total number of users.
+                  results:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/User'
+        '400':
+          description: Invalid query parameters.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  message:
+                    type: string
+                  error:
+                    type: array
+                    items:
+                      type: string
+        '500':
+          description: Error retrieving data.
+  /users/lastViewedNotificationsAt/:userId:
+    put:
+      summary: Update the timestamp of the last time the user viewed their notifications.
+      description: Update the timestamp of the last time the user viewed their notifications, by userId, to the current time.
+      tags:
+      - Accounts
+      parameters:
+      - in: path
+        name: userId
+        schema:
+          type: string
+        required: true
+        description: userId of the user who's lastViewedNotificationsAt is being updated.
+        example: 55555555-5555-5555-5555-555555555555
+      - in: body
+        name: lastViewedNotificationsAt
+        schema:
+          type: string
+        required: false
+        description: Optional timestamp to update lastViewedNotificationsAt with.
+        example: '2016-1-17T16:27:05.000Z'
+      responses:
+        '200':
+          description: A sucess response.
+        '422':
+          description: Unprocessable Entity.

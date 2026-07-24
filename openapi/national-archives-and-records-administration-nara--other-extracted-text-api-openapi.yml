@@ -1,0 +1,136 @@
+openapi: 3.0.0
+info:
+  title: NextGen Catalog Accounts Other Extracted Text API
+  version: 0.2.0
+  description: "\nThis is the NextGen Catalog API application made with Express and documented with Swagger.\n\nThis API requires the use of an API key in order to access. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For example, the request might look like\n\n    curl --location --request GET 'https://catalog.archives.gov/api/v2/records/search?q=constitution'\n    --header 'Content-Type: application/json'\n    --header 'x-api-key: API_KEY'\n\nwhere API_KEY is the key string of your API key.\n\nFor write operations, in addition to the API key, a user ID in the format of a Universally Unique Identifier (UUID) is required in the body of the request. For example, a request to POST a tag might look like:\n\n    curl --location --request POST 'https://catalog.archives.gov/api/v2/tags'\n    --header 'Content-Type: application/json'\n    --data-raw '{\n    \"tag\": \"example tag\",\n    \"targetNaId\": 1667751,\n    \"userId\": \"USER_UUID\"\n    }'\nwhere USER_UUID is the UUID of the user.\n\nPlease contact O&M at Catalog_API@nara.gov for an API Key."
+servers:
+- url: https://catalog.archives.gov/api/v2/
+tags:
+- name: Other Extracted Text
+paths:
+  /other-extracted-text/search:
+    get:
+      summary: Get search results for active contribution data by sending a request to the catalog with other extracted text as a search parameter.
+      description: Get search results for active contribution data by sending a request to the catalog with other extracted text as a search parameter. It returns a JSON result.
+      tags:
+      - Other Extracted Text
+      parameters:
+      - $ref: '#/components/parameters/paramOETQuery'
+      - $ref: '#/components/parameters/paramContId'
+      - $ref: '#/components/parameters/paramUserId'
+      - $ref: '#/components/parameters/paramUserName'
+      - $ref: '#/components/parameters/paramNaId'
+      - $ref: '#/components/parameters/paramContStatus'
+      - $ref: '#/components/parameters/paramCreatedAtFilter'
+      - $ref: '#/components/parameters/paramUpdatedAtFilter'
+      - $ref: '#/components/parameters/paramSortBy'
+      - $ref: '#/components/parameters/paramIncludeTotalCount'
+      responses:
+        '200':
+          description: A body of response data containing other extracted objects if any were found.
+        '400':
+          description: Bad Request. Invalid search terms, revise terms.
+        '422':
+          description: Unprocessable Entity.
+components:
+  parameters:
+    paramContStatus:
+      in: query
+      name: status
+      description: Contribution's status which maps to the status field in the MySQL database
+      required: false
+      schema:
+        maximum: 30
+        type: string
+      example: active
+    paramOETQuery:
+      in: query
+      name: q
+      description: A search query string which accepts exact phrases or similar matches ("").
+      required: false
+      schema:
+        maximum: 1024
+        type: string
+      examples:
+        simple:
+          value: we the people
+          summary: Simple keyword
+          description: Returns results which contain one or more contributions with the words we, the, and people.
+    paramUserName:
+      in: query
+      name: userName
+      description: Contributor's screen name which maps to the record.contributor.userName field
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: johndoe1
+    paramIncludeTotalCount:
+      in: query
+      name: includeTotalCount
+      description: Returns the total count of results in each result.
+      required: false
+      schema:
+        maximum: 100
+        type: boolean
+      example: true
+    paramCreatedAtFilter:
+      in: query
+      name: createdAt
+      description: Contribution's date of creation by which to filter
+      required: false
+      schema:
+        maximum: 30
+        type: string
+      example: '2020-01-01 07:00:00'
+    paramNaId:
+      in: query
+      name: naId
+      description: An array of NARA-specific identifiers, each of which is unique to a single record.
+      required: false
+      schema:
+        maximum: 10000
+        type: string
+      example: 146919092, 146919093
+    paramUserId:
+      in: query
+      name: userId
+      description: Contributor's unique identifier which maps to the record.contributor.userId field
+      required: false
+      schema:
+        maximum: 50
+        type: string
+      example: 55555555-5555-5555-5555-555555555555
+    paramUpdatedAtFilter:
+      in: query
+      name: updatedAt
+      description: Contribution's date of modification by which to filter
+      required: false
+      schema:
+        maximum: 30
+        type: string
+      example: '2020-01-02 07:00:00'
+    paramContId:
+      in: query
+      name: id
+      description: An individual contribution's unique identifier which maps to the record.contributionId field
+      required: false
+      schema:
+        maximum: 50
+        type: string
+      example: 55555555-5555-5555-5555-555555555555
+    paramSortBy:
+      in: query
+      name: sortBy
+      required: false
+      schema:
+        maximum: 30
+        type: string
+        enum:
+        - contribution.asc
+        - contribution.desc
+        - createdAt.asc
+        - createdAt.desc
+        - updatedAt.asc
+        - updatedAt.desc
+      description: "Sort order:\n * `contribution.asc` - Sort by contribution, ascending from A to Z\n * `contribution.desc` - Sort by contribution, descending from Z to A\n * `createdAt.asc` - Sort by created date, ascending\n * `createdAt.desc` - Sort by created date, descending\n * `updatedAt.asc` - Sort by updated date, ascending\n * `updatedAt.desc` - Sort by updated date, descending\n * `count.asc` - Sort by aggregated tag counts, ascending, ONLY works when contributionType = tag is present\n * `count.desc` - Sort by aggregated tag counts, descending, ONLY works when contributionType = tag is present\n"

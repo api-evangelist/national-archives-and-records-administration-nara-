@@ -1,0 +1,153 @@
+openapi: 3.0.0
+info:
+  title: NextGen Catalog Accounts Users API
+  version: 0.2.0
+  description: "\nThis is the NextGen Catalog API application made with Express and documented with Swagger.\n\nThis API requires the use of an API key in order to access. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For example, the request might look like\n\n    curl --location --request GET 'https://catalog.archives.gov/api/v2/records/search?q=constitution'\n    --header 'Content-Type: application/json'\n    --header 'x-api-key: API_KEY'\n\nwhere API_KEY is the key string of your API key.\n\nFor write operations, in addition to the API key, a user ID in the format of a Universally Unique Identifier (UUID) is required in the body of the request. For example, a request to POST a tag might look like:\n\n    curl --location --request POST 'https://catalog.archives.gov/api/v2/tags'\n    --header 'Content-Type: application/json'\n    --data-raw '{\n    \"tag\": \"example tag\",\n    \"targetNaId\": 1667751,\n    \"userId\": \"USER_UUID\"\n    }'\nwhere USER_UUID is the UUID of the user.\n\nPlease contact O&M at Catalog_API@nara.gov for an API Key."
+servers:
+- url: https://catalog.archives.gov/api/v2/
+tags:
+- name: Users
+paths:
+  /users:
+    patch:
+      summary: Update user information given a user's email.
+      description: Update user information given a user. Requires an administrative account and a justification. Returns a JSON result.
+      tags:
+      - Users
+      requestBody:
+        description: Update information about a user.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/userUpdateBody'
+      responses:
+        '200':
+          description: Successfully updated user
+        '400':
+          description: Bad Request
+        '422':
+          description: Unprocessable Entity - params are invalid
+  /users/username:
+    patch:
+      summary: Update a users username given their userId.
+      description: Update user information given a user's userId. Returns a JSON result.
+      tags:
+      - Users
+      requestBody:
+        description: Update information about a user.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/usernameUpdateBody'
+      responses:
+        '200':
+          description: Successfully updated user
+        '400':
+          description: Bad Request
+        '422':
+          description: Unprocessable Entity - params are invalid
+  /users/notifications/:userId:
+    get:
+      summary: Recieve the users notifications.
+      description: Recieve the users notifications, including edited transcriptions, moderated contributions, and replies to comments. Notifications are contributions, with an additional field 'notificationType' to denote type.
+      tags:
+      - Users
+      parameters:
+      - in: path
+        name: userId
+        schema:
+          type: string
+        required: true
+        description: userId of the user recieving notifications.
+        example: 55555555-5555-5555-5555-555555555555
+      - in: query
+        name: countOnly
+        schema:
+          type: boolean
+        required: false
+        description: Recieve only the count of notifications, and none of the contributions.
+        example: true
+      - in: query
+        name: date
+        schema:
+          type: string
+        required: false
+        description: Recieve only the notifications past a certain date. Date must be in YYYY-MM-DD format.
+        example: '2022-02-22'
+      - in: query
+        name: limit
+        schema:
+          type: int
+        required: false
+        description: Limit the amount of returned notifications.
+        example: 5
+      - in: query
+        name: page
+        schema:
+          type: int
+        required: false
+        description: Page number for pagination of notifications. Page size is denoted by limit, defaults to 5. For example, if page = 3 notifications 10-14 will be returned.
+        example: 2
+      responses:
+        '200':
+          description: Successfully retrieved notifications
+        '422':
+          description: Unprocessable Entity - params are invalid
+components:
+  schemas:
+    userUpdateBody:
+      type: object
+      properties:
+        actionNotes:
+          type: string
+          example: Changed user role to moderator
+          maximum: 500
+        adminUserId:
+          type: string
+          example: 12345678-abcd-efgh-1234-abcdefghigjk
+          maximum: 36
+          minimum: 36
+        email:
+          type: string
+          example: johndoe@nara.gov
+          maximum: 250
+        justificationId:
+          type: number
+          example: 16
+          maximum: 20
+          minimum: 1
+        role:
+          type: string
+          example: contributor
+          maximum: 32
+          minimum: 2
+        status:
+          type: string
+          example: inactive
+          maximum: 32
+          minimum: 2
+        userName:
+          type: string
+          example: jdoe1
+          maximum: 32
+          minimum: 2
+      required:
+      - adminUserId
+      - email
+      - justificationId
+    usernameUpdateBody:
+      type: object
+      properties:
+        userId:
+          type: string
+          example: 1234
+          maximum: 100
+        userName:
+          type: string
+          example: jdoe1
+          maximum: 32
+          minimum: 2
+      required:
+      - userId

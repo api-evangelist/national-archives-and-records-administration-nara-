@@ -1,0 +1,34 @@
+openapi: 3.0.0
+info:
+  title: NextGen Catalog Accounts Justifications API
+  version: 0.2.0
+  description: "\nThis is the NextGen Catalog API application made with Express and documented with Swagger.\n\nThis API requires the use of an API key in order to access. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For example, the request might look like\n\n    curl --location --request GET 'https://catalog.archives.gov/api/v2/records/search?q=constitution'\n    --header 'Content-Type: application/json'\n    --header 'x-api-key: API_KEY'\n\nwhere API_KEY is the key string of your API key.\n\nFor write operations, in addition to the API key, a user ID in the format of a Universally Unique Identifier (UUID) is required in the body of the request. For example, a request to POST a tag might look like:\n\n    curl --location --request POST 'https://catalog.archives.gov/api/v2/tags'\n    --header 'Content-Type: application/json'\n    --data-raw '{\n    \"tag\": \"example tag\",\n    \"targetNaId\": 1667751,\n    \"userId\": \"USER_UUID\"\n    }'\nwhere USER_UUID is the UUID of the user.\n\nPlease contact O&M at Catalog_API@nara.gov for an API Key."
+servers:
+- url: https://catalog.archives.gov/api/v2/
+tags:
+- name: Justifications
+paths:
+  /justifications:
+    get:
+      summary: Get justifications directly from the database.
+      description: Get justifications directly from the database. Returns a JSON result.
+      tags:
+      - Justifications
+      parameters:
+      - $ref: '#/components/parameters/paramAssociatedTable'
+      responses:
+        '200':
+          description: A body of response data containing public account data from the database if any were found.
+        '422':
+          description: Unprocessable Entity.
+components:
+  parameters:
+    paramAssociatedTable:
+      in: path
+      name: associatedTable
+      description: The table to which a justification is associated in the MySQL database
+      required: false
+      schema:
+        maximum: 30
+        type: string
+      example: constributions

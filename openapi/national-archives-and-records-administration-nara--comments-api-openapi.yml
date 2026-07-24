@@ -1,0 +1,280 @@
+openapi: 3.0.0
+info:
+  title: NextGen Catalog Accounts Comments API
+  version: 0.2.0
+  description: "\nThis is the NextGen Catalog API application made with Express and documented with Swagger.\n\nThis API requires the use of an API key in order to access. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For example, the request might look like\n\n    curl --location --request GET 'https://catalog.archives.gov/api/v2/records/search?q=constitution'\n    --header 'Content-Type: application/json'\n    --header 'x-api-key: API_KEY'\n\nwhere API_KEY is the key string of your API key.\n\nFor write operations, in addition to the API key, a user ID in the format of a Universally Unique Identifier (UUID) is required in the body of the request. For example, a request to POST a tag might look like:\n\n    curl --location --request POST 'https://catalog.archives.gov/api/v2/tags'\n    --header 'Content-Type: application/json'\n    --data-raw '{\n    \"tag\": \"example tag\",\n    \"targetNaId\": 1667751,\n    \"userId\": \"USER_UUID\"\n    }'\nwhere USER_UUID is the UUID of the user.\n\nPlease contact O&M at Catalog_API@nara.gov for an API Key."
+servers:
+- url: https://catalog.archives.gov/api/v2/
+tags:
+- name: Comments
+  description: Comment search and data retrieval
+paths:
+  /comments/search:
+    get:
+      summary: Get search results for comment data by sending a request with search parameters to the catalog.
+      description: Get search results for comment data by sending a request with search parameters to the catalog. Returns a JSON result.
+      tags:
+      - Comments
+      parameters:
+      - $ref: '#/components/parameters/paramContQuery'
+      - $ref: '#/components/parameters/paramContId'
+      - $ref: '#/components/parameters/paramUserName'
+      - $ref: '#/components/parameters/paramUserId'
+      - $ref: '#/components/parameters/paramNaId'
+      - $ref: '#/components/parameters/paramDebug'
+      responses:
+        '200':
+          description: A body of response data containing full comment objects if any were found.
+        '400':
+          description: Bad Request. Invalid search terms, revise terms.
+        '422':
+          description: Unprocessable Entity.
+  /comments/{id}:
+    get:
+      summary: Get a single comment object by comment id.
+      description: Get a single comment object by comment id. Returns a JSON result.
+      tags:
+      - Comments
+      parameters:
+      - in: path
+        $ref: '#/components/parameters/paramContId'
+      - $ref: '#/components/parameters/paramDebug'
+      responses:
+        '200':
+          description: A body of response data containing a comment object if it was found.
+        '422':
+          description: Unprocessable Entity.
+  /comments/naId/{naId}:
+    get:
+      summary: Get comments by their parent record's naId.
+      description: Get comments by their parent record's naId. Returns a JSON result.
+      tags:
+      - Comments
+      parameters:
+      - in: path
+        name: naId
+        schema:
+          type: string
+        required: true
+        description: naId of parent record whose comments to return
+        example: '57664721'
+      - $ref: '#/components/parameters/paramDebug'
+      responses:
+        '200':
+          description: A body of response data containing comment objects if any were found.
+        '422':
+          description: Unprocessable Entity.
+  /comments/userId/{userId}:
+    get:
+      summary: Get comments by their contributor's userId.
+      description: Get comments by their contributor's userId. Returns a JSON result.
+      tags:
+      - Comments
+      parameters:
+      - in: path
+        name: userId
+        schema:
+          type: string
+        required: true
+        description: userId of contributor whose comments to return
+        example: 5b18f857-29d7-31a9-b944-f4e68c12fd3f
+      - $ref: '#/components/parameters/paramDebug'
+      responses:
+        '200':
+          description: A body of response data containing comment objects if any were found.
+        '422':
+          description: Unprocessable Entity.
+  /comments/:
+    post:
+      summary: Add a comment.
+      description: Add a comment to a record.
+      tags:
+      - Comments
+      requestBody:
+        description: Add a comment to a record.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/commentBody'
+      responses:
+        '200':
+          description: A response body containing confirmation that the comment was added successfully.
+        '422':
+          description: An error response while processing the request to add a comment.
+  /comments/{contributionId}:
+    patch:
+      summary: Update a comment.
+      description: Update a comment on a record.
+      tags:
+      - Comments
+      parameters:
+      - in: path
+        name: contributionId
+        schema:
+          type: string
+        required: true
+        description: contributionId of comment to update
+        example: cf831974-7af7-11ec-90d6-0242ac120003
+      requestBody:
+        description: Update a comment on a record.
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/commentUpdateBody'
+      responses:
+        '200':
+          description: A response body containing confirmation that the comment was added successfully.
+        '422':
+          description: An error response while processing the request to add a comment.
+    delete:
+      summary: Deactivate/remove a comment.
+      description: Change the status of a comment to 'inactive' or 'removed'. Normal comments will be made inactive. Administrator comments will be removed.
+      tags:
+      - Comments
+      parameters:
+      - in: path
+        name: contributionId
+        schema:
+          type: string
+        required: true
+        description: contributionId of a comment to be deactivated/removed.
+        example: e3fe99d2-7af7-11ec-90d6-0242ac120003
+      - in: body
+        name: userId
+        schema:
+          type: string
+        required: true
+        description: userId of the user that created the comment to be deactivated/removed.
+        example: 55555555-5555-5555-5555-555555555555
+      - in: body
+        name: justificationId
+        schema:
+          type: number
+        required: false
+        description: justificationId for the comment being deactivated/removed. Defaults to
+        example: 2
+      - in: body
+        name: actionNotes
+        schema:
+          type: string
+        required: false
+        description: Additional notes for the comment being deactivated/removed. Defaults to the empty string.
+        example: Comment removed at users request.
+      responses:
+        '200':
+          description: A response body containing confirmation that the comment was deactivated/removed successfully.
+        '409':
+          description: An error response while processing the request to deactivate/remove a comment.
+components:
+  parameters:
+    paramDebug:
+      in: query
+      name: debug
+      description: Turns on debug mode, showing metadata in the response body, if set to true.
+      required: false
+      schema:
+        maximum: 100
+        type: boolean
+      example: true
+    paramUserName:
+      in: query
+      name: userName
+      description: Contributor's screen name which maps to the record.contributor.userName field
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: johndoe1
+    paramContQuery:
+      in: query
+      name: q
+      description: A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases ("").
+      required: false
+      schema:
+        maximum: 1024
+        type: string
+      examples:
+        simple:
+          value: we the people
+          summary: Simple keyword
+          description: Returns results which contain one or more contributions with the words we, the, and people. Note that the boolean operator AND is used by default.
+        bool:
+          value: people NOT we
+          summary: Boolean operators
+          description: Returns results which contain one or more contributions with the word people but do not contain the word we.
+        exact:
+          value: United States
+          summary: Exact phrase
+          description: Returns results which contain one or more contributions with the words "United" and "States" together.
+        stemming:
+          value: photo*
+          summary: Stemming with wildcards
+          description: Returns results which contain one or more contributions with variations of the word "photo", such as "photograph" and "photography".
+    paramNaId:
+      in: query
+      name: naId
+      description: An array of NARA-specific identifiers, each of which is unique to a single record.
+      required: false
+      schema:
+        maximum: 10000
+        type: string
+      example: 146919092, 146919093
+    paramUserId:
+      in: query
+      name: userId
+      description: Contributor's unique identifier which maps to the record.contributor.userId field
+      required: false
+      schema:
+        maximum: 50
+        type: string
+      example: 55555555-5555-5555-5555-555555555555
+    paramContId:
+      in: query
+      name: id
+      description: An individual contribution's unique identifier which maps to the record.contributionId field
+      required: false
+      schema:
+        maximum: 50
+        type: string
+      example: 55555555-5555-5555-5555-555555555555
+  schemas:
+    commentUpdateBody:
+      type: object
+      properties:
+        comment:
+          type: string
+          example: a thoughtful edit to this comment
+          maximum: 750
+        status:
+          type: string
+          default: active
+          example: inactive
+    commentBody:
+      type: object
+      properties:
+        comment:
+          type: string
+          example: a thoughtful comment
+          maximum: 750
+        targetNaId:
+          type: integer
+          example: 31124739
+        targetObjectId:
+          type: integer
+          example: 77852917
+        userId:
+          type: string
+          example: c2558dff-bf46-3e28-8aff-29913227beb2
+        parentContributionId:
+          type: string
+          example: 55555555-5555-5555-5555-555555555555
+        status:
+          type: string
+          default: active
+          example: inactive
+      required:
+      - comment
+      - targetNaId
+      - userId
