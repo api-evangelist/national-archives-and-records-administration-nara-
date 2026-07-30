@@ -4,7 +4,19 @@ description: >-
   The National Archives and Records Administration (NARA) is the nation's record keeper, preserving and providing access
   to federal government records that document the rights of American citizens and the actions of their government.
 type: Index
-image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
+accessModel:
+  pricing: freemium
+  onboarding: unknown
+  trial: false
+  try_now: false
+  public: false
+  label: Freemium
+  confidence: medium
+  source:
+  - plans
+  generated: '2026-07-22'
+  method: derived
+image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/national-archives-and-records-administration-nara-.png
 url: https://www.archives.gov/developer
 created: '2024-12-25'
 modified: '2026-05-19'
@@ -15,30 +27,297 @@ tags:
   - Records
   - Catalog
 apis:
-  - aid: national-archives-and-records-administration-nara-:catalog-api
-    name: National Archives Catalog API
-    description: >-
-      The National Archives Catalog API is a read-write web API for the National Archives Catalog used to perform
-      fielded search of archival metadata, bulk export of metadata and digital media, and post contributions to records.
-    image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/apis-json-logo.jpg
-    humanURL: https://www.archives.gov/research/catalog/help/api
-    baseURL: https://catalog.archives.gov/api/v2/
-    tags:
-      - Archives
-      - Records
-      - Catalog
-      - Search
-      - Metadata
-    properties:
-      - type: Documentation
-        url: https://www.archives.gov/research/catalog/help/api
-      - type: OpenAPI
-        url: >-
-          https://raw.githubusercontent.com/api-evangelist/national-archives-and-records-administration-nara-/main/openapi/national-archives-and-records-administration-nara--openapi.json
-      - type: SwaggerUI
-        url: https://catalog.archives.gov/api/v2/api-docs/
-      - type: SourceCode
-        url: https://github.com/usnationalarchives/Catalog-API
+- aid: >-
+    national-archives-and-records-administration-nara-:national-archives-and-records-administration-nara--accounts-api
+  name: National Archives and Records Administration (NARA) Accounts API
+  description: >-
+    The Accounts API from National Archives and Records Administration (NARA) — 4 operation(s) for accounts.
+  humanURL: https://www.archives.gov/research/catalog/help/api
+  baseURL: https://catalog.archives.gov/api/v2/
+  tags:
+  - Accounts
+  properties:
+  - type: OpenAPI
+    url: openapi/national-archives-and-records-administration-nara--accounts-api-openapi.yml
+  - type: Documentation
+    url: https://www.archives.gov/research/catalog/help/api
+  - type: SwaggerUI
+    url: https://catalog.archives.gov/api/v2/api-docs/
+  - type: SourceCode
+    url: https://github.com/usnationalarchives/Catalog-API
+- aid: >-
+    national-archives-and-records-administration-nara-:national-archives-and-records-administration-nara--announcements-api
+  name: National Archives and Records Administration (NARA) Announcements API
+  description: For important announcements
+  humanURL: https://www.archives.gov/research/catalog/help/api
+  baseURL: https://catalog.archives.gov/api/v2/
+  tags:
+  - Announcements
+  properties:
+  - type: OpenAPI
+    url: openapi/national-archives-and-records-administration-nara--announcements-api-openapi.yml
+  - type: Documentation
+    url: https://www.archives.gov/research/catalog/help/api
+  - type: SwaggerUI
+    url: https://catalog.archives.gov/api/v2/api-docs/
+  - type: SourceCode
+    url: https://github.com/usnationalarchives/Catalog-API
+- aid: >-
+    national-archives-and-records-administration-nara-:national-archives-and-records-administration-nara--comments-api
+  name: National Archives and Records Administration (NARA) Comments API
+  description: Comment search and data retrieval
+  humanURL: https://www.archives.gov/research/catalog/help/api
+  baseURL: https://catalog.archives.gov/api/v2/
+  tags:
+  - Comments
+  properties:
+  - type: OpenAPI
+    url: openapi/national-archives-and-records-administration-nara--comments-api-openapi.yml
+  - type: Documentation
+    url: https://www.archives.gov/research/catalog/help/api
+  - type: SwaggerUI
+    url: https://catalog.archives.gov/api/v2/api-docs/
+  - type: SourceCode
+    url: https://github.com/usnationalarchives/Catalog-API
+- aid: >-
+    national-archives-and-records-administration-nara-:national-archives-and-records-administration-nara--contributions-api
+  name: National Archives and Records Administration (NARA) Contributions API
+  description: >-
+    Contribution search and data retrieval; Contributions include Tags, Transcriptions, and Comments -
+    search/retrieve contributions when you want to return any contribution type.
+  humanURL: https://www.archives.gov/research/catalog/help/api
+  baseURL: https://catalog.archives.gov/api/v2/
+  tags:
+  - Contributions
+  properties:
+  - type: OpenAPI
+    url: openapi/national-archives-and-records-administration-nara--contributions-api-openapi.yml
+  - type: Documentation
+    url: https://www.archives.gov/research/catalog/help/api
+  - type: SwaggerUI
+    url: https://catalog.archives.gov/api/v2/api-docs/
+  - type: SourceCode
+    url: https://github.com/usnationalarchives/Catalog-API
+- aid: >-
+    national-archives-and-records-administration-nara-:national-archives-and-records-administration-nara--extracted-text-api
+  name: National Archives and Records Administration (NARA) Extracted Text API
+  description: >-
+    The Extracted Text API from National Archives and Records Administration (NARA) — 1 operation(s) for
+    extracted text.
+  humanURL: https://www.archives.gov/research/catalog/help/api
+  baseURL: https://catalog.archives.gov/api/v2/
+  tags:
+  - Extracted Text
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/national-archives-and-records-administration-nara--extracted-text-api-openapi.yml
+  - type: Documentation
+    url: https://www.archives.gov/research/catalog/help/api
+  - type: SwaggerUI
+    url: https://catalog.archives.gov/api/v2/api-docs/
+  - type: SourceCode
+    url: https://github.com/usnationalarchives/Catalog-API
+- aid: >-
+    national-archives-and-records-administration-nara-:national-archives-and-records-administration-nara--justifications-api
+  name: National Archives and Records Administration (NARA) Justifications API
+  description: >-
+    The Justifications API from National Archives and Records Administration (NARA) — 1 operation(s) for
+    justifications.
+  humanURL: https://www.archives.gov/research/catalog/help/api
+  baseURL: https://catalog.archives.gov/api/v2/
+  tags:
+  - Justifications
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/national-archives-and-records-administration-nara--justifications-api-openapi.yml
+  - type: Documentation
+    url: https://www.archives.gov/research/catalog/help/api
+  - type: SwaggerUI
+    url: https://catalog.archives.gov/api/v2/api-docs/
+  - type: SourceCode
+    url: https://github.com/usnationalarchives/Catalog-API
+- aid: >-
+    national-archives-and-records-administration-nara-:national-archives-and-records-administration-nara--metadata-api
+  name: National Archives and Records Administration (NARA) Metadata API
+  description: >-
+    The Metadata API from National Archives and Records Administration (NARA) — 1 operation(s) for metadata.
+  humanURL: https://www.archives.gov/research/catalog/help/api
+  baseURL: https://catalog.archives.gov/api/v2/
+  tags:
+  - Metadata
+  properties:
+  - type: OpenAPI
+    url: openapi/national-archives-and-records-administration-nara--metadata-api-openapi.yml
+  - type: Documentation
+    url: https://www.archives.gov/research/catalog/help/api
+  - type: SwaggerUI
+    url: https://catalog.archives.gov/api/v2/api-docs/
+  - type: SourceCode
+    url: https://github.com/usnationalarchives/Catalog-API
+- aid: >-
+    national-archives-and-records-administration-nara-:national-archives-and-records-administration-nara--online-availability-api
+  name: National Archives and Records Administration (NARA) Online Availability API
+  description: Information about record online availability
+  humanURL: https://www.archives.gov/research/catalog/help/api
+  baseURL: https://catalog.archives.gov/api/v2/
+  tags:
+  - Online Availability
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/national-archives-and-records-administration-nara--online-availability-api-openapi.yml
+  - type: Documentation
+    url: https://www.archives.gov/research/catalog/help/api
+  - type: SwaggerUI
+    url: https://catalog.archives.gov/api/v2/api-docs/
+  - type: SourceCode
+    url: https://github.com/usnationalarchives/Catalog-API
+- aid: >-
+    national-archives-and-records-administration-nara-:national-archives-and-records-administration-nara--other-extracted-text-api
+  name: National Archives and Records Administration (NARA) Other Extracted Text API
+  description: >-
+    The Other Extracted Text API from National Archives and Records Administration (NARA) — 1 operation(s)
+    for other extracted text.
+  humanURL: https://www.archives.gov/research/catalog/help/api
+  baseURL: https://catalog.archives.gov/api/v2/
+  tags:
+  - Other Extracted Text
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/national-archives-and-records-administration-nara--other-extracted-text-api-openapi.yml
+  - type: Documentation
+    url: https://www.archives.gov/research/catalog/help/api
+  - type: SwaggerUI
+    url: https://catalog.archives.gov/api/v2/api-docs/
+  - type: SourceCode
+    url: https://github.com/usnationalarchives/Catalog-API
+- aid: >-
+    national-archives-and-records-administration-nara-:national-archives-and-records-administration-nara--partner-api
+  name: National Archives and Records Administration (NARA) Partner API
+  description: >-
+    The Partner API from National Archives and Records Administration (NARA) — 5 operation(s) for partner.
+  humanURL: https://www.archives.gov/research/catalog/help/api
+  baseURL: https://catalog.archives.gov/api/v2/
+  tags:
+  - Partner
+  properties:
+  - type: OpenAPI
+    url: openapi/national-archives-and-records-administration-nara--partner-api-openapi.yml
+  - type: Documentation
+    url: https://www.archives.gov/research/catalog/help/api
+  - type: SwaggerUI
+    url: https://catalog.archives.gov/api/v2/api-docs/
+  - type: SourceCode
+    url: https://github.com/usnationalarchives/Catalog-API
+- aid: >-
+    national-archives-and-records-administration-nara-:national-archives-and-records-administration-nara--records-api
+  name: National Archives and Records Administration (NARA) Records API
+  description: Record description search and data retrieval
+  humanURL: https://www.archives.gov/research/catalog/help/api
+  baseURL: https://catalog.archives.gov/api/v2/
+  tags:
+  - Records
+  properties:
+  - type: OpenAPI
+    url: openapi/national-archives-and-records-administration-nara--records-api-openapi.yml
+  - type: Documentation
+    url: https://www.archives.gov/research/catalog/help/api
+  - type: SwaggerUI
+    url: https://catalog.archives.gov/api/v2/api-docs/
+  - type: SourceCode
+    url: https://github.com/usnationalarchives/Catalog-API
+- aid: >-
+    national-archives-and-records-administration-nara-:national-archives-and-records-administration-nara--statistics-api
+  name: National Archives and Records Administration (NARA) Statistics API
+  description: >-
+    The Statistics API from National Archives and Records Administration (NARA) — 1 operation(s) for statistics.
+  humanURL: https://www.archives.gov/research/catalog/help/api
+  baseURL: https://catalog.archives.gov/api/v2/
+  tags:
+  - Statistics
+  properties:
+  - type: OpenAPI
+    url: openapi/national-archives-and-records-administration-nara--statistics-api-openapi.yml
+  - type: Documentation
+    url: https://www.archives.gov/research/catalog/help/api
+  - type: SwaggerUI
+    url: https://catalog.archives.gov/api/v2/api-docs/
+  - type: SourceCode
+    url: https://github.com/usnationalarchives/Catalog-API
+- aid: >-
+    national-archives-and-records-administration-nara-:national-archives-and-records-administration-nara--tags-api
+  name: National Archives and Records Administration (NARA) Tags API
+  description: Tag search and data retrieval
+  humanURL: https://www.archives.gov/research/catalog/help/api
+  baseURL: https://catalog.archives.gov/api/v2/
+  tags:
+  - Tags
+  properties:
+  - type: OpenAPI
+    url: openapi/national-archives-and-records-administration-nara--tags-api-openapi.yml
+  - type: Documentation
+    url: https://www.archives.gov/research/catalog/help/api
+  - type: SwaggerUI
+    url: https://catalog.archives.gov/api/v2/api-docs/
+  - type: SourceCode
+    url: https://github.com/usnationalarchives/Catalog-API
+- aid: >-
+    national-archives-and-records-administration-nara-:national-archives-and-records-administration-nara--transcriptions-api
+  name: National Archives and Records Administration (NARA) Transcriptions API
+  description: Transcription search and data retrieval
+  humanURL: https://www.archives.gov/research/catalog/help/api
+  baseURL: https://catalog.archives.gov/api/v2/
+  tags:
+  - Transcriptions
+  properties:
+  - type: OpenAPI
+    url: >-
+      openapi/national-archives-and-records-administration-nara--transcriptions-api-openapi.yml
+  - type: Documentation
+    url: https://www.archives.gov/research/catalog/help/api
+  - type: SwaggerUI
+    url: https://catalog.archives.gov/api/v2/api-docs/
+  - type: SourceCode
+    url: https://github.com/usnationalarchives/Catalog-API
+- aid: >-
+    national-archives-and-records-administration-nara-:national-archives-and-records-administration-nara--users-api
+  name: National Archives and Records Administration (NARA) Users API
+  description: >-
+    The Users API from National Archives and Records Administration (NARA) — 3 operation(s) for users.
+  humanURL: https://www.archives.gov/research/catalog/help/api
+  baseURL: https://catalog.archives.gov/api/v2/
+  tags:
+  - Users
+  properties:
+  - type: OpenAPI
+    url: openapi/national-archives-and-records-administration-nara--users-api-openapi.yml
+  - type: Documentation
+    url: https://www.archives.gov/research/catalog/help/api
+  - type: SwaggerUI
+    url: https://catalog.archives.gov/api/v2/api-docs/
+  - type: SourceCode
+    url: https://github.com/usnationalarchives/Catalog-API
+- aid: >-
+    national-archives-and-records-administration-nara-:national-archives-and-records-administration-nara--utilities-api
+  name: National Archives and Records Administration (NARA) Utilities API
+  description: >-
+    The Utilities API from National Archives and Records Administration (NARA) — 1 operation(s) for utilities.
+  humanURL: https://www.archives.gov/research/catalog/help/api
+  baseURL: https://catalog.archives.gov/api/v2/
+  tags:
+  - Utilities
+  properties:
+  - type: OpenAPI
+    url: openapi/national-archives-and-records-administration-nara--utilities-api-openapi.yml
+  - type: Documentation
+    url: https://www.archives.gov/research/catalog/help/api
+  - type: SwaggerUI
+    url: https://catalog.archives.gov/api/v2/api-docs/
+  - type: SourceCode
+    url: https://github.com/usnationalarchives/Catalog-API
 common:
   - type: AgenticAccess
     url: agentic-access/national-archives-and-records-administration-nara--agentic-access.yml
