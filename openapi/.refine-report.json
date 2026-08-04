@@ -1,0 +1,50 @@
+{
+  "provider": "national-archives-and-records-administration-nara-",
+  "sources": [
+    "national-archives-and-records-administration-nara--accounts-api-openapi.yml",
+    "national-archives-and-records-administration-nara--announcements-api-openapi.yml",
+    "national-archives-and-records-administration-nara--comments-api-openapi.yml",
+    "national-archives-and-records-administration-nara--contributions-api-openapi.yml",
+    "national-archives-and-records-administration-nara--extracted-text-api-openapi.yml",
+    "national-archives-and-records-administration-nara--justifications-api-openapi.yml",
+    "national-archives-and-records-administration-nara--metadata-api-openapi.yml",
+    "national-archives-and-records-administration-nara--online-availability-api-openapi.yml",
+    "national-archives-and-records-administration-nara--other-extracted-text-api-openapi.yml",
+    "national-archives-and-records-administration-nara--partner-api-openapi.yml",
+    "national-archives-and-records-administration-nara--records-api-openapi.yml",
+    "national-archives-and-records-administration-nara--statistics-api-openapi.yml",
+    "national-archives-and-records-administration-nara--tags-api-openapi.yml",
+    "national-archives-and-records-administration-nara--transcriptions-api-openapi.yml",
+    "national-archives-and-records-administration-nara--users-api-openapi.yml",
+    "national-archives-and-records-administration-nara--utilities-api-openapi.yml"
+  ],
+  "outputs": [
+    "national-archives-and-records-administration-nara--accounts-api-openapi.yml",
+    "national-archives-and-records-administration-nara--announcements-api-openapi.yml",
+    "national-archives-and-records-administration-nara--comments-api-openapi.yml",
+    "national-archives-and-records-administration-nara--contributions-api-openapi.yml",
+    "national-archives-and-records-administration-nara--extracted-text-api-openapi.yml",
+    "national-archives-and-records-administration-nara--justifications-api-openapi.yml",
+    "national-archives-and-records-administration-nara--metadata-api-openapi.yml",
+    "national-archives-and-records-administration-nara--online-availability-api-openapi.yml",
+    "national-archives-and-records-administration-nara--other-extracted-text-api-openapi.yml",
+    "national-archives-and-records-administration-nara--partner-api-openapi.yml",
+    "national-archives-and-records-administration-nara--records-api-openapi.yml",
+    "national-archives-and-records-administration-nara--statistics-api-openapi.yml",
+    "national-archives-and-records-administration-nara--tags-api-openapi.yml",
+    "national-archives-and-records-administration-nara--transcriptions-api-openapi.yml",
+    "national-archives-and-records-administration-nara--users-api-openapi.yml",
+    "national-archives-and-records-administration-nara--utilities-api-openapi.yml"
+  ],
+  "archived": [],
+  "errors": [
+    "national-archives-and-records-administration-nara--accounts-api-openapi.yml: dangling $ref: #/components/schemas/User",
+    "national-archives-and-records-administration-nara--announcements-api-openapi.yml: dangling $ref: #/components/schemas/Announcement",
+    "national-archives-and-records-administration-nara--contributions-api-openapi.yml: dangling $ref: #/components/schemas/contributionBody",
+    "national-archives-and-records-administration-nara--statistics-api-openapi.yml: dangling $ref: #/components/schemas/ContributionRecord",
+    "national-archives-and-records-administration-nara--statistics-api-openapi.yml: dangling $ref: #/components/schemas/MetaData"
+  ],
+  "warnings": [],
+  "notes": [],
+  "skipped": []
+}
