@@ -319,6 +319,8 @@ apis:
   - type: SourceCode
     url: https://github.com/usnationalarchives/Catalog-API
 common:
+  - type: IssueTracker
+    url: https://github.com/usnationalarchives/Catalog-API/issues
   - type: AgenticAccess
     url: agentic-access/national-archives-and-records-administration-nara--agentic-access.yml
   - type: DomainSecurity
