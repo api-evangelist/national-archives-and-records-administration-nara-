@@ -20,7 +20,7 @@ image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/national-a
 url: https://www.archives.gov/developer
 created: '2024-12-25'
 modified: '2026-05-19'
-specificationVersion: '0.19'
+specificationVersion: '0.23'
 tags:
   - Archives
   - Federal Government
