@@ -1,0 +1,33 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NextGen Catalog Accounts Utilities API",
+    "version": "0.2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Utilities",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Fetch JSON data from S3 based on a provided URL.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://catalog.archives.gov/api/v2/fetch-coords",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "This endpoint receives an S3 URL pointing to a resource, modifies the URL to target a JSON file instead of an image, and returns the content of the JSON file."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,110 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NextGen Catalog Accounts Announcements API",
+    "version": "0.2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Announcements",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get a list of active announcements.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/announcements/latest"
+          },
+          "docs": "Retrieve a paginated list of announcements."
+        },
+        {
+          "info": {
+            "name": "Get a list of announcements.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/announcements",
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "The page number of announcements to retrieve."
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "The number of announcements to display per page."
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "The status of the announcements to filter by."
+              },
+              {
+                "name": "sortCol",
+                "value": "",
+                "type": "query",
+                "description": "The column to sort the announcements by."
+              },
+              {
+                "name": "sortOrder",
+                "value": "",
+                "type": "query",
+                "description": "The order of sorting (ascending or descending)."
+              }
+            ]
+          },
+          "docs": "Retrieve a paginated list of announcements."
+        },
+        {
+          "info": {
+            "name": "Create a new announcement.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://catalog.archives.gov/api/v2/announcements",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allows a moderator to create a new announcement. The announcement is initially created with a status of 'DRAFT'."
+        },
+        {
+          "info": {
+            "name": "Update an existing announcement.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://catalog.archives.gov/api/v2/announcements/:announcement_id",
+            "params": [
+              {
+                "name": "announcement_id",
+                "value": "",
+                "type": "path",
+                "description": "The unique identifier of the announcement to update."
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allows a moderator to update an existing announcement."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

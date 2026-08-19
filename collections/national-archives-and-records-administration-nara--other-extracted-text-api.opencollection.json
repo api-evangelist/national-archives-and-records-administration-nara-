@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NextGen Catalog Accounts Other Extracted Text API",
+    "version": "0.2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Other Extracted Text",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get search results for active contribution data by sending a request to the catalog with other extracted text as a search parameter.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/other-extracted-text/search",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "A search query string which accepts exact phrases or similar matches (\"\")."
+              },
+              {
+                "name": "id",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "An individual contribution's unique identifier which maps to the record.contributionId field"
+              },
+              {
+                "name": "userId",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "Contributor's unique identifier which maps to the record.contributor.userId field"
+              },
+              {
+                "name": "userName",
+                "value": "johndoe1",
+                "type": "query",
+                "description": "Contributor's screen name which maps to the record.contributor.userName field"
+              },
+              {
+                "name": "naId",
+                "value": "146919092, 146919093",
+                "type": "query",
+                "description": "An array of NARA-specific identifiers, each of which is unique to a single record."
+              },
+              {
+                "name": "status",
+                "value": "active",
+                "type": "query",
+                "description": "Contribution's status which maps to the status field in the MySQL database"
+              },
+              {
+                "name": "createdAt",
+                "value": "2020-01-01 07:00:00",
+                "type": "query",
+                "description": "Contribution's date of creation by which to filter"
+              },
+              {
+                "name": "updatedAt",
+                "value": "2020-01-02 07:00:00",
+                "type": "query",
+                "description": "Contribution's date of modification by which to filter"
+              },
+              {
+                "name": "sortBy",
+                "value": "",
+                "type": "query",
+                "description": "Sort order:\n * `contribution.asc` - Sort by contribution, ascending from A to Z\n * `contribution.desc` - Sort by contribution, descending from Z to A\n * `createdAt.asc` - Sort by created date, ascending\n * `createdAt.desc` - Sort by created date, descending\n * `updatedAt.asc` - Sort by updated date, ascending\n * `updatedAt.desc` - Sort by updated date, descending\n * `count.asc` - Sort by aggregated tag counts, ascending, ONLY works when contributionType = tag is present\n * `count.desc` - Sort by aggregated tag counts, descending, ONLY works when contributionType = tag is present\n"
+              },
+              {
+                "name": "includeTotalCount",
+                "value": "true",
+                "type": "query",
+                "description": "Returns the total count of results in each result."
+              }
+            ]
+          },
+          "docs": "Get search results for active contribution data by sending a request to the catalog with other extracted text as a search parameter. It returns a JSON result."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

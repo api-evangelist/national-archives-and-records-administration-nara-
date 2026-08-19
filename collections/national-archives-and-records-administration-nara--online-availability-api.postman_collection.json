@@ -1,0 +1,652 @@
+{
+  "item": [
+    {
+      "id": "d8020fde-4c4c-473e-a844-aba849c23c78",
+      "name": "Online Availability",
+      "description": {
+        "content": "Information about record online availability",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "4e962656-f931-44ba-93d0-00af98b1f5b2",
+          "name": "Get all online availability information.",
+          "request": {
+            "name": "Get all online availability information.",
+            "description": {},
+            "url": {
+              "path": [
+                "online-availability"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "availability",
+                  "value": "<string>",
+                  "description": "An array of online availability values"
+                },
+                {
+                  "disabled": false,
+                  "key": "availabilityStatus",
+                  "value": "<string>",
+                  "description": "An array of online availability status values"
+                },
+                {
+                  "disabled": false,
+                  "key": "naId",
+                  "value": "<string>",
+                  "description": "An array of NARA-specific identifiers, each of which is unique to a single record."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum number of results returned for each page of paginated data."
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number of the paginated result set in which to return."
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "d4fa1b87-22d9-4cac-9c5f-5dbf88416a21",
+              "name": "A body of response data containing full record objects if any were found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "online-availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "availability",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "availabilityStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naId",
+                      "value": "146919092, 146919093"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "75"
+                    },
+                    {
+                      "key": "page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "20198384-76b7-4ecc-aa85-2fafd146265f",
+              "name": "Bad Request. Invalid search terms, revise terms.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "online-availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "availability",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "availabilityStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naId",
+                      "value": "146919092, 146919093"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "75"
+                    },
+                    {
+                      "key": "page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8e26c9f1-caa5-4fe8-811c-b82bd3cb1589",
+              "name": "Unprocessable Entity. Query must be a non-empty string.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "online-availability"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "availability",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "availabilityStatus",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "naId",
+                      "value": "146919092, 146919093"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "75"
+                    },
+                    {
+                      "key": "page",
+                      "value": "20"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "bc882037-f252-4d23-bdb1-b6737527f4e4",
+          "name": "Get all online availability information for a record with the given naId.",
+          "request": {
+            "name": "Get all online availability information for a record with the given naId.",
+            "description": {},
+            "url": {
+              "path": [
+                "online-availability",
+                "naId",
+                ":naId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "naId",
+                  "description": "Unique, NARA-specific identifier given to each record."
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bd2bc7d9-1803-434a-8983-ca138ead334d",
+              "name": "A body of response data containing full record objects if any were found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "online-availability",
+                    "naId",
+                    ":naId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "naId",
+                      "description": "Unique, NARA-specific identifier given to each record."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5cbff1c2-170d-4c8d-84bc-7c066b48e1a6",
+              "name": "Bad Request. Invalid search terms, revise terms.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "online-availability",
+                    "naId",
+                    ":naId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "naId",
+                      "description": "Unique, NARA-specific identifier given to each record."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "1901405a-0e83-4fd4-bcf7-4c03da1d83f6",
+              "name": "Unprocessable Entity. Query must be a non-empty string.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "online-availability",
+                    "naId",
+                    ":naId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "naId",
+                      "description": "Unique, NARA-specific identifier given to each record."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "2514ac1f-9b80-43ec-94d0-8cbde87221ac",
+          "name": "Update or insert online availability information given a record's naId.",
+          "request": {
+            "name": "Update or insert online availability information given a record's naId.",
+            "description": {},
+            "url": {
+              "path": [
+                "online-availability",
+                "update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"naId\": \"<string>\",\n  \"status\": \"<string>\",\n  \"availability\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b5c29c37-90c2-4183-9657-d9d5adcc962e",
+              "name": "A body of response data containing full record objects if any were found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "online-availability",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"naId\": \"<string>\",\n  \"status\": \"active\",\n  \"availability\": \"fullyDigitized\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b452b779-18c2-49c2-9083-9baddb7d9567",
+              "name": "Bad Request. Invalid search terms, revise terms.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "online-availability",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"naId\": \"<string>\",\n  \"status\": \"active\",\n  \"availability\": \"fullyDigitized\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3ed3840d-e3bc-46ed-b317-e5c56898d8bd",
+              "name": "Unprocessable Entity. Query must be a non-empty string.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "online-availability",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"naId\": \"<string>\",\n  \"status\": \"active\",\n  \"availability\": \"fullyDigitized\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "ce6bb6c7-4024-4b85-9b84-5b84bfec905a",
+          "name": "Completely remove online availability information for a given record naId.",
+          "request": {
+            "name": "Completely remove online availability information for a given record naId.",
+            "description": {},
+            "url": {
+              "path": [
+                "online-availability",
+                "delete"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "naId",
+                  "value": "<string>",
+                  "description": "An array of NARA-specific identifiers, each of which is unique to a single record."
+                }
+              ],
+              "variable": []
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ab67890c-c0c8-4bfa-a5d0-45ce9e10a727",
+              "name": "A message confirming the online availability status for the specified record was successfully deleted",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "online-availability",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "naId",
+                      "value": "146919092, 146919093"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "85eb0f37-76c5-40b1-883b-a46d62279244",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "online-availability",
+                    "delete"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "naId",
+                      "value": "146919092, 146919093"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://catalog.archives.gov/api/v2/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "3750f751-200b-44b5-a052-3e9d4b158491",
+    "name": "NextGen Catalog Accounts Online Availability API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\nThis is the NextGen Catalog API application made with Express and documented with Swagger.\n\nThis API requires the use of an API key in order to access. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For example, the request might look like\n\n    curl --location --request GET 'https://catalog.archives.gov/api/v2/records/search?q=constitution'\n    --header 'Content-Type: application/json'\n    --header 'x-api-key: API_KEY'\n\nwhere API_KEY is the key string of your API key.\n\nFor write operations, in addition to the API key, a user ID in the format of a Universally Unique Identifier (UUID) is required in the body of the request. For example, a request to POST a tag might look like:\n\n    curl --location --request POST 'https://catalog.archives.gov/api/v2/tags'\n    --header 'Content-Type: application/json'\n    --data-raw '{\n    \"tag\": \"example tag\",\n    \"targetNaId\": 1667751,\n    \"userId\": \"USER_UUID\"\n    }'\nwhere USER_UUID is the UUID of the user.\n\nPlease contact O&M at Catalog_API@nara.gov for an API Key.",
+      "type": "text/plain"
+    }
+  }
+}

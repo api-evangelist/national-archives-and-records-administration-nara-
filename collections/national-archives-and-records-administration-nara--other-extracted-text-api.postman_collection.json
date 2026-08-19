@@ -1,0 +1,336 @@
+{
+  "item": [
+    {
+      "id": "44acb5d2-e06c-46ba-bb0b-2449620b1924",
+      "name": "Other Extracted Text",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "f8fb4652-90c2-4889-89d5-3f5f094c7d04",
+          "name": "Get search results for active contribution data by sending a request to the catalog with other extracted text as a search parameter.",
+          "request": {
+            "name": "Get search results for active contribution data by sending a request to the catalog with other extracted text as a search parameter.",
+            "description": {
+              "content": "Get search results for active contribution data by sending a request to the catalog with other extracted text as a search parameter. It returns a JSON result.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "other-extracted-text",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "A search query string which accepts exact phrases or similar matches (\"\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "An individual contribution's unique identifier which maps to the record.contributionId field"
+                },
+                {
+                  "disabled": false,
+                  "key": "userId",
+                  "value": "<string>",
+                  "description": "Contributor's unique identifier which maps to the record.contributor.userId field"
+                },
+                {
+                  "disabled": false,
+                  "key": "userName",
+                  "value": "<string>",
+                  "description": "Contributor's screen name which maps to the record.contributor.userName field"
+                },
+                {
+                  "disabled": false,
+                  "key": "naId",
+                  "value": "<string>",
+                  "description": "An array of NARA-specific identifiers, each of which is unique to a single record."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "Contribution's status which maps to the status field in the MySQL database"
+                },
+                {
+                  "disabled": false,
+                  "key": "createdAt",
+                  "value": "<string>",
+                  "description": "Contribution's date of creation by which to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "updatedAt",
+                  "value": "<string>",
+                  "description": "Contribution's date of modification by which to filter"
+                },
+                {
+                  "disabled": false,
+                  "key": "sortBy",
+                  "value": "<string>",
+                  "description": "Sort order:\n * `contribution.asc` - Sort by contribution, ascending from A to Z\n * `contribution.desc` - Sort by contribution, descending from Z to A\n * `createdAt.asc` - Sort by created date, ascending\n * `createdAt.desc` - Sort by created date, descending\n * `updatedAt.asc` - Sort by updated date, ascending\n * `updatedAt.desc` - Sort by updated date, descending\n * `count.asc` - Sort by aggregated tag counts, ascending, ONLY works when contributionType = tag is present\n * `count.desc` - Sort by aggregated tag counts, descending, ONLY works when contributionType = tag is present\n"
+                },
+                {
+                  "disabled": false,
+                  "key": "includeTotalCount",
+                  "value": "<boolean>",
+                  "description": "Returns the total count of results in each result."
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "6c601d59-f4c0-4ddb-8f73-52e39ae37e79",
+              "name": "A body of response data containing other extracted objects if any were found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "other-extracted-text",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "we the people"
+                    },
+                    {
+                      "key": "id",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "userName",
+                      "value": "johndoe1"
+                    },
+                    {
+                      "key": "naId",
+                      "value": "146919092, 146919093"
+                    },
+                    {
+                      "key": "status",
+                      "value": "active"
+                    },
+                    {
+                      "key": "createdAt",
+                      "value": "2020-01-01 07:00:00"
+                    },
+                    {
+                      "key": "updatedAt",
+                      "value": "2020-01-02 07:00:00"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeTotalCount",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "85c877db-60ae-41e6-b0fd-c78fcdcfbdf1",
+              "name": "Bad Request. Invalid search terms, revise terms.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "other-extracted-text",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "we the people"
+                    },
+                    {
+                      "key": "id",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "userName",
+                      "value": "johndoe1"
+                    },
+                    {
+                      "key": "naId",
+                      "value": "146919092, 146919093"
+                    },
+                    {
+                      "key": "status",
+                      "value": "active"
+                    },
+                    {
+                      "key": "createdAt",
+                      "value": "2020-01-01 07:00:00"
+                    },
+                    {
+                      "key": "updatedAt",
+                      "value": "2020-01-02 07:00:00"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeTotalCount",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7d3691d3-ec91-47b9-aae2-987d474481ba",
+              "name": "Unprocessable Entity.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "other-extracted-text",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "we the people"
+                    },
+                    {
+                      "key": "id",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "userName",
+                      "value": "johndoe1"
+                    },
+                    {
+                      "key": "naId",
+                      "value": "146919092, 146919093"
+                    },
+                    {
+                      "key": "status",
+                      "value": "active"
+                    },
+                    {
+                      "key": "createdAt",
+                      "value": "2020-01-01 07:00:00"
+                    },
+                    {
+                      "key": "updatedAt",
+                      "value": "2020-01-02 07:00:00"
+                    },
+                    {
+                      "key": "sortBy",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "includeTotalCount",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://catalog.archives.gov/api/v2/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "8f283448-00e0-4ab8-8f00-83789d48ba41",
+    "name": "NextGen Catalog Accounts Other Extracted Text API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\nThis is the NextGen Catalog API application made with Express and documented with Swagger.\n\nThis API requires the use of an API key in order to access. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For example, the request might look like\n\n    curl --location --request GET 'https://catalog.archives.gov/api/v2/records/search?q=constitution'\n    --header 'Content-Type: application/json'\n    --header 'x-api-key: API_KEY'\n\nwhere API_KEY is the key string of your API key.\n\nFor write operations, in addition to the API key, a user ID in the format of a Universally Unique Identifier (UUID) is required in the body of the request. For example, a request to POST a tag might look like:\n\n    curl --location --request POST 'https://catalog.archives.gov/api/v2/tags'\n    --header 'Content-Type: application/json'\n    --data-raw '{\n    \"tag\": \"example tag\",\n    \"targetNaId\": 1667751,\n    \"userId\": \"USER_UUID\"\n    }'\nwhere USER_UUID is the UUID of the user.\n\nPlease contact O&M at Catalog_API@nara.gov for an API Key.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NextGen Catalog Accounts Extracted Text API",
+    "version": "0.2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Extracted Text",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get extracted text for a given naid and digital object ID.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/extractedText/:naId",
+            "params": [
+              {
+                "name": "naId",
+                "value": "146919092",
+                "type": "path",
+                "description": "Unique, NARA-specific identifier given to each record."
+              },
+              {
+                "name": "objectId",
+                "value": "152951242",
+                "type": "query",
+                "description": "Unique ID given to an object"
+              },
+              {
+                "name": "page",
+                "value": "20",
+                "type": "query",
+                "description": "Page number of the paginated result set in which to return."
+              },
+              {
+                "name": "limit",
+                "value": "75",
+                "type": "query",
+                "description": "Maximum number of results returned for each page of paginated data."
+              }
+            ]
+          },
+          "docs": "Returns a list of extracted text for a given naid and digital object ID."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

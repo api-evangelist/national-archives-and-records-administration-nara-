@@ -1,0 +1,132 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NextGen Catalog Accounts API",
+    "version": "0.2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Accounts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get public account data by account id directly from the database.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/users/userId/:userId"
+          },
+          "docs": "Get public account data by account id directly from the database. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get public account data by account id directly from the database.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/users/userName/:userName"
+          },
+          "docs": "Get public account data by account id directly from the database. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get public account data directly from the database",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/users",
+            "params": [
+              {
+                "name": "userId",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "User id of the user account."
+              },
+              {
+                "name": "email",
+                "value": "johndoe@example.com",
+                "type": "query",
+                "description": "Email address of the user account."
+              },
+              {
+                "name": "userName",
+                "value": "johndoe1",
+                "type": "query",
+                "description": "Username of the user account."
+              },
+              {
+                "name": "fullName",
+                "value": "John Doe",
+                "type": "query",
+                "description": "Full name of the user account."
+              },
+              {
+                "name": "role",
+                "value": "contributor",
+                "type": "query",
+                "description": "Role of the user account."
+              },
+              {
+                "name": "status",
+                "value": "active",
+                "type": "query",
+                "description": "Status of the user account."
+              },
+              {
+                "name": "limit",
+                "value": "100",
+                "type": "query",
+                "description": "Number of records to be returned on a page. Defaults to 5."
+              },
+              {
+                "name": "page",
+                "value": "2",
+                "type": "query",
+                "description": "Page number of records to display. Defaults to 1."
+              },
+              {
+                "name": "sortCol",
+                "value": "userName",
+                "type": "query",
+                "description": "Column name to sort the results by. Optional."
+              },
+              {
+                "name": "sortOrder",
+                "value": "asc",
+                "type": "query",
+                "description": "Sort order, ascending or descending. Defaults to \"asc\" if not specified."
+              }
+            ]
+          },
+          "docs": "Provide any combination of the parameters below to return all users that match this criteria. Use asterisks for wildcards. Values are NOT case sensitive."
+        },
+        {
+          "info": {
+            "name": "Update the timestamp of the last time the user viewed their notifications.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://catalog.archives.gov/api/v2/users/lastViewedNotificationsAt/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "path",
+                "description": "userId of the user who's lastViewedNotificationsAt is being updated."
+              }
+            ]
+          },
+          "docs": "Update the timestamp of the last time the user viewed their notifications, by userId, to the current time."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

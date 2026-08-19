@@ -1,0 +1,141 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NextGen Catalog Accounts Partner API",
+    "version": "0.2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Partner",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a new partner.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://catalog.archives.gov/api/v2/partners/create",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allows a moderator to create a new partner. The partner is initially created with a status of 'ACTIVE'."
+        },
+        {
+          "info": {
+            "name": "Search for partners",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/partners/search",
+            "params": [
+              {
+                "name": "partnerNameId",
+                "value": "0360214c-55b4-4819-8f28-206b24cca41a",
+                "type": "query",
+                "description": "partnerNameId of the partner being searched"
+              },
+              {
+                "name": "fullName",
+                "value": "Demo Partner",
+                "type": "query",
+                "description": "Full name of the partner being searched"
+              },
+              {
+                "name": "userId",
+                "value": "3fa85f64-5717-4562-b3fc-2c963f66afa",
+                "type": "query",
+                "description": "userId of the user that associated with the partner"
+              }
+            ]
+          },
+          "docs": "Allows users to search for partners via userId , partner name, partnerNameId or all"
+        },
+        {
+          "info": {
+            "name": "Update partner name.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://catalog.archives.gov/api/v2/partners/update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Allows a moderator to update partner's full name and status."
+        },
+        {
+          "info": {
+            "name": "Get partner contributions by partnerNameId.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/partners/contributions/partnerNameId/:partnerNameId",
+            "params": [
+              {
+                "name": "partnerNameId",
+                "value": "0360214c-55b4-4819-8f28-206b24cca41a",
+                "type": "path",
+                "description": "The unique identifier of the partner."
+              },
+              {
+                "name": "page",
+                "value": "20",
+                "type": "query",
+                "description": "Page number of the paginated result set in which to return."
+              },
+              {
+                "name": "limit",
+                "value": "75",
+                "type": "query",
+                "description": "Maximum number of results returned for each page of paginated data."
+              }
+            ]
+          },
+          "docs": "Allows a moderator to get partner contributions by partnerNameId."
+        },
+        {
+          "info": {
+            "name": "Get partner contributions by fullName.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/partners/contributions/fullName/:fullName",
+            "params": [
+              {
+                "name": "fullName",
+                "value": "NARA Partner",
+                "type": "path",
+                "description": "The fullName of the partner."
+              },
+              {
+                "name": "page",
+                "value": "20",
+                "type": "query",
+                "description": "Page number of the paginated result set in which to return."
+              },
+              {
+                "name": "limit",
+                "value": "75",
+                "type": "query",
+                "description": "Maximum number of results returned for each page of paginated data."
+              }
+            ]
+          },
+          "docs": "Allows a moderator to get partner contributions by id."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,197 @@
+{
+  "item": [
+    {
+      "id": "275ec6da-5128-48e1-88ab-451d7a2ac958",
+      "name": "Utilities",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "07c532cb-fc6a-4ed5-8ee8-1e6f025d2be7",
+          "name": "Fetch JSON data from S3 based on a provided URL.",
+          "request": {
+            "name": "Fetch JSON data from S3 based on a provided URL.",
+            "description": {
+              "content": "This endpoint receives an S3 URL pointing to a resource, modifies the URL to target a JSON file instead of an image, and returns the content of the JSON file.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "fetch-coords"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"s3Url\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "34792961-8e16-4ee9-8ab7-022795dc9c60",
+              "name": "JSON data successfully retrieved from the specified S3 URL.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fetch-coords"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"s3Url\": \"https://s3.amazonaws.com/bucket-name/path/to/file.jpg\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"averageConfidenceScore\": 6094.445502631,\n  \"data\": {\n    \"DocumentMetadata\": {\n      \"Pages\": 1\n    },\n    \"Blocks\": [\n      {\n        \"BlockType\": \"PAGE\",\n        \"Text\": \"Example text\"\n      }\n    ]\n  }\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f952ecf9-2e3a-43db-8858-9dff83db230e",
+              "name": "Invalid S3 URL format. Please check the URL and try again.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fetch-coords"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"s3Url\": \"https://s3.amazonaws.com/bucket-name/path/to/file.jpg\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "0c8d2191-fa10-4abc-8847-abd1be3eeea2",
+              "name": "Server error occurred while fetching JSON from S3.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "fetch-coords"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"s3Url\": \"https://s3.amazonaws.com/bucket-name/path/to/file.jpg\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://catalog.archives.gov/api/v2/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "32ddd109-f15e-43d3-b867-a28fc10772e8",
+    "name": "NextGen Catalog Accounts Utilities API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\nThis is the NextGen Catalog API application made with Express and documented with Swagger.\n\nThis API requires the use of an API key in order to access. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For example, the request might look like\n\n    curl --location --request GET 'https://catalog.archives.gov/api/v2/records/search?q=constitution'\n    --header 'Content-Type: application/json'\n    --header 'x-api-key: API_KEY'\n\nwhere API_KEY is the key string of your API key.\n\nFor write operations, in addition to the API key, a user ID in the format of a Universally Unique Identifier (UUID) is required in the body of the request. For example, a request to POST a tag might look like:\n\n    curl --location --request POST 'https://catalog.archives.gov/api/v2/tags'\n    --header 'Content-Type: application/json'\n    --data-raw '{\n    \"tag\": \"example tag\",\n    \"targetNaId\": 1667751,\n    \"userId\": \"USER_UUID\"\n    }'\nwhere USER_UUID is the UUID of the user.\n\nPlease contact O&M at Catalog_API@nara.gov for an API Key.",
+      "type": "text/plain"
+    }
+  }
+}

@@ -1,0 +1,305 @@
+{
+  "item": [
+    {
+      "id": "9f30217a-2a12-4068-890c-30bb5959e0ca",
+      "name": "Extracted Text",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7d7d172c-7818-4ddb-b1a6-83b0aaa06e2c",
+          "name": "Get extracted text for a given naid and digital object ID.",
+          "request": {
+            "name": "Get extracted text for a given naid and digital object ID.",
+            "description": {
+              "content": "Returns a list of extracted text for a given naid and digital object ID.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "extractedText",
+                ":naId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "objectId",
+                  "value": "<integer>",
+                  "description": "(Required) Unique ID given to an object"
+                },
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number of the paginated result set in which to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum number of results returned for each page of paginated data."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "naId",
+                  "description": "Unique, NARA-specific identifier given to each record."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a9425231-b5d5-4aed-a626-4ab1bf2081da",
+              "name": "A list of digital object IDs.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extractedText",
+                    ":naId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "objectId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "75"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "naId",
+                      "description": "Unique, NARA-specific identifier given to each record."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "[\n  {\n    \"objectId\": \"string\",\n    \"extractedText\": \"string\"\n  },\n  {\n    \"objectId\": \"string\",\n    \"extractedText\": \"string\"\n  }\n]",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "8e6051f4-6777-470e-8da3-64dc95034318",
+              "name": "Bad Request. Invalid naid provided.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extractedText",
+                    ":naId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "objectId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "75"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "naId",
+                      "description": "Unique, NARA-specific identifier given to each record."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e8e8f9e0-a6d7-4a93-8b32-cda659570e03",
+              "name": "No matching records found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extractedText",
+                    ":naId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "objectId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "75"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "naId",
+                      "description": "Unique, NARA-specific identifier given to each record."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "f8499ddd-f90f-4200-a26a-4dd93535bcb2",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "extractedText",
+                    ":naId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "objectId",
+                      "value": "<integer>"
+                    },
+                    {
+                      "key": "page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "75"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "naId",
+                      "description": "Unique, NARA-specific identifier given to each record."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://catalog.archives.gov/api/v2/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "7f8716d2-daaf-46c7-8ec1-5d5de8502f20",
+    "name": "NextGen Catalog Accounts Extracted Text API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\nThis is the NextGen Catalog API application made with Express and documented with Swagger.\n\nThis API requires the use of an API key in order to access. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For example, the request might look like\n\n    curl --location --request GET 'https://catalog.archives.gov/api/v2/records/search?q=constitution'\n    --header 'Content-Type: application/json'\n    --header 'x-api-key: API_KEY'\n\nwhere API_KEY is the key string of your API key.\n\nFor write operations, in addition to the API key, a user ID in the format of a Universally Unique Identifier (UUID) is required in the body of the request. For example, a request to POST a tag might look like:\n\n    curl --location --request POST 'https://catalog.archives.gov/api/v2/tags'\n    --header 'Content-Type: application/json'\n    --data-raw '{\n    \"tag\": \"example tag\",\n    \"targetNaId\": 1667751,\n    \"userId\": \"USER_UUID\"\n    }'\nwhere USER_UUID is the UUID of the user.\n\nPlease contact O&M at Catalog_API@nara.gov for an API Key.",
+      "type": "text/plain"
+    }
+  }
+}

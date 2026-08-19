@@ -1,0 +1,636 @@
+{
+  "item": [
+    {
+      "id": "b2cf8fe7-67aa-4018-b01c-1cba3ce46c23",
+      "name": "Announcements",
+      "description": {
+        "content": "For important announcements",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "3ea8bd61-256f-410f-9e19-2ac76631b20a",
+          "name": "Get a list of active announcements.",
+          "request": {
+            "name": "Get a list of active announcements.",
+            "description": {
+              "content": "Retrieve a paginated list of announcements.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "announcements",
+                "latest"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fc77c31b-180d-460d-ab38-e6e17309b17d",
+              "name": "A list of announcements.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "announcements",
+                    "latest"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"announcements\": [\n    {\n      \"value\": \"reference #/components/schemas/Announcement not found in the OpenAPI spec\"\n    },\n    {\n      \"value\": \"reference #/components/schemas/Announcement not found in the OpenAPI spec\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "a832070a-590d-4f6e-a783-8b96623eeac3",
+          "name": "Get a list of announcements.",
+          "request": {
+            "name": "Get a list of announcements.",
+            "description": {
+              "content": "Retrieve a paginated list of announcements.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "announcements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "The page number of announcements to retrieve."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "10",
+                  "description": "The number of announcements to display per page."
+                },
+                {
+                  "disabled": false,
+                  "key": "status",
+                  "value": "<string>",
+                  "description": "The status of the announcements to filter by."
+                },
+                {
+                  "disabled": false,
+                  "key": "sortCol",
+                  "value": "<string>",
+                  "description": "The column to sort the announcements by."
+                },
+                {
+                  "disabled": false,
+                  "key": "sortOrder",
+                  "value": "desc",
+                  "description": "The order of sorting (ascending or descending)."
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "b86a45d6-73dd-4fa3-959d-fbca6dce658f",
+              "name": "A list of announcements.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "announcements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "10"
+                    },
+                    {
+                      "key": "status",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortCol",
+                      "value": "<string>"
+                    },
+                    {
+                      "key": "sortOrder",
+                      "value": "desc"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"metadata\": {\n    \"totalCount\": 6866,\n    \"activeCount\": 7132,\n    \"draftCount\": 3892,\n    \"inactiveCount\": 8450\n  },\n  \"announcements\": [\n    {\n      \"value\": \"reference #/components/schemas/Announcement not found in the OpenAPI spec\"\n    },\n    {\n      \"value\": \"reference #/components/schemas/Announcement not found in the OpenAPI spec\"\n    }\n  ]\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "684090a2-238f-4e2a-8057-aa508a8e6248",
+          "name": "Create a new announcement.",
+          "request": {
+            "name": "Create a new announcement.",
+            "description": {
+              "content": "Allows a moderator to create a new announcement. The announcement is initially created with a status of 'DRAFT'.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "announcements"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"announcement_text\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"user_id\": \"<integer>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4e2155a1-c860-4db8-91da-a8461313ef69",
+              "name": "Announcement created successfully. The response includes the created announcement details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "announcements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"announcement_text\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"user_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"announcement_id\": 2870,\n  \"created_at\": \"1953-12-07T07:03:30.384Z\",\n  \"announcement_text\": \"string\",\n  \"notes\": \"string\",\n  \"user_id\": \"string\",\n  \"status\": \"string\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "f71a32fd-6abf-43c3-ad7b-029202137a5f",
+              "name": "Validation error. This can occur if the request body does not match the expected format.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "announcements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"announcement_text\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"user_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6583fecc-b4ef-40a4-b84a-87169243a64b",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "announcements"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"announcement_text\": \"<string>\",\n  \"notes\": \"<string>\",\n  \"user_id\": \"<integer>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "494001d9-dd25-4b77-b2ef-7215a9b6640a",
+          "name": "Update an existing announcement.",
+          "request": {
+            "name": "Update an existing announcement.",
+            "description": {
+              "content": "Allows a moderator to update an existing announcement.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "announcements",
+                ":announcement_id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "announcement_id",
+                  "description": "(Required) The unique identifier of the announcement to update."
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"announcement_text\": \"<string>\",\n  \"status\": \"<string>\",\n  \"user_id\": \"<uuid>\",\n  \"notes\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f9cf11d1-3e14-4fc4-b4e8-c84e474d6a62",
+              "name": "Announcement updated successfully. Returns the updated announcement object.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "announcements",
+                    ":announcement_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "announcement_id",
+                      "description": "(Required) The unique identifier of the announcement to update."
+                    }
+                  ]
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"announcement_text\": \"<string>\",\n  \"status\": \"<string>\",\n  \"user_id\": \"<uuid>\",\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"announcement_id\": 7181,\n  \"announcement_text\": \"string\",\n  \"status\": \"string\",\n  \"user_id\": \"f2ea7e2d-f71d-bd7a-d709-d61fec1249f7\",\n  \"user_name\": \"string\",\n  \"notes\": \"string\",\n  \"created_at\": \"1989-12-08T12:16:05.083Z\",\n  \"updated_at\": \"2006-11-14T10:32:24.121Z\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "766c8c54-39c2-4da1-9ca6-d9c1dc7936de",
+              "name": "Validation error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "announcements",
+                    ":announcement_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "announcement_id",
+                      "description": "(Required) The unique identifier of the announcement to update."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"announcement_text\": \"<string>\",\n  \"status\": \"<string>\",\n  \"user_id\": \"<uuid>\",\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "eb4fdffc-dc01-4250-81c9-be3fb04e4606",
+              "name": "Announcement not found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "announcements",
+                    ":announcement_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "announcement_id",
+                      "description": "(Required) The unique identifier of the announcement to update."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"announcement_text\": \"<string>\",\n  \"status\": \"<string>\",\n  \"user_id\": \"<uuid>\",\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Not Found",
+              "code": 404,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "19c630ba-5e30-4163-938f-379d40f79974",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "announcements",
+                    ":announcement_id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "announcement_id",
+                      "description": "(Required) The unique identifier of the announcement to update."
+                    }
+                  ]
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"announcement_text\": \"<string>\",\n  \"status\": \"<string>\",\n  \"user_id\": \"<uuid>\",\n  \"notes\": \"<string>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://catalog.archives.gov/api/v2/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "a88319f9-e6a4-4563-b568-981982bb94be",
+    "name": "NextGen Catalog Accounts Announcements API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\nThis is the NextGen Catalog API application made with Express and documented with Swagger.\n\nThis API requires the use of an API key in order to access. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For example, the request might look like\n\n    curl --location --request GET 'https://catalog.archives.gov/api/v2/records/search?q=constitution'\n    --header 'Content-Type: application/json'\n    --header 'x-api-key: API_KEY'\n\nwhere API_KEY is the key string of your API key.\n\nFor write operations, in addition to the API key, a user ID in the format of a Universally Unique Identifier (UUID) is required in the body of the request. For example, a request to POST a tag might look like:\n\n    curl --location --request POST 'https://catalog.archives.gov/api/v2/tags'\n    --header 'Content-Type: application/json'\n    --data-raw '{\n    \"tag\": \"example tag\",\n    \"targetNaId\": 1667751,\n    \"userId\": \"USER_UUID\"\n    }'\nwhere USER_UUID is the UUID of the user.\n\nPlease contact O&M at Catalog_API@nara.gov for an API Key.",
+      "type": "text/plain"
+    }
+  }
+}

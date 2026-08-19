@@ -1,0 +1,37 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NextGen Catalog Accounts Justifications API",
+    "version": "0.2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Justifications",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get justifications directly from the database.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/justifications",
+            "params": [
+              {
+                "name": "associatedTable",
+                "value": "constributions",
+                "type": "path",
+                "description": "The table to which a justification is associated in the MySQL database"
+              }
+            ]
+          },
+          "docs": "Get justifications directly from the database. Returns a JSON result."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

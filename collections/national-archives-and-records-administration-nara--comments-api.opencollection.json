@@ -1,0 +1,199 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NextGen Catalog Accounts Comments API",
+    "version": "0.2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Comments",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get search results for comment data by sending a request with search parameters to the catalog.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/comments/search",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases (\"\")."
+              },
+              {
+                "name": "id",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "An individual contribution's unique identifier which maps to the record.contributionId field"
+              },
+              {
+                "name": "userName",
+                "value": "johndoe1",
+                "type": "query",
+                "description": "Contributor's screen name which maps to the record.contributor.userName field"
+              },
+              {
+                "name": "userId",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "Contributor's unique identifier which maps to the record.contributor.userId field"
+              },
+              {
+                "name": "naId",
+                "value": "146919092, 146919093",
+                "type": "query",
+                "description": "An array of NARA-specific identifiers, each of which is unique to a single record."
+              },
+              {
+                "name": "debug",
+                "value": "true",
+                "type": "query",
+                "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+              }
+            ]
+          },
+          "docs": "Get search results for comment data by sending a request with search parameters to the catalog. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get a single comment object by comment id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/comments/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "An individual contribution's unique identifier which maps to the record.contributionId field"
+              },
+              {
+                "name": "debug",
+                "value": "true",
+                "type": "query",
+                "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+              }
+            ]
+          },
+          "docs": "Get a single comment object by comment id. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get comments by their parent record's naId.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/comments/naId/:naId",
+            "params": [
+              {
+                "name": "naId",
+                "value": "57664721",
+                "type": "path",
+                "description": "naId of parent record whose comments to return"
+              },
+              {
+                "name": "debug",
+                "value": "true",
+                "type": "query",
+                "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+              }
+            ]
+          },
+          "docs": "Get comments by their parent record's naId. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get comments by their contributor's userId.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/comments/userId/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "5b18f857-29d7-31a9-b944-f4e68c12fd3f",
+                "type": "path",
+                "description": "userId of contributor whose comments to return"
+              },
+              {
+                "name": "debug",
+                "value": "true",
+                "type": "query",
+                "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+              }
+            ]
+          },
+          "docs": "Get comments by their contributor's userId. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Add a comment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://catalog.archives.gov/api/v2/comments/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a comment to a record."
+        },
+        {
+          "info": {
+            "name": "Update a comment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://catalog.archives.gov/api/v2/comments/:contributionId",
+            "params": [
+              {
+                "name": "contributionId",
+                "value": "cf831974-7af7-11ec-90d6-0242ac120003",
+                "type": "path",
+                "description": "contributionId of comment to update"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update a comment on a record."
+        },
+        {
+          "info": {
+            "name": "Deactivate/remove a comment.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://catalog.archives.gov/api/v2/comments/:contributionId",
+            "params": [
+              {
+                "name": "contributionId",
+                "value": "e3fe99d2-7af7-11ec-90d6-0242ac120003",
+                "type": "path",
+                "description": "contributionId of a comment to be deactivated/removed."
+              }
+            ]
+          },
+          "docs": "Change the status of a comment to 'inactive' or 'removed'. Normal comments will be made inactive. Administrator comments will be removed."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

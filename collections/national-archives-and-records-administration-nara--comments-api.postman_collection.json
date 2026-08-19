@@ -1,0 +1,1033 @@
+{
+  "item": [
+    {
+      "id": "54971f95-7cda-45ac-8757-9dcdec3c8ca1",
+      "name": "Comments",
+      "description": {
+        "content": "Comment search and data retrieval",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "41483666-d9c7-421a-987d-c52a1b03b5fe",
+          "name": "Get search results for comment data by sending a request with search parameters to the catalog.",
+          "request": {
+            "name": "Get search results for comment data by sending a request with search parameters to the catalog.",
+            "description": {
+              "content": "Get search results for comment data by sending a request with search parameters to the catalog. Returns a JSON result.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "comments",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases (\"\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "An individual contribution's unique identifier which maps to the record.contributionId field"
+                },
+                {
+                  "disabled": false,
+                  "key": "userName",
+                  "value": "<string>",
+                  "description": "Contributor's screen name which maps to the record.contributor.userName field"
+                },
+                {
+                  "disabled": false,
+                  "key": "userId",
+                  "value": "<string>",
+                  "description": "Contributor's unique identifier which maps to the record.contributor.userId field"
+                },
+                {
+                  "disabled": false,
+                  "key": "naId",
+                  "value": "<string>",
+                  "description": "An array of NARA-specific identifiers, each of which is unique to a single record."
+                },
+                {
+                  "disabled": false,
+                  "key": "debug",
+                  "value": "<boolean>",
+                  "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ae2fed25-2f74-4cee-9544-f15f4683b08a",
+              "name": "A body of response data containing full comment objects if any were found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "we the people"
+                    },
+                    {
+                      "key": "id",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "userName",
+                      "value": "johndoe1"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "naId",
+                      "value": "146919092, 146919093"
+                    },
+                    {
+                      "key": "debug",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e5157d4a-e452-44a6-baa3-ee36170550c9",
+              "name": "Bad Request. Invalid search terms, revise terms.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "we the people"
+                    },
+                    {
+                      "key": "id",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "userName",
+                      "value": "johndoe1"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "naId",
+                      "value": "146919092, 146919093"
+                    },
+                    {
+                      "key": "debug",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "2b5a050e-6b40-40b0-8bb9-dcc48cdf0e8b",
+              "name": "Unprocessable Entity.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "we the people"
+                    },
+                    {
+                      "key": "id",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "userName",
+                      "value": "johndoe1"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "naId",
+                      "value": "146919092, 146919093"
+                    },
+                    {
+                      "key": "debug",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "98c7dcba-ebff-424f-944e-aa3f753e9d45",
+          "name": "Get a single comment object by comment id.",
+          "request": {
+            "name": "Get a single comment object by comment id.",
+            "description": {
+              "content": "Get a single comment object by comment id. Returns a JSON result.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "comments",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "An individual contribution's unique identifier which maps to the record.contributionId field"
+                },
+                {
+                  "disabled": false,
+                  "key": "debug",
+                  "value": "<boolean>",
+                  "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7ca8f7e8-f45e-4a53-8258-85e5dfbb2e77",
+              "name": "A body of response data containing a comment object if it was found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "debug",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "507cf47e-4c54-492d-a015-79ac7a9632cd",
+              "name": "Unprocessable Entity.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "debug",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "68dfb387-e25d-427b-8c99-cb9b11db377b",
+          "name": "Get comments by their parent record's naId.",
+          "request": {
+            "name": "Get comments by their parent record's naId.",
+            "description": {
+              "content": "Get comments by their parent record's naId. Returns a JSON result.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "comments",
+                "naId",
+                ":naId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "debug",
+                  "value": "<boolean>",
+                  "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "naId",
+                  "description": "(Required) naId of parent record whose comments to return"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "a1087153-8e01-439c-8f3e-5e5dfbef0602",
+              "name": "A body of response data containing comment objects if any were found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    "naId",
+                    ":naId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "debug",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "naId",
+                      "description": "(Required) naId of parent record whose comments to return"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "605e8719-2eea-4149-8fe2-70c5215f1313",
+              "name": "Unprocessable Entity.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    "naId",
+                    ":naId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "debug",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "naId",
+                      "description": "(Required) naId of parent record whose comments to return"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "5e48c7c1-6a4c-467b-9780-49d893404bbc",
+          "name": "Get comments by their contributor's userId.",
+          "request": {
+            "name": "Get comments by their contributor's userId.",
+            "description": {
+              "content": "Get comments by their contributor's userId. Returns a JSON result.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "comments",
+                "userId",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "debug",
+                  "value": "<boolean>",
+                  "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) userId of contributor whose comments to return"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "dc2c1536-9c27-4943-b231-fb6638ea4181",
+              "name": "A body of response data containing comment objects if any were found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    "userId",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "debug",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) userId of contributor whose comments to return"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "b40f683a-8727-4b94-a786-f0045908d51e",
+              "name": "Unprocessable Entity.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    "userId",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "debug",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) userId of contributor whose comments to return"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "be6c008c-3cf3-4cd1-acf4-32198e723a90",
+          "name": "Add a comment.",
+          "request": {
+            "name": "Add a comment.",
+            "description": {
+              "content": "Add a comment to a record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "comments",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"comment\": \"<string>\",\n  \"targetNaId\": \"<integer>\",\n  \"userId\": \"<string>\",\n  \"targetObjectId\": \"<integer>\",\n  \"parentContributionId\": \"<string>\",\n  \"status\": \"active\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "fe317bb3-cda4-45aa-b764-d91b531d84ec",
+              "name": "A response body containing confirmation that the comment was added successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"comment\": \"a thoughtful comment\",\n  \"targetNaId\": 31124739,\n  \"userId\": \"c2558dff-bf46-3e28-8aff-29913227beb2\",\n  \"targetObjectId\": 77852917,\n  \"parentContributionId\": \"55555555-5555-5555-5555-555555555555\",\n  \"status\": \"inactive\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "04f95350-08b1-4d14-b2c3-0b3c80092a8c",
+              "name": "An error response while processing the request to add a comment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"comment\": \"a thoughtful comment\",\n  \"targetNaId\": 31124739,\n  \"userId\": \"c2558dff-bf46-3e28-8aff-29913227beb2\",\n  \"targetObjectId\": 77852917,\n  \"parentContributionId\": \"55555555-5555-5555-5555-555555555555\",\n  \"status\": \"inactive\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7c434a42-a836-40fe-b114-87999d1b4bed",
+          "name": "Update a comment.",
+          "request": {
+            "name": "Update a comment.",
+            "description": {
+              "content": "Update a comment on a record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "comments",
+                ":contributionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contributionId",
+                  "description": "(Required) contributionId of comment to update"
+                }
+              ]
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"comment\": \"<string>\",\n  \"status\": \"active\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "a5c6f7ed-cdd5-424f-aa84-a66aec896d02",
+              "name": "A response body containing confirmation that the comment was added successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":contributionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contributionId",
+                      "description": "(Required) contributionId of comment to update"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"comment\": \"a thoughtful edit to this comment\",\n  \"status\": \"inactive\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "33b0d7d0-c652-436f-a79f-991e4c27c0e1",
+              "name": "An error response while processing the request to add a comment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":contributionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contributionId",
+                      "description": "(Required) contributionId of comment to update"
+                    }
+                  ]
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"comment\": \"a thoughtful edit to this comment\",\n  \"status\": \"inactive\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "424d4ed9-ef58-46e1-bb60-f6881bdd4c0f",
+          "name": "Deactivate/remove a comment.",
+          "request": {
+            "name": "Deactivate/remove a comment.",
+            "description": {
+              "content": "Change the status of a comment to 'inactive' or 'removed'. Normal comments will be made inactive. Administrator comments will be removed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "comments",
+                ":contributionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contributionId",
+                  "description": "(Required) contributionId of a comment to be deactivated/removed."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "bab2f701-ff63-4daa-860c-5ba83863ee83",
+              "name": "A response body containing confirmation that the comment was deactivated/removed successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":contributionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contributionId",
+                      "description": "(Required) contributionId of a comment to be deactivated/removed."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "5a70dc93-2667-4bce-b33c-b516c8b04fe8",
+              "name": "An error response while processing the request to deactivate/remove a comment.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "comments",
+                    ":contributionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contributionId",
+                      "description": "(Required) contributionId of a comment to be deactivated/removed."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://catalog.archives.gov/api/v2/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "0f90a264-2550-4761-8ac2-919f155c50d6",
+    "name": "NextGen Catalog Accounts Comments API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\nThis is the NextGen Catalog API application made with Express and documented with Swagger.\n\nThis API requires the use of an API key in order to access. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For example, the request might look like\n\n    curl --location --request GET 'https://catalog.archives.gov/api/v2/records/search?q=constitution'\n    --header 'Content-Type: application/json'\n    --header 'x-api-key: API_KEY'\n\nwhere API_KEY is the key string of your API key.\n\nFor write operations, in addition to the API key, a user ID in the format of a Universally Unique Identifier (UUID) is required in the body of the request. For example, a request to POST a tag might look like:\n\n    curl --location --request POST 'https://catalog.archives.gov/api/v2/tags'\n    --header 'Content-Type: application/json'\n    --data-raw '{\n    \"tag\": \"example tag\",\n    \"targetNaId\": 1667751,\n    \"userId\": \"USER_UUID\"\n    }'\nwhere USER_UUID is the UUID of the user.\n\nPlease contact O&M at Catalog_API@nara.gov for an API Key.",
+      "type": "text/plain"
+    }
+  }
+}

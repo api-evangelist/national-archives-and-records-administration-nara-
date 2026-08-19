@@ -1,0 +1,91 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NextGen Catalog Accounts Users API",
+    "version": "0.2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Users",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Update user information given a user's email.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://catalog.archives.gov/api/v2/users",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update user information given a user. Requires an administrative account and a justification. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Update a users username given their userId.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://catalog.archives.gov/api/v2/users/username",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update user information given a user's userId. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Recieve the users notifications.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/users/notifications/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "path",
+                "description": "userId of the user recieving notifications."
+              },
+              {
+                "name": "countOnly",
+                "value": "true",
+                "type": "query",
+                "description": "Recieve only the count of notifications, and none of the contributions."
+              },
+              {
+                "name": "date",
+                "value": "2022-02-22",
+                "type": "query",
+                "description": "Recieve only the notifications past a certain date. Date must be in YYYY-MM-DD format."
+              },
+              {
+                "name": "limit",
+                "value": "5",
+                "type": "query",
+                "description": "Limit the amount of returned notifications."
+              },
+              {
+                "name": "page",
+                "value": "2",
+                "type": "query",
+                "description": "Page number for pagination of notifications. Page size is denoted by limit, defaults to 5. For example, if page = 3 notifications 10-14 will be returned."
+              }
+            ]
+          },
+          "docs": "Recieve the users notifications, including edited transcriptions, moderated contributions, and replies to comments. Notifications are contributions, with an additional field 'notificationType' to denote type."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

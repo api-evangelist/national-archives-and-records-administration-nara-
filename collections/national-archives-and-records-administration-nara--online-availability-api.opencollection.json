@@ -1,0 +1,114 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NextGen Catalog Accounts Online Availability API",
+    "version": "0.2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Online Availability",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get all online availability information.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/online-availability",
+            "params": [
+              {
+                "name": "availability",
+                "value": "fullyDigitized, unrestrictedOnly",
+                "type": "query",
+                "description": "An array of online availability values"
+              },
+              {
+                "name": "availabilityStatus",
+                "value": "active, inactive",
+                "type": "query",
+                "description": "An array of online availability status values"
+              },
+              {
+                "name": "naId",
+                "value": "146919092, 146919093",
+                "type": "query",
+                "description": "An array of NARA-specific identifiers, each of which is unique to a single record."
+              },
+              {
+                "name": "limit",
+                "value": "75",
+                "type": "query",
+                "description": "Maximum number of results returned for each page of paginated data."
+              },
+              {
+                "name": "page",
+                "value": "20",
+                "type": "query",
+                "description": "Page number of the paginated result set in which to return."
+              }
+            ]
+          },
+          "docs": "Get all online availability information."
+        },
+        {
+          "info": {
+            "name": "Get all online availability information for a record with the given naId.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/online-availability/naId/:naId",
+            "params": [
+              {
+                "name": "naId",
+                "value": "146919092",
+                "type": "path",
+                "description": "Unique, NARA-specific identifier given to each record."
+              }
+            ]
+          },
+          "docs": "Get all online availability information for a record with the given naId."
+        },
+        {
+          "info": {
+            "name": "Update or insert online availability information given a record's naId.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://catalog.archives.gov/api/v2/online-availability/update",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Update or insert online availability information given a record's naId."
+        },
+        {
+          "info": {
+            "name": "Completely remove online availability information for a given record naId.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://catalog.archives.gov/api/v2/online-availability/delete",
+            "params": [
+              {
+                "name": "naId",
+                "value": "146919092, 146919093",
+                "type": "query",
+                "description": "An array of NARA-specific identifiers, each of which is unique to a single record."
+              }
+            ]
+          },
+          "docs": "Completely remove online availability information for a given record naId."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

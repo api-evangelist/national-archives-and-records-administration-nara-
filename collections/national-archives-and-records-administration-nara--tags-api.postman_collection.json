@@ -1,0 +1,927 @@
+{
+  "item": [
+    {
+      "id": "cae78c84-0bb3-44e5-876a-8a218384ef0a",
+      "name": "Tags",
+      "description": {
+        "content": "Tag search and data retrieval",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "7db69ed2-459e-4a8a-a19e-e2ce7f869c56",
+          "name": "Get search results for tag data by sending a request with search parameters to the catalog.",
+          "request": {
+            "name": "Get search results for tag data by sending a request with search parameters to the catalog.",
+            "description": {
+              "content": "Get search results for tag data by sending a request with search parameters to the catalog. Returns a JSON result.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tags",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases (\"\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "An individual contribution's unique identifier which maps to the record.contributionId field"
+                },
+                {
+                  "disabled": false,
+                  "key": "userName",
+                  "value": "<string>",
+                  "description": "Contributor's screen name which maps to the record.contributor.userName field"
+                },
+                {
+                  "disabled": false,
+                  "key": "userId",
+                  "value": "<string>",
+                  "description": "Contributor's unique identifier which maps to the record.contributor.userId field"
+                },
+                {
+                  "disabled": false,
+                  "key": "naId",
+                  "value": "<string>",
+                  "description": "An array of NARA-specific identifiers, each of which is unique to a single record."
+                },
+                {
+                  "disabled": false,
+                  "key": "debug",
+                  "value": "<boolean>",
+                  "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8f83a07b-46e9-4288-ba63-3f75a7321329",
+              "name": "A body of response data containing full tag objects if any were found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tags",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "we the people"
+                    },
+                    {
+                      "key": "id",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "userName",
+                      "value": "johndoe1"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "naId",
+                      "value": "146919092, 146919093"
+                    },
+                    {
+                      "key": "debug",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "72c9b9d6-68af-48ce-88ac-4069b0dbcbb3",
+              "name": "Bad Request. Invalid search terms, revise terms.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tags",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "we the people"
+                    },
+                    {
+                      "key": "id",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "userName",
+                      "value": "johndoe1"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "naId",
+                      "value": "146919092, 146919093"
+                    },
+                    {
+                      "key": "debug",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "3632d148-09e7-4cac-9400-c18a010cfaf8",
+              "name": "Unprocessable Entity.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tags",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "we the people"
+                    },
+                    {
+                      "key": "id",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "userName",
+                      "value": "johndoe1"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "naId",
+                      "value": "146919092, 146919093"
+                    },
+                    {
+                      "key": "debug",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "32370d6c-60cf-4ab3-ae0e-8ec5fdfcd3f5",
+          "name": "Get a single tag object by tag id.",
+          "request": {
+            "name": "Get a single tag object by tag id.",
+            "description": {
+              "content": "Get a single tag object by tag id. Returns a JSON result.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tags",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "An individual contribution's unique identifier which maps to the record.contributionId field"
+                },
+                {
+                  "disabled": false,
+                  "key": "debug",
+                  "value": "<boolean>",
+                  "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "7b2f9010-9e21-4386-81e7-2a5214e1ac0b",
+              "name": "A body of response data containing a tag object if it was found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tags",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "debug",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6af82f4d-673f-4505-8dfa-414c8d18f102",
+              "name": "Bad Request. Invalid search terms, revise terms.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tags",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "debug",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cd00ca41-72a9-4453-9a3d-5472a4183073",
+              "name": "Unprocessable Entity.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tags",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "debug",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7cebacd6-f0e4-44c4-a993-1f3124b1ebc5",
+          "name": "Get tags by their parent record's naId.",
+          "request": {
+            "name": "Get tags by their parent record's naId.",
+            "description": {
+              "content": "Get tags by their parent record's naId. Returns a JSON result.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tags",
+                "naId",
+                ":naId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "debug",
+                  "value": "<boolean>",
+                  "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "naId",
+                  "description": "(Required) naId of parent record whose tags to return"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "efef7884-9abf-4101-b89e-7af2ff36adc2",
+              "name": "A body of response data containing tag objects if any were found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tags",
+                    "naId",
+                    ":naId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "debug",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "naId",
+                      "description": "(Required) naId of parent record whose tags to return"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "93e9759c-f57a-46b9-835c-c28c2db6622e",
+              "name": "Unprocessable Entity.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tags",
+                    "naId",
+                    ":naId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "debug",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "naId",
+                      "description": "(Required) naId of parent record whose tags to return"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "b9bc587a-9943-409f-8e23-3bd435f489be",
+          "name": "Get tags by their contributor's userId.",
+          "request": {
+            "name": "Get tags by their contributor's userId.",
+            "description": {
+              "content": "Get tags by their contributor's userId. Returns a JSON result.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tags",
+                "userId",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "debug",
+                  "value": "<boolean>",
+                  "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) userId of tag to return"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "3c0a9e83-b542-479c-a512-f01df4c7535e",
+              "name": "A body of response data containing tag objects if any were found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tags",
+                    "userId",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "debug",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) userId of tag to return"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "672a020f-ad29-4490-a281-f6f710d0f4d9",
+              "name": "Unprocessable Entity.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tags",
+                    "userId",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "debug",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) userId of tag to return"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "4d5c6812-8991-427f-b059-008f8214b142",
+          "name": "Add a tag.",
+          "request": {
+            "name": "Add a tag.",
+            "description": {
+              "content": "Add a tag to a record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tags",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"tag\": \"<string>\",\n  \"targetNaId\": \"<integer>\",\n  \"userId\": \"<integer>\",\n  \"targetObjectId\": \"<integer>\",\n  \"status\": \"active\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "068ca787-57a7-40df-a200-ca76cb133cd7",
+              "name": "A response body containing confirmation that the tag was added successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tags",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tag\": \"some tag\",\n  \"targetNaId\": 31124739,\n  \"userId\": \"<integer>\",\n  \"targetObjectId\": 31124739,\n  \"status\": \"inactive\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8e4963af-5d19-4916-aec5-4b97c17059c0",
+              "name": "An error response while processing the request to add a tag.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tags",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"tag\": \"some tag\",\n  \"targetNaId\": 31124739,\n  \"userId\": \"<integer>\",\n  \"targetObjectId\": 31124739,\n  \"status\": \"inactive\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "6719d3f5-2fa7-48c8-83ea-d3c82c1ca4ec",
+          "name": "Deactivate/remove a tag.",
+          "request": {
+            "name": "Deactivate/remove a tag.",
+            "description": {
+              "content": "Change the status of a tag to 'inactive' or 'removed'. Normal tags will be made inactive. Administrator tags will be removed.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "tags",
+                ":contributionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contributionId",
+                  "description": "(Required) contributionId of a tag to be deactivated/removed."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "fd9fc5b4-1155-4e03-b0e9-57a196691661",
+              "name": "A response body containing confirmation that the tag was deactivated/removed successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tags",
+                    ":contributionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contributionId",
+                      "description": "(Required) contributionId of a tag to be deactivated/removed."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "da12e0f1-ae3d-40de-8e4c-f3f149c5cd40",
+              "name": "An error response while processing the request to deactivate/remove the tag.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "tags",
+                    ":contributionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contributionId",
+                      "description": "(Required) contributionId of a tag to be deactivated/removed."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://catalog.archives.gov/api/v2/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "15aa0737-e6be-4f5e-85c6-c9b910dc3a69",
+    "name": "NextGen Catalog Accounts Tags API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\nThis is the NextGen Catalog API application made with Express and documented with Swagger.\n\nThis API requires the use of an API key in order to access. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For example, the request might look like\n\n    curl --location --request GET 'https://catalog.archives.gov/api/v2/records/search?q=constitution'\n    --header 'Content-Type: application/json'\n    --header 'x-api-key: API_KEY'\n\nwhere API_KEY is the key string of your API key.\n\nFor write operations, in addition to the API key, a user ID in the format of a Universally Unique Identifier (UUID) is required in the body of the request. For example, a request to POST a tag might look like:\n\n    curl --location --request POST 'https://catalog.archives.gov/api/v2/tags'\n    --header 'Content-Type: application/json'\n    --data-raw '{\n    \"tag\": \"example tag\",\n    \"targetNaId\": 1667751,\n    \"userId\": \"USER_UUID\"\n    }'\nwhere USER_UUID is the UUID of the user.\n\nPlease contact O&M at Catalog_API@nara.gov for an API Key.",
+      "type": "text/plain"
+    }
+  }
+}

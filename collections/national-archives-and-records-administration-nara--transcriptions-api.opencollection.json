@@ -1,0 +1,255 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "NextGen Catalog Accounts Transcriptions API",
+    "version": "0.2.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "Transcriptions",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get search results for transcriptions data by sending a request with search parameters to the catalog.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/transcriptions/search",
+            "params": [
+              {
+                "name": "q",
+                "value": "",
+                "type": "query",
+                "description": "A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases (\"\")."
+              },
+              {
+                "name": "id",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "An individual contribution's unique identifier which maps to the record.contributionId field"
+              },
+              {
+                "name": "userName",
+                "value": "johndoe1",
+                "type": "query",
+                "description": "Contributor's screen name which maps to the record.contributor.userName field"
+              },
+              {
+                "name": "userId",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "Contributor's unique identifier which maps to the record.contributor.userId field"
+              },
+              {
+                "name": "naId",
+                "value": "146919092, 146919093",
+                "type": "query",
+                "description": "An array of NARA-specific identifiers, each of which is unique to a single record."
+              },
+              {
+                "name": "debug",
+                "value": "true",
+                "type": "query",
+                "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+              }
+            ]
+          },
+          "docs": "Get search results for transcriptions data by sending a request with search parameters to the catalog. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get a single transcription object by transcription id.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/transcriptions/:id",
+            "params": [
+              {
+                "name": "id",
+                "value": "55555555-5555-5555-5555-555555555555",
+                "type": "query",
+                "description": "An individual contribution's unique identifier which maps to the record.contributionId field"
+              },
+              {
+                "name": "debug",
+                "value": "true",
+                "type": "query",
+                "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+              }
+            ]
+          },
+          "docs": "Get a single transcription object by transcription id. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get transcriptions by their parent record's naId.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/transcriptions/naId/:naId",
+            "params": [
+              {
+                "name": "naId",
+                "value": "893506",
+                "type": "path",
+                "description": "naId of parent record whose transcriptions to return"
+              },
+              {
+                "name": "debug",
+                "value": "true",
+                "type": "query",
+                "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+              }
+            ]
+          },
+          "docs": "Get transcriptions by their parent record's naId. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Get transcriptions by their contributor's userId.",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://catalog.archives.gov/api/v2/transcriptions/userId/:userId",
+            "params": [
+              {
+                "name": "userId",
+                "value": "5b18f857-29d7-31a9-b944-f4e68c12fd3f",
+                "type": "path",
+                "description": "userId of contributor whose transcriptions to return"
+              },
+              {
+                "name": "debug",
+                "value": "true",
+                "type": "query",
+                "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+              }
+            ]
+          },
+          "docs": "Get transcriptions by their contributor's userId. Returns a JSON result."
+        },
+        {
+          "info": {
+            "name": "Add a transcription.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://catalog.archives.gov/api/v2/transcriptions/",
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a transcription to a record."
+        },
+        {
+          "info": {
+            "name": "Add or update a transcription.",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://catalog.archives.gov/api/v2/transcriptions/",
+            "params": [
+              {
+                "name": "publish",
+                "value": "true",
+                "type": "query",
+                "description": "publish flag which when true indicates that a transcription should be published"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Add a transcription to a record."
+        },
+        {
+          "info": {
+            "name": "Get the history of a transcription.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://catalog.archives.gov/api/v2/transcriptions/history/:parentContributionId",
+            "params": [
+              {
+                "name": "parentContributionId",
+                "value": "232a3c9d-d0b5-32cb-a2d7-26c9eeab57a3",
+                "type": "query",
+                "description": "parentContributionId indicating the transcription of which to request the history."
+              }
+            ]
+          },
+          "docs": "Get the history of a transcription to a record."
+        },
+        {
+          "info": {
+            "name": "Activate a transcription.",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://catalog.archives.gov/api/v2/transcriptions/:contributionId/justificationId/:justificationId",
+            "params": [
+              {
+                "name": "contributionId",
+                "value": "e3fe99d2-7af7-11ec-90d6-0242ac120003",
+                "type": "path",
+                "description": "contributionId of a transcription to be activated."
+              },
+              {
+                "name": "justificationId",
+                "value": "5",
+                "type": "path",
+                "description": "justificationId of the reason a transcription is being activated."
+              }
+            ]
+          },
+          "docs": "Activate a transcription, deactivate any other versions if they exist."
+        },
+        {
+          "info": {
+            "name": "Deactivate a transcription.",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://catalog.archives.gov/api/v2/transcriptions/:contributionId/justificationId/:justificationId",
+            "params": [
+              {
+                "name": "contributionId",
+                "value": "e3fe99d2-7af7-11ec-90d6-0242ac120003",
+                "type": "path",
+                "description": "contributionId of a transcription to be deactivated."
+              },
+              {
+                "name": "justificationId",
+                "value": "5",
+                "type": "path",
+                "description": "justificationId of the reason a transcription is being deactivated."
+              },
+              {
+                "name": "autoActivate",
+                "value": "true",
+                "type": "query",
+                "description": "autoActivate tag which when true has the API choose a previous transcription to activate"
+              }
+            ]
+          },
+          "docs": "Deactivate a transcription, reactivate the previous version if it exists."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

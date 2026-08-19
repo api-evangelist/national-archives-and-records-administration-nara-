@@ -1,0 +1,955 @@
+{
+  "item": [
+    {
+      "id": "020de242-bbcf-42d2-880f-32b1f980bdce",
+      "name": "Partner",
+      "description": {
+        "content": "",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "8906f582-6ffc-47c6-b3ce-c32c420c6980",
+          "name": "Create a new partner.",
+          "request": {
+            "name": "Create a new partner.",
+            "description": {
+              "content": "Allows a moderator to create a new partner. The partner is initially created with a status of 'ACTIVE'.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "partners",
+                "create"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"status\": \"<string>\",\n  \"fullName\": \"<string>\",\n  \"userId\": \"<uuid>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "b95effcc-c802-4f89-a85a-9ebca735b4e0",
+              "name": "The partner was created successfully. The response includes the created partner details.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partners",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"ACTIVE\",\n  \"fullName\": \"Demo Partner\",\n  \"userId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Created",
+              "code": 201,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"partnerNameId\": \"0360214c-55b4-4819-8f28-206b24cca41a\",\n  \"userId\": \"836863a2-4ad4-0e89-fc64-f3d6e57d8188\",\n  \"status\": \"ACTIVE\",\n  \"fullName\": \"Demo Partner\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "fb47724c-8e01-49d6-a885-a62421c3811e",
+              "name": "Validation error. This can occur if the request body does not match the expected format.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partners",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"ACTIVE\",\n  \"fullName\": \"Demo Partner\",\n  \"userId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "e002c215-0613-4f09-a9de-f1f02e949d6b",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partners",
+                    "create"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"status\": \"ACTIVE\",\n  \"fullName\": \"Demo Partner\",\n  \"userId\": \"<uuid>\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "0319be71-5b96-4931-bb95-57b9016a5a23",
+          "name": "Search for partners",
+          "request": {
+            "name": "Search for partners",
+            "description": {
+              "content": "Allows users to search for partners via userId , partner name, partnerNameId or all",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "partners",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "partnerNameId",
+                  "value": "<string>",
+                  "description": "partnerNameId of the partner being searched"
+                },
+                {
+                  "disabled": false,
+                  "key": "fullName",
+                  "value": "<string>",
+                  "description": "Full name of the partner being searched"
+                },
+                {
+                  "disabled": false,
+                  "key": "userId",
+                  "value": "<string>",
+                  "description": "userId of the user that associated with the partner"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "7d6292eb-1384-478c-859b-9c50b4324cbc",
+              "name": "List of the partners retrieved through the search criteria.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partners",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerNameId",
+                      "value": "0360214c-55b4-4819-8f28-206b24cca41a"
+                    },
+                    {
+                      "key": "fullName",
+                      "value": "Demo Partner"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "3fa85f64-5717-4562-b3fc-2c963f66afa"
+                    }
+                  ],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"partnerNameId\": \"2b40844c-1978-c0e7-2833-0449bdc43136\",\n  \"userId\": \"69e018e9-98ed-40a0-c2de-7306bd8c1b62\",\n  \"status\": \"ACTIVE\",\n  \"fullName\": \"Demo Partner\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cba1567d-dacc-4259-940c-0bc8ae237e7c",
+              "name": "Validation error. This can occur if the request body does not match the expected format.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partners",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerNameId",
+                      "value": "0360214c-55b4-4819-8f28-206b24cca41a"
+                    },
+                    {
+                      "key": "fullName",
+                      "value": "Demo Partner"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "3fa85f64-5717-4562-b3fc-2c963f66afa"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "cb550b47-c18c-4f5f-b47e-56c4560d24f4",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partners",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "partnerNameId",
+                      "value": "0360214c-55b4-4819-8f28-206b24cca41a"
+                    },
+                    {
+                      "key": "fullName",
+                      "value": "Demo Partner"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "3fa85f64-5717-4562-b3fc-2c963f66afa"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "7c73a0e2-6f68-4928-beba-093dd34ad935",
+          "name": "Update partner name.",
+          "request": {
+            "name": "Update partner name.",
+            "description": {
+              "content": "Allows a moderator to update partner's full name and status.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "partners",
+                "update"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              },
+              {
+                "key": "Accept",
+                "value": "application/json"
+              }
+            ],
+            "method": "PATCH",
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"partnerNameId\": \"<uuid>\",\n  \"userId\": \"<uuid>\",\n  \"status\": \"<string>\",\n  \"fullName\": \"<string>\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "4286c4d2-7ddd-4f3f-8766-2135528a8247",
+              "name": "The partner was updated successfully. The response includes the updated partner name.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partners",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"partnerNameId\": \"<uuid>\",\n  \"userId\": \"0360214c-55b4-4819-8f28-206b24cca41a\",\n  \"status\": \"INACTIVE\",\n  \"fullName\": \"Demo Partner Changed\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "application/json"
+                }
+              ],
+              "body": "{\n  \"partnerNameId\": \"46232314-ac1b-150f-fbc9-8d5d1961818c\",\n  \"userId\": \"0360214c-55b4-4819-8f28-206b24cca41a\",\n  \"fullName\": \"Demo Partner Changed\",\n  \"status\": \"INACTIVE\"\n}",
+              "cookie": [],
+              "_postman_previewlanguage": "json"
+            },
+            {
+              "id": "cbb21c85-feca-4b07-8b7c-c1e3c6ff0cf3",
+              "name": "Validation error. This can occur if the request body does not match the expected format.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partners",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"partnerNameId\": \"<uuid>\",\n  \"userId\": \"0360214c-55b4-4819-8f28-206b24cca41a\",\n  \"status\": \"INACTIVE\",\n  \"fullName\": \"Demo Partner Changed\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "4662bc01-bf43-4895-9f58-3c0348b6882d",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partners",
+                    "update"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "PATCH",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"partnerNameId\": \"<uuid>\",\n  \"userId\": \"0360214c-55b4-4819-8f28-206b24cca41a\",\n  \"status\": \"INACTIVE\",\n  \"fullName\": \"Demo Partner Changed\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f16173de-6666-490b-bbeb-569767d7609a",
+          "name": "Get partner contributions by partnerNameId.",
+          "request": {
+            "name": "Get partner contributions by partnerNameId.",
+            "description": {
+              "content": "Allows a moderator to get partner contributions by partnerNameId.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "partners",
+                "contributions",
+                "partnerNameId",
+                ":partnerNameId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number of the paginated result set in which to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum number of results returned for each page of paginated data."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "partnerNameId",
+                  "description": "(Required) The unique identifier of the partner."
+                }
+              ]
+            },
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "ed305035-40e2-436c-8c7d-a340a38d56de",
+              "name": "List of the partner contributions retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partners",
+                    "contributions",
+                    "partnerNameId",
+                    ":partnerNameId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "75"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "partnerNameId",
+                      "description": "(Required) The unique identifier of the partner."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d41aa85f-b177-4c35-a68e-c9e7af4c91a0",
+              "name": "Validation error. This can occur if the request body does not match the expected format.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partners",
+                    "contributions",
+                    "partnerNameId",
+                    ":partnerNameId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "75"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "partnerNameId",
+                      "description": "(Required) The unique identifier of the partner."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "95646d43-5a44-4b37-a072-369d6fccef27",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partners",
+                    "contributions",
+                    "partnerNameId",
+                    ":partnerNameId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "75"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "partnerNameId",
+                      "description": "(Required) The unique identifier of the partner."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "912b3e51-51ae-4b97-ad52-e39e5c48e72a",
+          "name": "Get partner contributions by fullName.",
+          "request": {
+            "name": "Get partner contributions by fullName.",
+            "description": {
+              "content": "Allows a moderator to get partner contributions by id.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "partners",
+                "contributions",
+                "fullName",
+                ":fullName"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "page",
+                  "value": "1",
+                  "description": "Page number of the paginated result set in which to return."
+                },
+                {
+                  "disabled": false,
+                  "key": "limit",
+                  "value": "20",
+                  "description": "Maximum number of results returned for each page of paginated data."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "",
+                  "key": "fullName",
+                  "description": "(Required) The fullName of the partner."
+                }
+              ]
+            },
+            "method": "GET"
+          },
+          "response": [
+            {
+              "id": "4f968e02-d685-4245-8767-5fb03eb0b747",
+              "name": "List of the partner contributions retrieved successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partners",
+                    "contributions",
+                    "fullName",
+                    ":fullName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "75"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "fullName",
+                      "description": "(Required) The fullName of the partner."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "8234d096-ab36-4fc4-9c4a-61428147467b",
+              "name": "Validation error. This can occur if the request body does not match the expected format.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partners",
+                    "contributions",
+                    "fullName",
+                    ":fullName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "75"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "fullName",
+                      "description": "(Required) The fullName of the partner."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6b841737-d146-4685-b87b-29cc44cd1795",
+              "name": "Internal server error.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "partners",
+                    "contributions",
+                    "fullName",
+                    ":fullName"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "20"
+                    },
+                    {
+                      "key": "limit",
+                      "value": "75"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "",
+                      "key": "fullName",
+                      "description": "(Required) The fullName of the partner."
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Internal Server Error",
+              "code": 500,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://catalog.archives.gov/api/v2/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "ad004f2a-229c-43c1-a288-0e19f7c92f3a",
+    "name": "NextGen Catalog Accounts Partner API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\nThis is the NextGen Catalog API application made with Express and documented with Swagger.\n\nThis API requires the use of an API key in order to access. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For example, the request might look like\n\n    curl --location --request GET 'https://catalog.archives.gov/api/v2/records/search?q=constitution'\n    --header 'Content-Type: application/json'\n    --header 'x-api-key: API_KEY'\n\nwhere API_KEY is the key string of your API key.\n\nFor write operations, in addition to the API key, a user ID in the format of a Universally Unique Identifier (UUID) is required in the body of the request. For example, a request to POST a tag might look like:\n\n    curl --location --request POST 'https://catalog.archives.gov/api/v2/tags'\n    --header 'Content-Type: application/json'\n    --data-raw '{\n    \"tag\": \"example tag\",\n    \"targetNaId\": 1667751,\n    \"userId\": \"USER_UUID\"\n    }'\nwhere USER_UUID is the UUID of the user.\n\nPlease contact O&M at Catalog_API@nara.gov for an API Key.",
+      "type": "text/plain"
+    }
+  }
+}

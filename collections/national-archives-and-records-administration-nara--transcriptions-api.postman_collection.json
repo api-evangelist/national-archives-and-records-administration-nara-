@@ -1,0 +1,1449 @@
+{
+  "item": [
+    {
+      "id": "93b9f114-54e0-4f73-9e7c-bfd3c8662e96",
+      "name": "Transcriptions",
+      "description": {
+        "content": "Transcription search and data retrieval",
+        "type": "text/plain"
+      },
+      "item": [
+        {
+          "id": "172f1ecf-cfe9-47ff-9bf9-96f797ba4a3b",
+          "name": "Get search results for transcriptions data by sending a request with search parameters to the catalog.",
+          "request": {
+            "name": "Get search results for transcriptions data by sending a request with search parameters to the catalog.",
+            "description": {
+              "content": "Get search results for transcriptions data by sending a request with search parameters to the catalog. Returns a JSON result.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transcriptions",
+                "search"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "q",
+                  "value": "<string>",
+                  "description": "A search query string which accepts boolean operators (AND, OR, NOT), wildcards (*), and exact phrases (\"\")."
+                },
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "An individual contribution's unique identifier which maps to the record.contributionId field"
+                },
+                {
+                  "disabled": false,
+                  "key": "userName",
+                  "value": "<string>",
+                  "description": "Contributor's screen name which maps to the record.contributor.userName field"
+                },
+                {
+                  "disabled": false,
+                  "key": "userId",
+                  "value": "<string>",
+                  "description": "Contributor's unique identifier which maps to the record.contributor.userId field"
+                },
+                {
+                  "disabled": false,
+                  "key": "naId",
+                  "value": "<string>",
+                  "description": "An array of NARA-specific identifiers, each of which is unique to a single record."
+                },
+                {
+                  "disabled": false,
+                  "key": "debug",
+                  "value": "<boolean>",
+                  "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "ddbd0acc-8b54-45b4-a999-a5e41b9d6ca4",
+              "name": "A body of response data containing full transcription objects if any were found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transcriptions",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "we the people"
+                    },
+                    {
+                      "key": "id",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "userName",
+                      "value": "johndoe1"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "naId",
+                      "value": "146919092, 146919093"
+                    },
+                    {
+                      "key": "debug",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "97bf55ce-4248-4096-8153-2a26960e86df",
+              "name": "Bad Request. Invalid search terms, revise terms.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transcriptions",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "we the people"
+                    },
+                    {
+                      "key": "id",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "userName",
+                      "value": "johndoe1"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "naId",
+                      "value": "146919092, 146919093"
+                    },
+                    {
+                      "key": "debug",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "430c9ed8-61d3-4bee-bb5a-7de0aa272e03",
+              "name": "Unprocessable Entity.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transcriptions",
+                    "search"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "q",
+                      "value": "we the people"
+                    },
+                    {
+                      "key": "id",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "userName",
+                      "value": "johndoe1"
+                    },
+                    {
+                      "key": "userId",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "naId",
+                      "value": "146919092, 146919093"
+                    },
+                    {
+                      "key": "debug",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "72a8d268-1d9b-4a21-9c68-aa136491c3fa",
+          "name": "Get a single transcription object by transcription id.",
+          "request": {
+            "name": "Get a single transcription object by transcription id.",
+            "description": {
+              "content": "Get a single transcription object by transcription id. Returns a JSON result.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transcriptions",
+                ":id"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "id",
+                  "value": "<string>",
+                  "description": "An individual contribution's unique identifier which maps to the record.contributionId field"
+                },
+                {
+                  "disabled": false,
+                  "key": "debug",
+                  "value": "<boolean>",
+                  "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+                }
+              ],
+              "variable": []
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8f83480a-39fd-468d-be3e-ee6f6cfb5015",
+              "name": "A body of response data containing a transcription object if it was found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transcriptions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "debug",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "d3a1ce0c-9e10-4462-bc0b-5aa060508243",
+              "name": "Unprocessable Entity.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transcriptions",
+                    ":id"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "id",
+                      "value": "55555555-5555-5555-5555-555555555555"
+                    },
+                    {
+                      "key": "debug",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "e4398803-1909-4d02-94a2-8e5e3447302a",
+          "name": "Get transcriptions by their parent record's naId.",
+          "request": {
+            "name": "Get transcriptions by their parent record's naId.",
+            "description": {
+              "content": "Get transcriptions by their parent record's naId. Returns a JSON result.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transcriptions",
+                "naId",
+                ":naId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "debug",
+                  "value": "<boolean>",
+                  "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "naId",
+                  "description": "(Required) naId of parent record whose transcriptions to return"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "8e170522-8c20-4f6d-8f2c-001d43eb6dc8",
+              "name": "A body of response data containing transcriptions objects if any were found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transcriptions",
+                    "naId",
+                    ":naId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "debug",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "naId",
+                      "description": "(Required) naId of parent record whose transcriptions to return"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "df438030-f91e-4d3c-bef8-16d52672ca88",
+              "name": "Unprocessable Entity.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transcriptions",
+                    "naId",
+                    ":naId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "debug",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "naId",
+                      "description": "(Required) naId of parent record whose transcriptions to return"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f5dfe957-e15a-4c9b-9614-834aa73e96c6",
+          "name": "Get transcriptions by their contributor's userId.",
+          "request": {
+            "name": "Get transcriptions by their contributor's userId.",
+            "description": {
+              "content": "Get transcriptions by their contributor's userId. Returns a JSON result.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transcriptions",
+                "userId",
+                ":userId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "debug",
+                  "value": "<boolean>",
+                  "description": "Turns on debug mode, showing metadata in the response body, if set to true."
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "userId",
+                  "description": "(Required) userId of contributor whose transcriptions to return"
+                }
+              ]
+            },
+            "method": "GET",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "09063714-4cc9-4863-954c-4bdb3f10dfcb",
+              "name": "A body of response data containing transcription objects if any were found.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transcriptions",
+                    "userId",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "debug",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) userId of contributor whose transcriptions to return"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "890818b8-ff50-474d-a7b9-81f7f52a2187",
+              "name": "Unprocessable Entity.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transcriptions",
+                    "userId",
+                    ":userId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "debug",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "userId",
+                      "description": "(Required) userId of contributor whose transcriptions to return"
+                    }
+                  ]
+                },
+                "method": "GET",
+                "body": {}
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "f8745860-4bf5-49ec-b349-dd12fd65ad80",
+          "name": "Add or update a transcription.",
+          "request": {
+            "name": "Add or update a transcription.",
+            "description": {
+              "content": "Add a transcription to a record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transcriptions",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "publish",
+                  "value": "<boolean>",
+                  "description": "publish flag which when true indicates that a transcription should be published"
+                }
+              ],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "PUT",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transcription\": \"<string>\",\n  \"targetNaId\": \"<integer>\",\n  \"userId\": \"<string>\",\n  \"targetObjectId\": \"<integer>\",\n  \"status\": \"active\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "f6284f16-59be-4b64-bc46-335d0ad8ad29",
+              "name": "A response body containing confirmation that the transcription was added successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transcriptions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "publish",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transcription\": \"a properly encoded/escaped transcription\",\n  \"targetNaId\": 31124739,\n  \"userId\": \"c2558dff-bf46-3e28-8aff-29913227beb2\",\n  \"targetObjectId\": 77852917,\n  \"status\": \"inactive\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "6105d153-3ebb-486b-a414-6d4433a5de2d",
+              "name": "Bad Request. Invalid search terms, revise terms.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transcriptions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "publish",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transcription\": \"a properly encoded/escaped transcription\",\n  \"targetNaId\": 31124739,\n  \"userId\": \"c2558dff-bf46-3e28-8aff-29913227beb2\",\n  \"targetObjectId\": 77852917,\n  \"status\": \"inactive\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "7728487d-ee26-442b-b835-c03db3424c84",
+              "name": "An error response while processing the request to add a transcription.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transcriptions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "publish",
+                      "value": "<boolean>"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "PUT",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transcription\": \"a properly encoded/escaped transcription\",\n  \"targetNaId\": 31124739,\n  \"userId\": \"c2558dff-bf46-3e28-8aff-29913227beb2\",\n  \"targetObjectId\": 77852917,\n  \"status\": \"inactive\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "3014232a-169d-4521-84f6-bdaf17f478d7",
+          "name": "Add a transcription.",
+          "request": {
+            "name": "Add a transcription.",
+            "description": {
+              "content": "Add a transcription to a record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transcriptions",
+                ""
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": []
+            },
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json"
+              }
+            ],
+            "method": "POST",
+            "auth": null,
+            "body": {
+              "mode": "raw",
+              "raw": "{\n  \"transcription\": \"<string>\",\n  \"targetNaId\": \"<integer>\",\n  \"userId\": \"<string>\",\n  \"targetObjectId\": \"<integer>\",\n  \"status\": \"active\"\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            }
+          },
+          "response": [
+            {
+              "id": "ec77d610-ecf5-43db-aaa8-0ba6459a1026",
+              "name": "A response body containing confirmation that the transcription was added successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transcriptions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transcription\": \"a properly encoded/escaped transcription\",\n  \"targetNaId\": 31124739,\n  \"userId\": \"c2558dff-bf46-3e28-8aff-29913227beb2\",\n  \"targetObjectId\": 77852917,\n  \"status\": \"inactive\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "61d6c0ca-a821-48c9-96fb-d2806cfc8bd3",
+              "name": "Bad Request. Invalid search terms, revise terms.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transcriptions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transcription\": \"a properly encoded/escaped transcription\",\n  \"targetNaId\": 31124739,\n  \"userId\": \"c2558dff-bf46-3e28-8aff-29913227beb2\",\n  \"targetObjectId\": 77852917,\n  \"status\": \"inactive\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "dd3bde7e-2dc3-4ba0-b52e-20e1871143ec",
+              "name": "An error response while processing the request to add a transcription.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transcriptions",
+                    ""
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"transcription\": \"a properly encoded/escaped transcription\",\n  \"targetNaId\": 31124739,\n  \"userId\": \"c2558dff-bf46-3e28-8aff-29913227beb2\",\n  \"targetObjectId\": 77852917,\n  \"status\": \"inactive\"\n}",
+                  "options": {
+                    "raw": {
+                      "language": "json"
+                    }
+                  }
+                }
+              },
+              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+              "code": 422,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "02bc73ad-79e5-4c26-9f33-b96059646f37",
+          "name": "Get the history of a transcription.",
+          "request": {
+            "name": "Get the history of a transcription.",
+            "description": {
+              "content": "Get the history of a transcription to a record.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transcriptions",
+                "history",
+                ":parentContributionId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "parentContributionId",
+                  "value": "<string>",
+                  "description": "(Required) parentContributionId indicating the transcription of which to request the history."
+                }
+              ],
+              "variable": []
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "2af88b5d-6ae5-4e4b-9afd-aee906014da3",
+              "name": "A response body containing the transcription historyPos.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transcriptions",
+                    "history",
+                    ":parentContributionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "parentContributionId",
+                      "value": "232a3c9d-d0b5-32cb-a2d7-26c9eeab57a3"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "89c438e0-7d34-466b-adeb-85101efd9473",
+              "name": "Bad Request. Invalid parentContributionId.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transcriptions",
+                    "history",
+                    ":parentContributionId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "parentContributionId",
+                      "value": "232a3c9d-d0b5-32cb-a2d7-26c9eeab57a3"
+                    }
+                  ],
+                  "variable": []
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Bad Request",
+              "code": 400,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "1192e0d0-e1c0-4b8d-b378-63869179e27f",
+          "name": "Deactivate a transcription.",
+          "request": {
+            "name": "Deactivate a transcription.",
+            "description": {
+              "content": "Deactivate a transcription, reactivate the previous version if it exists.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transcriptions",
+                ":contributionId",
+                "justificationId",
+                ":justificationId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [
+                {
+                  "disabled": false,
+                  "key": "autoActivate",
+                  "value": "<boolean>",
+                  "description": "autoActivate tag which when true has the API choose a previous transcription to activate"
+                }
+              ],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contributionId",
+                  "description": "(Required) contributionId of a transcription to be deactivated."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "justificationId",
+                  "description": "(Required) justificationId of the reason a transcription is being deactivated."
+                }
+              ]
+            },
+            "method": "DELETE",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "9e1133ab-4930-488f-bb9c-e7036a94257b",
+              "name": "A response body containing confirmation that the transcription was deactivated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transcriptions",
+                    ":contributionId",
+                    "justificationId",
+                    ":justificationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "autoActivate",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contributionId",
+                      "description": "(Required) contributionId of a transcription to be deactivated."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "justificationId",
+                      "description": "(Required) justificationId of the reason a transcription is being deactivated."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "fe2c21fa-8d7f-4ac8-928f-bb0703577450",
+              "name": "An error response while processing the request to deactivate a transcription.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transcriptions",
+                    ":contributionId",
+                    "justificationId",
+                    ":justificationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [
+                    {
+                      "key": "autoActivate",
+                      "value": "true"
+                    }
+                  ],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contributionId",
+                      "description": "(Required) contributionId of a transcription to be deactivated."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "justificationId",
+                      "description": "(Required) justificationId of the reason a transcription is being deactivated."
+                    }
+                  ]
+                },
+                "method": "DELETE",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        },
+        {
+          "id": "68145964-7866-4533-93b3-31af3d3481e9",
+          "name": "Activate a transcription.",
+          "request": {
+            "name": "Activate a transcription.",
+            "description": {
+              "content": "Activate a transcription, deactivate any other versions if they exist.",
+              "type": "text/plain"
+            },
+            "url": {
+              "path": [
+                "transcriptions",
+                ":contributionId",
+                "justificationId",
+                ":justificationId"
+              ],
+              "host": [
+                "{{baseUrl}}"
+              ],
+              "query": [],
+              "variable": [
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<string>",
+                  "key": "contributionId",
+                  "description": "(Required) contributionId of a transcription to be activated."
+                },
+                {
+                  "disabled": false,
+                  "type": "any",
+                  "value": "<integer>",
+                  "key": "justificationId",
+                  "description": "(Required) justificationId of the reason a transcription is being activated."
+                }
+              ]
+            },
+            "method": "POST",
+            "auth": null
+          },
+          "response": [
+            {
+              "id": "021b3891-20a4-49cb-a0c2-fb9a3c343436",
+              "name": "A response body containing confirmation that the transcription was activated successfully.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transcriptions",
+                    ":contributionId",
+                    "justificationId",
+                    ":justificationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contributionId",
+                      "description": "(Required) contributionId of a transcription to be activated."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "justificationId",
+                      "description": "(Required) justificationId of the reason a transcription is being activated."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "OK",
+              "code": 200,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "da532d42-20d3-40d6-b09a-468074d58239",
+              "name": "Insufficient user permissions to change a transcription's status",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transcriptions",
+                    ":contributionId",
+                    "justificationId",
+                    ":justificationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contributionId",
+                      "description": "(Required) contributionId of a transcription to be activated."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "justificationId",
+                      "description": "(Required) justificationId of the reason a transcription is being activated."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Forbidden",
+              "code": 403,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            },
+            {
+              "id": "41fd9404-5933-4ee1-b35c-c846341bb4a1",
+              "name": "An error response while processing the request to activate a transcription.",
+              "originalRequest": {
+                "url": {
+                  "path": [
+                    "transcriptions",
+                    ":contributionId",
+                    "justificationId",
+                    ":justificationId"
+                  ],
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "query": [],
+                  "variable": [
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<string>",
+                      "key": "contributionId",
+                      "description": "(Required) contributionId of a transcription to be activated."
+                    },
+                    {
+                      "disabled": false,
+                      "type": "any",
+                      "value": "<integer>",
+                      "key": "justificationId",
+                      "description": "(Required) justificationId of the reason a transcription is being activated."
+                    }
+                  ]
+                },
+                "method": "POST",
+                "body": {}
+              },
+              "status": "Conflict",
+              "code": 409,
+              "header": [
+                {
+                  "key": "Content-Type",
+                  "value": "text/plain"
+                }
+              ],
+              "body": "",
+              "cookie": [],
+              "_postman_previewlanguage": "text"
+            }
+          ],
+          "event": [],
+          "protocolProfileBehavior": {
+            "disableBodyPruning": true
+          }
+        }
+      ],
+      "event": []
+    }
+  ],
+  "event": [],
+  "variable": [
+    {
+      "type": "string",
+      "value": "https://catalog.archives.gov/api/v2/",
+      "key": "baseUrl"
+    }
+  ],
+  "info": {
+    "_postman_id": "4cf080be-7817-4cf1-8f39-d74b3d6d2699",
+    "name": "NextGen Catalog Accounts Transcriptions API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "description": {
+      "content": "\nThis is the NextGen Catalog API application made with Express and documented with Swagger.\n\nThis API requires the use of an API key in order to access. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For example, the request might look like\n\n    curl --location --request GET 'https://catalog.archives.gov/api/v2/records/search?q=constitution'\n    --header 'Content-Type: application/json'\n    --header 'x-api-key: API_KEY'\n\nwhere API_KEY is the key string of your API key.\n\nFor write operations, in addition to the API key, a user ID in the format of a Universally Unique Identifier (UUID) is required in the body of the request. For example, a request to POST a tag might look like:\n\n    curl --location --request POST 'https://catalog.archives.gov/api/v2/tags'\n    --header 'Content-Type: application/json'\n    --data-raw '{\n    \"tag\": \"example tag\",\n    \"targetNaId\": 1667751,\n    \"userId\": \"USER_UUID\"\n    }'\nwhere USER_UUID is the UUID of the user.\n\nPlease contact O&M at Catalog_API@nara.gov for an API Key.",
+      "type": "text/plain"
+    }
+  }
+}
