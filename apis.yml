@@ -23,6 +23,11 @@ modified: '2026-05-19'
 specificationVersion: '0.23'
 tags:
   - Archives
+  - Federal-Government
+  - Records
+  - Catalog
+tags_raw:
+  - Archives
   - Federal Government
   - Records
   - Catalog
@@ -35,6 +40,8 @@ apis:
   humanURL: https://www.archives.gov/research/catalog/help/api
   baseURL: https://catalog.archives.gov/api/v2/
   tags:
+  - Account
+  tags_raw:
   - Accounts
   properties:
   - type: OpenAPI
@@ -290,6 +297,8 @@ apis:
   humanURL: https://www.archives.gov/research/catalog/help/api
   baseURL: https://catalog.archives.gov/api/v2/
   tags:
+  - User
+  tags_raw:
   - Users
   properties:
   - type: OpenAPI
