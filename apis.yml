@@ -4,6 +4,18 @@ description: >-
   The National Archives and Records Administration (NARA) is the nation's record keeper, preserving and providing access
   to federal government records that document the rights of American citizens and the actions of their government.
 type: Index
+deliveryModel:
+  model: unknown
+  open_source: unknown
+  commercial: false
+  callable_host: true
+  label: Delivery model not determined — needs a product licence on record
+  confidence: low
+  source:
+  - openapi
+  - repository-unlicensed
+  generated: '2026-08-28'
+  method: derived
 accessModel:
   pricing: freemium
   onboarding: unknown
