@@ -1,4 +1,4 @@
-openapi: 3.0.0
+openapi: 3.2.0
 info:
   title: NextGen Catalog Accounts Tags API
   version: 0.2.0
@@ -145,16 +145,31 @@ paths:
         '409':
           description: An error response while processing the request to deactivate/remove the tag.
 components:
+  schemas:
+    tagBody:
+      type: object
+      properties:
+        tag:
+          type: string
+          example: some tag
+        targetNaId:
+          type: integer
+          example: 31124739
+        targetObjectId:
+          type: integer
+          example: 31124739
+        userId:
+          type: integer
+          example: c2558dff-bf46-3e28-8aff-29913227beb2
+        status:
+          type: string
+          default: active
+          example: inactive
+      required:
+      - tag
+      - targetNaId
+      - userId
   parameters:
-    paramDebug:
-      in: query
-      name: debug
-      description: Turns on debug mode, showing metadata in the response body, if set to true.
-      required: false
-      schema:
-        maximum: 100
-        type: boolean
-      example: true
     paramUserName:
       in: query
       name: userName
@@ -164,6 +179,15 @@ components:
         maximum: 100
         type: string
       example: johndoe1
+    paramUserId:
+      in: query
+      name: userId
+      description: Contributor's unique identifier which maps to the record.contributor.userId field
+      required: false
+      schema:
+        maximum: 50
+        type: string
+      example: 55555555-5555-5555-5555-555555555555
     paramContQuery:
       in: query
       name: q
@@ -189,24 +213,6 @@ components:
           value: photo*
           summary: Stemming with wildcards
           description: Returns results which contain one or more contributions with variations of the word "photo", such as "photograph" and "photography".
-    paramNaId:
-      in: query
-      name: naId
-      description: An array of NARA-specific identifiers, each of which is unique to a single record.
-      required: false
-      schema:
-        maximum: 10000
-        type: string
-      example: 146919092, 146919093
-    paramUserId:
-      in: query
-      name: userId
-      description: Contributor's unique identifier which maps to the record.contributor.userId field
-      required: false
-      schema:
-        maximum: 50
-        type: string
-      example: 55555555-5555-5555-5555-555555555555
     paramContId:
       in: query
       name: id
@@ -216,27 +222,21 @@ components:
         maximum: 50
         type: string
       example: 55555555-5555-5555-5555-555555555555
-  schemas:
-    tagBody:
-      type: object
-      properties:
-        tag:
-          type: string
-          example: some tag
-        targetNaId:
-          type: integer
-          example: 31124739
-        targetObjectId:
-          type: integer
-          example: 31124739
-        userId:
-          type: integer
-          example: c2558dff-bf46-3e28-8aff-29913227beb2
-        status:
-          type: string
-          default: active
-          example: inactive
-      required:
-      - tag
-      - targetNaId
-      - userId
+    paramNaId:
+      in: query
+      name: naId
+      description: An array of NARA-specific identifiers, each of which is unique to a single record.
+      required: false
+      schema:
+        maximum: 10000
+        type: string
+      example: 146919092, 146919093
+    paramDebug:
+      in: query
+      name: debug
+      description: Turns on debug mode, showing metadata in the response body, if set to true.
+      required: false
+      schema:
+        maximum: 100
+        type: boolean
+      example: true
