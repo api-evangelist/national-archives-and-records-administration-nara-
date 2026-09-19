@@ -221,6 +221,8 @@ apis:
   humanURL: https://www.archives.gov/research/catalog/help/api
   baseURL: https://catalog.archives.gov/api/v2/
   tags:
+  - Partners
+  tags_raw:
   - Partner
   properties:
   - type: OpenAPI
