@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: NextGen Catalog Accounts Contributions API
+  title: NextGen Catalog Contributions API
   version: 0.2.0
-  description: "\nThis is the NextGen Catalog API application made with Express and documented with Swagger.\n\nThis API requires the use of an API key in order to access. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For example, the request might look like\n\n    curl --location --request GET 'https://catalog.archives.gov/api/v2/records/search?q=constitution'\n    --header 'Content-Type: application/json'\n    --header 'x-api-key: API_KEY'\n\nwhere API_KEY is the key string of your API key.\n\nFor write operations, in addition to the API key, a user ID in the format of a Universally Unique Identifier (UUID) is required in the body of the request. For example, a request to POST a tag might look like:\n\n    curl --location --request POST 'https://catalog.archives.gov/api/v2/tags'\n    --header 'Content-Type: application/json'\n    --data-raw '{\n    \"tag\": \"example tag\",\n    \"targetNaId\": 1667751,\n    \"userId\": \"USER_UUID\"\n    }'\nwhere USER_UUID is the UUID of the user.\n\nPlease contact O&M at Catalog_API@nara.gov for an API Key."
+  description: This is the NextGen Catalog API application made with Express and documented with Swagger.
 servers:
 - url: https://catalog.archives.gov/api/v2/
 tags:
@@ -11,7 +11,7 @@ tags:
 paths:
   /contributions/:
     put:
-      summary: Update a contribution.
+      summary: Update a contribution
       description: Update a contribution to a record.
       tags:
       - Contributions
@@ -37,8 +37,10 @@ paths:
           description: Bad Request. Invalid search terms, revise terms.
         '422':
           description: An error response while processing the request to add a transcription.
+      operationId: putContributions
+      x-operation-id-source: derived
     get:
-      summary: Get contribution data directly from the database.
+      summary: Get contribution data directly from the database
       description: Get contribution data directly from the database. Returns a JSON result.
       tags:
       - Contributions
@@ -56,9 +58,11 @@ paths:
           description: A body of response data containing contribution data from the database if any were found.
         '422':
           description: Unprocessable Entity.
+      operationId: getContributions
+      x-operation-id-source: derived
   /contributions/search:
     get:
-      summary: Get search results for contributions data by sending a request with search parameters to the catalog.
+      summary: Get search results for contributions data by sending a request with search…
       description: Get search results for contributions data by sending a request with search parameters to the catalog. Returns a JSON result.
       tags:
       - Contributions
@@ -75,9 +79,11 @@ paths:
           description: A body of response data containing full contribution objects if any were found.
         '422':
           description: Unprocessable Entity.
+      operationId: getContributionsSearch
+      x-operation-id-source: derived
   /contributions/targetObjectId/{targetObjectId}:
     get:
-      summary: Get contribution data by target object id directly from the database.
+      summary: Get contribution data by target object id directly from the database
       description: Get contribution data by target object id directly from the database. Returns a JSON result.
       tags:
       - Contributions
@@ -91,9 +97,11 @@ paths:
           description: A body of response data containing contribution data from the database if any were found.
         '422':
           description: Unprocessable Entity.
+      operationId: getContributionsTargetObjectIdByTargetObjectId
+      x-operation-id-source: derived
   /contributions/parentContributionId/{parentContributionId}:
     get:
-      summary: Get contribution data by parent contribution id directly from the database.
+      summary: Get contribution data by parent contribution id directly from the database
       description: Get contribution data by parent contribution id directly from the database. Returns a JSON result.
       tags:
       - Contributions
@@ -110,9 +118,11 @@ paths:
           description: A body of response data containing contribution data from the database if any were found.
         '422':
           description: Unprocessable Entity.
+      operationId: getContributionsParentContributionIdByParentContributionId
+      x-operation-id-source: derived
   /contributions/contributionId/{contributionId}:
     get:
-      summary: Get contribution data by contribution id directly from the database.
+      summary: Get contribution data by contribution id directly from the database
       description: Get contribution data by contribution id directly from the database. Returns a JSON result.
       tags:
       - Contributions
@@ -125,9 +135,11 @@ paths:
           description: A body of response data containing contribution data from the database if any were found.
         '422':
           description: Unprocessable Entity.
+      operationId: getContributionsContributionIdByContributionId
+      x-operation-id-source: derived
   /contributions/userId/{userId}:
     get:
-      summary: Get contribution data by user id directly from the database.
+      summary: Get contribution data by user id directly from the database
       description: Get contribution data by user id directly from the database. Returns a JSON result.
       tags:
       - Contributions
@@ -145,9 +157,11 @@ paths:
           description: A body of response data containing contribution data from the database if any were found.
         '422':
           description: Unprocessable Entity.
+      operationId: getContributionsUserIdByUserId
+      x-operation-id-source: derived
   /contributions/targetNaId/{targetNaId}:
     get:
-      summary: Get contribution data by target naId directly from the database.
+      summary: Get contribution data by target naId directly from the database
       description: Get contribution data by target naId directly from the database. Returns a JSON result.
       tags:
       - Contributions
@@ -163,9 +177,11 @@ paths:
           description: A body of response data containing contribution data from the database if any were found.
         '422':
           description: Unprocessable Entity.
+      operationId: getContributionsTargetNaIdByTargetNaId
+      x-operation-id-source: derived
   /contributions/delete:
     delete:
-      summary: Deactivate/remove a contribution.
+      summary: Deactivate/remove a contribution
       description: Change the status of a contribution to 'inactive'
       tags:
       - Contributions
@@ -191,80 +207,10 @@ paths:
           description: A response body containing confirmation that the contribution was deactivated/removed successfully.
         '409':
           description: An error response while processing the request to deactivate/remove the contribution.
+      operationId: deleteContributionsDelete
+      x-operation-id-source: derived
 components:
   parameters:
-    paramTargetObjectId:
-      in: path
-      name: targetObjectId
-      description: Contribution's target objects's unique identifier which maps to the targetObjectId field in the MySQL database
-      required: true
-      schema:
-        maximum: 30
-        type: integer
-      example: 45710028
-    paramParentContUuid:
-      in: path
-      name: parentContributionId
-      description: A contribution's parent contribution's unique uuid identifier, which maps to the parentContributorId field in the MySQL database
-      required: true
-      schema:
-        maximum: 50
-        type: string
-      example: 55555555-5555-5555-5555-555555555555
-    paramCreatedAtFilter:
-      in: query
-      name: createdAt
-      description: Contribution's date of creation by which to filter
-      required: false
-      schema:
-        maximum: 30
-        type: string
-      example: '2020-01-01 07:00:00'
-    paramContUuid:
-      in: path
-      name: contributionId
-      description: An individual contribution's unique uuid identifier which maps to the contributorId field in the MySQL database
-      required: true
-      schema:
-        maximum: 50
-        type: string
-      example: 55555555-5555-5555-5555-555555555555
-    paramTargetNaId:
-      in: path
-      name: targetNaId
-      description: Contribution's target record's unique identifier which maps to the targetNaId field in the MySQL database
-      required: true
-      schema:
-        maximum: 30
-        type: integer
-      example: 1667758
-    paramUpdatedAtFilter:
-      in: query
-      name: updatedAt
-      description: Contribution's date of modification by which to filter
-      required: false
-      schema:
-        maximum: 30
-        type: string
-      example: '2020-01-02 07:00:00'
-    updatedAfter:
-      in: query
-      name: updatedAt
-      description: Compares provided timestamp to records updated timestamp, which maps to the updatedAt field in the MySQL database
-      required: false
-      schema:
-        maximum: 30
-        type: string
-      example: tag
-    paramContType:
-      in: query
-      name: contributionType
-      description: Contribution type which maps to the contributionType field in the MySQL database
-      required: false
-      schema:
-        maximum: 20
-        type: string
-      example: tag
     paramContQuery:
       in: query
       name: q
@@ -290,60 +236,33 @@ components:
           value: photo*
           summary: Stemming with wildcards
           description: Returns results which contain one or more contributions with variations of the word "photo", such as "photograph" and "photography".
-    paramNaId:
+    paramTargetNaIdFilter:
       in: query
-      name: naId
-      description: An array of NARA-specific identifiers, each of which is unique to a single record.
-      required: false
-      schema:
-        maximum: 10000
-        type: string
-      example: 146919092, 146919093
-    paramTargetPageNum:
-      in: query
-      name: targetPageNum
-      description: Contribution's target page number which maps to the targetPageNum field in the MySQL database
-      required: false
-      schema:
-        maximum: 30
-        type: integer
-      example: 1
-    paramContStatus:
-      in: query
-      name: status
-      description: Contribution's status which maps to the status field in the MySQL database
+      name: targetNaId
+      description: Contribution's target record's unique identifier which maps to the targetNaId field in the MySQL database
       required: false
       schema:
         maximum: 30
         type: string
-      example: active
-    paramUserId:
-      in: query
-      name: userId
-      description: Contributor's unique identifier which maps to the record.contributor.userId field
-      required: false
-      schema:
-        maximum: 50
-        type: string
-      example: 55555555-5555-5555-5555-555555555555
-    paramContUserId:
-      in: query
-      name: userId
-      description: Contributor's unique identifier which maps to the userId field in the MySQL database
+      example: 1667758
+    paramContUuid:
+      in: path
+      name: contributionId
+      description: An individual contribution's unique uuid identifier which maps to the contributorId field in the MySQL database
       required: true
       schema:
-        maximum: 36
-        type: string
-      example: 55555555-5555-5555-5555-555555555555
-    paramContId:
-      in: query
-      name: id
-      description: An individual contribution's unique identifier which maps to the record.contributionId field
-      required: false
-      schema:
         maximum: 50
         type: string
       example: 55555555-5555-5555-5555-555555555555
+    paramIncludeTotalCount:
+      in: query
+      name: includeTotalCount
+      description: Returns the total count of results in each result.
+      required: false
+      schema:
+        maximum: 100
+        type: boolean
+      example: true
     paramSortBy:
       in: query
       name: sortBy
@@ -359,6 +278,51 @@ components:
         - updatedAt.asc
         - updatedAt.desc
       description: "Sort order:\n * `contribution.asc` - Sort by contribution, ascending from A to Z\n * `contribution.desc` - Sort by contribution, descending from Z to A\n * `createdAt.asc` - Sort by created date, ascending\n * `createdAt.desc` - Sort by created date, descending\n * `updatedAt.asc` - Sort by updated date, ascending\n * `updatedAt.desc` - Sort by updated date, descending\n * `count.asc` - Sort by aggregated tag counts, ascending, ONLY works when contributionType = tag is present\n * `count.desc` - Sort by aggregated tag counts, descending, ONLY works when contributionType = tag is present\n"
+    paramUpdatedAtFilter:
+      in: query
+      name: updatedAt
+      description: Contribution's date of modification by which to filter
+      required: false
+      schema:
+        maximum: 30
+        type: string
+      example: '2020-01-02 07:00:00'
+    paramUserId:
+      in: query
+      name: userId
+      description: Contributor's unique identifier which maps to the record.contributor.userId field
+      required: false
+      schema:
+        maximum: 50
+        type: string
+      example: 55555555-5555-5555-5555-555555555555
+    paramParentContUuid:
+      in: path
+      name: parentContributionId
+      description: A contribution's parent contribution's unique uuid identifier, which maps to the parentContributorId field in the MySQL database
+      required: true
+      schema:
+        maximum: 50
+        type: string
+      example: 55555555-5555-5555-5555-555555555555
+    paramNaId:
+      in: query
+      name: naId
+      description: An array of NARA-specific identifiers, each of which is unique to a single record.
+      required: false
+      schema:
+        maximum: 10000
+        type: string
+      example: 146919092, 146919093
+    paramContType:
+      in: query
+      name: contributionType
+      description: Contribution type which maps to the contributionType field in the MySQL database
+      required: false
+      schema:
+        maximum: 20
+        type: string
+      example: tag
     paramDebug:
       in: query
       name: debug
@@ -382,24 +346,15 @@ components:
         maximum: 100
         type: string
       example: 55555555-5555-5555-5555-555555555555
-    paramTargetNaIdFilter:
+    paramContId:
       in: query
-      name: targetNaId
-      description: Contribution's target record's unique identifier which maps to the targetNaId field in the MySQL database
+      name: id
+      description: An individual contribution's unique identifier which maps to the record.contributionId field
       required: false
       schema:
-        maximum: 30
+        maximum: 50
         type: string
-      example: 1667758
-    paramIncludeTotalCount:
-      in: query
-      name: includeTotalCount
-      description: Returns the total count of results in each result.
-      required: false
-      schema:
-        maximum: 100
-        type: boolean
-      example: true
+      example: 55555555-5555-5555-5555-555555555555
     paramUserName:
       in: query
       name: userName
@@ -409,3 +364,66 @@ components:
         maximum: 100
         type: string
       example: johndoe1
+    paramCreatedAtFilter:
+      in: query
+      name: createdAt
+      description: Contribution's date of creation by which to filter
+      required: false
+      schema:
+        maximum: 30
+        type: string
+      example: '2020-01-01 07:00:00'
+    paramTargetNaId:
+      in: path
+      name: targetNaId
+      description: Contribution's target record's unique identifier which maps to the targetNaId field in the MySQL database
+      required: true
+      schema:
+        maximum: 30
+        type: integer
+      example: 1667758
+    paramContStatus:
+      in: query
+      name: status
+      description: Contribution's status which maps to the status field in the MySQL database
+      required: false
+      schema:
+        maximum: 30
+        type: string
+      example: active
+    updatedAfter:
+      in: query
+      name: updatedAt
+      description: Compares provided timestamp to records updated timestamp, which maps to the updatedAt field in the MySQL database
+      required: false
+      schema:
+        maximum: 30
+        type: string
+      example: tag
+    paramTargetPageNum:
+      in: query
+      name: targetPageNum
+      description: Contribution's target page number which maps to the targetPageNum field in the MySQL database
+      required: false
+      schema:
+        maximum: 30
+        type: integer
+      example: 1
+    paramTargetObjectId:
+      in: path
+      name: targetObjectId
+      description: Contribution's target objects's unique identifier which maps to the targetObjectId field in the MySQL database
+      required: true
+      schema:
+        maximum: 30
+        type: integer
+      example: 45710028
+    paramContUserId:
+      in: query
+      name: userId
+      description: Contributor's unique identifier which maps to the userId field in the MySQL database
+      required: true
+      schema:
+        maximum: 36
+        type: string
+      example: 55555555-5555-5555-5555-555555555555

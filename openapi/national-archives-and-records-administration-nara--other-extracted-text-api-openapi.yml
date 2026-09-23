@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: NextGen Catalog Accounts Other Extracted Text API
+  title: NextGen Catalog Other Extracted Text API
   version: 0.2.0
-  description: "\nThis is the NextGen Catalog API application made with Express and documented with Swagger.\n\nThis API requires the use of an API key in order to access. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For example, the request might look like\n\n    curl --location --request GET 'https://catalog.archives.gov/api/v2/records/search?q=constitution'\n    --header 'Content-Type: application/json'\n    --header 'x-api-key: API_KEY'\n\nwhere API_KEY is the key string of your API key.\n\nFor write operations, in addition to the API key, a user ID in the format of a Universally Unique Identifier (UUID) is required in the body of the request. For example, a request to POST a tag might look like:\n\n    curl --location --request POST 'https://catalog.archives.gov/api/v2/tags'\n    --header 'Content-Type: application/json'\n    --data-raw '{\n    \"tag\": \"example tag\",\n    \"targetNaId\": 1667751,\n    \"userId\": \"USER_UUID\"\n    }'\nwhere USER_UUID is the UUID of the user.\n\nPlease contact O&M at Catalog_API@nara.gov for an API Key."
+  description: This is the NextGen Catalog API application made with Express and documented with Swagger.
 servers:
 - url: https://catalog.archives.gov/api/v2/
 tags:
@@ -10,7 +10,7 @@ tags:
 paths:
   /other-extracted-text/search:
     get:
-      summary: Get search results for active contribution data by sending a request to the catalog with other extracted text as a search parameter.
+      summary: Get search results for active contribution data by sending a request to the…
       description: Get search results for active contribution data by sending a request to the catalog with other extracted text as a search parameter. It returns a JSON result.
       tags:
       - Other Extracted Text
@@ -32,44 +32,10 @@ paths:
           description: Bad Request. Invalid search terms, revise terms.
         '422':
           description: Unprocessable Entity.
+      operationId: getOtherExtractedTextSearch
+      x-operation-id-source: derived
 components:
   parameters:
-    paramUpdatedAtFilter:
-      in: query
-      name: updatedAt
-      description: Contribution's date of modification by which to filter
-      required: false
-      schema:
-        maximum: 30
-        type: string
-      example: '2020-01-02 07:00:00'
-    paramUserName:
-      in: query
-      name: userName
-      description: Contributor's screen name which maps to the record.contributor.userName field
-      required: false
-      schema:
-        maximum: 100
-        type: string
-      example: johndoe1
-    paramUserId:
-      in: query
-      name: userId
-      description: Contributor's unique identifier which maps to the record.contributor.userId field
-      required: false
-      schema:
-        maximum: 50
-        type: string
-      example: 55555555-5555-5555-5555-555555555555
-    paramCreatedAtFilter:
-      in: query
-      name: createdAt
-      description: Contribution's date of creation by which to filter
-      required: false
-      schema:
-        maximum: 30
-        type: string
-      example: '2020-01-01 07:00:00'
     paramOETQuery:
       in: query
       name: q
@@ -83,6 +49,15 @@ components:
           value: we the people
           summary: Simple keyword
           description: Returns results which contain one or more contributions with the words we, the, and people.
+    paramIncludeTotalCount:
+      in: query
+      name: includeTotalCount
+      description: Returns the total count of results in each result.
+      required: false
+      schema:
+        maximum: 100
+        type: boolean
+      example: true
     paramContId:
       in: query
       name: id
@@ -107,15 +82,42 @@ components:
         - updatedAt.asc
         - updatedAt.desc
       description: "Sort order:\n * `contribution.asc` - Sort by contribution, ascending from A to Z\n * `contribution.desc` - Sort by contribution, descending from Z to A\n * `createdAt.asc` - Sort by created date, ascending\n * `createdAt.desc` - Sort by created date, descending\n * `updatedAt.asc` - Sort by updated date, ascending\n * `updatedAt.desc` - Sort by updated date, descending\n * `count.asc` - Sort by aggregated tag counts, ascending, ONLY works when contributionType = tag is present\n * `count.desc` - Sort by aggregated tag counts, descending, ONLY works when contributionType = tag is present\n"
-    paramNaId:
+    paramUserName:
       in: query
-      name: naId
-      description: An array of NARA-specific identifiers, each of which is unique to a single record.
+      name: userName
+      description: Contributor's screen name which maps to the record.contributor.userName field
       required: false
       schema:
-        maximum: 10000
+        maximum: 100
         type: string
-      example: 146919092, 146919093
+      example: johndoe1
+    paramCreatedAtFilter:
+      in: query
+      name: createdAt
+      description: Contribution's date of creation by which to filter
+      required: false
+      schema:
+        maximum: 30
+        type: string
+      example: '2020-01-01 07:00:00'
+    paramUpdatedAtFilter:
+      in: query
+      name: updatedAt
+      description: Contribution's date of modification by which to filter
+      required: false
+      schema:
+        maximum: 30
+        type: string
+      example: '2020-01-02 07:00:00'
+    paramUserId:
+      in: query
+      name: userId
+      description: Contributor's unique identifier which maps to the record.contributor.userId field
+      required: false
+      schema:
+        maximum: 50
+        type: string
+      example: 55555555-5555-5555-5555-555555555555
     paramContStatus:
       in: query
       name: status
@@ -125,12 +127,12 @@ components:
         maximum: 30
         type: string
       example: active
-    paramIncludeTotalCount:
+    paramNaId:
       in: query
-      name: includeTotalCount
-      description: Returns the total count of results in each result.
+      name: naId
+      description: An array of NARA-specific identifiers, each of which is unique to a single record.
       required: false
       schema:
-        maximum: 100
-        type: boolean
-      example: true
+        maximum: 10000
+        type: string
+      example: 146919092, 146919093

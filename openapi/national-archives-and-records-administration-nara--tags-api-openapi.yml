@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: NextGen Catalog Accounts Tags API
+  title: NextGen Catalog Tags API
   version: 0.2.0
-  description: "\nThis is the NextGen Catalog API application made with Express and documented with Swagger.\n\nThis API requires the use of an API key in order to access. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For example, the request might look like\n\n    curl --location --request GET 'https://catalog.archives.gov/api/v2/records/search?q=constitution'\n    --header 'Content-Type: application/json'\n    --header 'x-api-key: API_KEY'\n\nwhere API_KEY is the key string of your API key.\n\nFor write operations, in addition to the API key, a user ID in the format of a Universally Unique Identifier (UUID) is required in the body of the request. For example, a request to POST a tag might look like:\n\n    curl --location --request POST 'https://catalog.archives.gov/api/v2/tags'\n    --header 'Content-Type: application/json'\n    --data-raw '{\n    \"tag\": \"example tag\",\n    \"targetNaId\": 1667751,\n    \"userId\": \"USER_UUID\"\n    }'\nwhere USER_UUID is the UUID of the user.\n\nPlease contact O&M at Catalog_API@nara.gov for an API Key."
+  description: This is the NextGen Catalog API application made with Express and documented with Swagger.
 servers:
 - url: https://catalog.archives.gov/api/v2/
 tags:
@@ -11,7 +11,7 @@ tags:
 paths:
   /tags/search:
     get:
-      summary: Get search results for tag data by sending a request with search parameters to the catalog.
+      summary: Get search results for tag data by sending a request with search parameters to…
       description: Get search results for tag data by sending a request with search parameters to the catalog. Returns a JSON result.
       tags:
       - Tags
@@ -29,9 +29,11 @@ paths:
           description: Bad Request. Invalid search terms, revise terms.
         '422':
           description: Unprocessable Entity.
+      operationId: getTagsSearch
+      x-operation-id-source: derived
   /tags/{id}:
     get:
-      summary: Get a single tag object by tag id.
+      summary: Get a single tag object by tag id
       description: Get a single tag object by tag id. Returns a JSON result.
       tags:
       - Tags
@@ -46,9 +48,11 @@ paths:
           description: Bad Request. Invalid search terms, revise terms.
         '422':
           description: Unprocessable Entity.
+      operationId: getTagsById
+      x-operation-id-source: derived
   /tags/naId/{naId}:
     get:
-      summary: Get tags by their parent record's naId.
+      summary: Get tags by their parent record's naId
       description: Get tags by their parent record's naId. Returns a JSON result.
       tags:
       - Tags
@@ -66,9 +70,11 @@ paths:
           description: A body of response data containing tag objects if any were found.
         '422':
           description: Unprocessable Entity.
+      operationId: getTagsNaIdByNaId
+      x-operation-id-source: derived
   /tags/userId/{userId}:
     get:
-      summary: Get tags by their contributor's userId.
+      summary: Get tags by their contributor's userId
       description: Get tags by their contributor's userId. Returns a JSON result.
       tags:
       - Tags
@@ -86,9 +92,11 @@ paths:
           description: A body of response data containing tag objects if any were found.
         '422':
           description: Unprocessable Entity.
+      operationId: getTagsUserIdByUserId
+      x-operation-id-source: derived
   /tags/:
     post:
-      summary: Add a tag.
+      summary: Add a tag
       description: Add a tag to a record.
       tags:
       - Tags
@@ -104,9 +112,11 @@ paths:
           description: A response body containing confirmation that the tag was added successfully.
         '422':
           description: An error response while processing the request to add a tag.
+      operationId: postTags
+      x-operation-id-source: derived
   /tags/:contributionId:
     delete:
-      summary: Deactivate/remove a tag.
+      summary: Deactivate/remove a tag
       description: Change the status of a tag to 'inactive' or 'removed'. Normal tags will be made inactive. Administrator tags will be removed.
       tags:
       - Tags
@@ -144,45 +154,23 @@ paths:
           description: A response body containing confirmation that the tag was deactivated/removed successfully.
         '409':
           description: An error response while processing the request to deactivate/remove the tag.
+      operationId: deleteTags:contributionId
+      x-operation-id-source: derived
 components:
-  schemas:
-    tagBody:
-      type: object
-      properties:
-        tag:
-          type: string
-          example: some tag
-        targetNaId:
-          type: integer
-          example: 31124739
-        targetObjectId:
-          type: integer
-          example: 31124739
-        userId:
-          type: integer
-          example: c2558dff-bf46-3e28-8aff-29913227beb2
-        status:
-          type: string
-          default: active
-          example: inactive
-      required:
-      - tag
-      - targetNaId
-      - userId
   parameters:
-    paramUserName:
+    paramDebug:
       in: query
-      name: userName
-      description: Contributor's screen name which maps to the record.contributor.userName field
+      name: debug
+      description: Turns on debug mode, showing metadata in the response body, if set to true.
       required: false
       schema:
         maximum: 100
-        type: string
-      example: johndoe1
-    paramUserId:
+        type: boolean
+      example: true
+    paramContId:
       in: query
-      name: userId
-      description: Contributor's unique identifier which maps to the record.contributor.userId field
+      name: id
+      description: An individual contribution's unique identifier which maps to the record.contributionId field
       required: false
       schema:
         maximum: 50
@@ -213,10 +201,19 @@ components:
           value: photo*
           summary: Stemming with wildcards
           description: Returns results which contain one or more contributions with variations of the word "photo", such as "photograph" and "photography".
-    paramContId:
+    paramUserName:
       in: query
-      name: id
-      description: An individual contribution's unique identifier which maps to the record.contributionId field
+      name: userName
+      description: Contributor's screen name which maps to the record.contributor.userName field
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: johndoe1
+    paramUserId:
+      in: query
+      name: userId
+      description: Contributor's unique identifier which maps to the record.contributor.userId field
       required: false
       schema:
         maximum: 50
@@ -231,12 +228,27 @@ components:
         maximum: 10000
         type: string
       example: 146919092, 146919093
-    paramDebug:
-      in: query
-      name: debug
-      description: Turns on debug mode, showing metadata in the response body, if set to true.
-      required: false
-      schema:
-        maximum: 100
-        type: boolean
-      example: true
+  schemas:
+    tagBody:
+      type: object
+      properties:
+        tag:
+          type: string
+          example: some tag
+        targetNaId:
+          type: integer
+          example: 31124739
+        targetObjectId:
+          type: integer
+          example: 31124739
+        userId:
+          type: integer
+          example: c2558dff-bf46-3e28-8aff-29913227beb2
+        status:
+          type: string
+          default: active
+          example: inactive
+      required:
+      - tag
+      - targetNaId
+      - userId

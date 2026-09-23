@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: NextGen Catalog Accounts Announcements API
+  title: NextGen Catalog Announcements API
   version: 0.2.0
-  description: "\nThis is the NextGen Catalog API application made with Express and documented with Swagger.\n\nThis API requires the use of an API key in order to access. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For example, the request might look like\n\n    curl --location --request GET 'https://catalog.archives.gov/api/v2/records/search?q=constitution'\n    --header 'Content-Type: application/json'\n    --header 'x-api-key: API_KEY'\n\nwhere API_KEY is the key string of your API key.\n\nFor write operations, in addition to the API key, a user ID in the format of a Universally Unique Identifier (UUID) is required in the body of the request. For example, a request to POST a tag might look like:\n\n    curl --location --request POST 'https://catalog.archives.gov/api/v2/tags'\n    --header 'Content-Type: application/json'\n    --data-raw '{\n    \"tag\": \"example tag\",\n    \"targetNaId\": 1667751,\n    \"userId\": \"USER_UUID\"\n    }'\nwhere USER_UUID is the UUID of the user.\n\nPlease contact O&M at Catalog_API@nara.gov for an API Key."
+  description: This is the NextGen Catalog API application made with Express and documented with Swagger.
 servers:
 - url: https://catalog.archives.gov/api/v2/
 tags:
@@ -11,7 +11,7 @@ tags:
 paths:
   /announcements/latest:
     get:
-      summary: Get a list of active announcements.
+      summary: Get a list of active announcements
       description: Retrieve a paginated list of announcements.
       tags:
       - Announcements
@@ -27,9 +27,11 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Announcement'
+      operationId: getAnnouncementsLatest
+      x-operation-id-source: derived
   /announcements:
     get:
-      summary: Get a list of announcements.
+      summary: Get a list of announcements
       description: Retrieve a paginated list of announcements.
       tags:
       - Announcements
@@ -101,8 +103,10 @@ paths:
                     type: array
                     items:
                       $ref: '#/components/schemas/Announcement'
+      operationId: getAnnouncements
+      x-operation-id-source: derived
     post:
-      summary: Create a new announcement.
+      summary: Create a new announcement
       description: Allows a moderator to create a new announcement. The announcement is initially created with a status of 'DRAFT'.
       tags:
       - Announcements
@@ -157,9 +161,11 @@ paths:
           description: Internal server error.
       security:
       - ApiKeyAuth: []
+      operationId: postAnnouncements
+      x-operation-id-source: derived
   /announcements/{announcement_id}:
     put:
-      summary: Update an existing announcement.
+      summary: Update an existing announcement
       description: Allows a moderator to update an existing announcement.
       tags:
       - Announcements
@@ -237,3 +243,5 @@ paths:
           description: Internal server error.
       security:
       - ApiKeyAuth: []
+      operationId: putAnnouncementsByAnnouncementId
+      x-operation-id-source: derived

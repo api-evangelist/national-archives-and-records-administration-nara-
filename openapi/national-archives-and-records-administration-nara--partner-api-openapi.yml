@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: NextGen Catalog Accounts Partner API
+  title: NextGen Catalog Partner API
   version: 0.2.0
-  description: "\nThis is the NextGen Catalog API application made with Express and documented with Swagger.\n\nThis API requires the use of an API key in order to access. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For example, the request might look like\n\n    curl --location --request GET 'https://catalog.archives.gov/api/v2/records/search?q=constitution'\n    --header 'Content-Type: application/json'\n    --header 'x-api-key: API_KEY'\n\nwhere API_KEY is the key string of your API key.\n\nFor write operations, in addition to the API key, a user ID in the format of a Universally Unique Identifier (UUID) is required in the body of the request. For example, a request to POST a tag might look like:\n\n    curl --location --request POST 'https://catalog.archives.gov/api/v2/tags'\n    --header 'Content-Type: application/json'\n    --data-raw '{\n    \"tag\": \"example tag\",\n    \"targetNaId\": 1667751,\n    \"userId\": \"USER_UUID\"\n    }'\nwhere USER_UUID is the UUID of the user.\n\nPlease contact O&M at Catalog_API@nara.gov for an API Key."
+  description: This is the NextGen Catalog API application made with Express and documented with Swagger.
 servers:
 - url: https://catalog.archives.gov/api/v2/
 tags:
@@ -10,7 +10,7 @@ tags:
 paths:
   /partners/create:
     post:
-      summary: Create a new partner.
+      summary: Create a new partner
       description: Allows a moderator to create a new partner. The partner is initially created with a status of 'ACTIVE'.
       tags:
       - Partner
@@ -70,6 +70,8 @@ paths:
           description: Internal server error.
       security:
       - ApiKeyAuth: []
+      operationId: postPartnersCreate
+      x-operation-id-source: derived
   /partners/search:
     get:
       summary: Search for partners
@@ -132,9 +134,11 @@ paths:
           description: Internal server error.
       security:
       - ApiKeyAuth: []
+      operationId: getPartnersSearch
+      x-operation-id-source: derived
   /partners/update:
     patch:
-      summary: Update partner name.
+      summary: Update partner name
       description: Allows a moderator to update partner's full name and status.
       tags:
       - Partner
@@ -200,9 +204,11 @@ paths:
           description: Internal server error.
       security:
       - ApiKeyAuth: []
+      operationId: patchPartnersUpdate
+      x-operation-id-source: derived
   /partners/contributions/partnerNameId/{partnerNameId}:
     get:
-      summary: Get partner contributions by partnerNameId.
+      summary: Get partner contributions by partnerNameId
       description: Allows a moderator to get partner contributions by partnerNameId.
       tags:
       - Partner
@@ -225,9 +231,11 @@ paths:
           description: Internal server error.
       security:
       - ApiKeyAuth: []
+      operationId: getPartnersContributionsPartnerNameIdByPartnerNameId
+      x-operation-id-source: derived
   /partners/contributions/fullName/{fullName}:
     get:
-      summary: Get partner contributions by fullName.
+      summary: Get partner contributions by fullName
       description: Allows a moderator to get partner contributions by id.
       tags:
       - Partner
@@ -249,6 +257,8 @@ paths:
           description: Internal server error.
       security:
       - ApiKeyAuth: []
+      operationId: getPartnersContributionsFullNameByFullName
+      x-operation-id-source: derived
 components:
   parameters:
     paramLimit:

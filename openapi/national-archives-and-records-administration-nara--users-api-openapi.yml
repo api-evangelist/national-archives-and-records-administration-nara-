@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: NextGen Catalog Accounts Users API
+  title: NextGen Catalog Users API
   version: 0.2.0
-  description: "\nThis is the NextGen Catalog API application made with Express and documented with Swagger.\n\nThis API requires the use of an API key in order to access. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For example, the request might look like\n\n    curl --location --request GET 'https://catalog.archives.gov/api/v2/records/search?q=constitution'\n    --header 'Content-Type: application/json'\n    --header 'x-api-key: API_KEY'\n\nwhere API_KEY is the key string of your API key.\n\nFor write operations, in addition to the API key, a user ID in the format of a Universally Unique Identifier (UUID) is required in the body of the request. For example, a request to POST a tag might look like:\n\n    curl --location --request POST 'https://catalog.archives.gov/api/v2/tags'\n    --header 'Content-Type: application/json'\n    --data-raw '{\n    \"tag\": \"example tag\",\n    \"targetNaId\": 1667751,\n    \"userId\": \"USER_UUID\"\n    }'\nwhere USER_UUID is the UUID of the user.\n\nPlease contact O&M at Catalog_API@nara.gov for an API Key."
+  description: This is the NextGen Catalog API application made with Express and documented with Swagger.
 servers:
 - url: https://catalog.archives.gov/api/v2/
 tags:
@@ -10,7 +10,7 @@ tags:
 paths:
   /users:
     patch:
-      summary: Update user information given a user's email.
+      summary: Update user information given a user's email
       description: Update user information given a user. Requires an administrative account and a justification. Returns a JSON result.
       tags:
       - Users
@@ -28,9 +28,11 @@ paths:
           description: Bad Request
         '422':
           description: Unprocessable Entity - params are invalid
+      operationId: patchUsers
+      x-operation-id-source: derived
   /users/username:
     patch:
-      summary: Update a users username given their userId.
+      summary: Update a users username given their userId
       description: Update user information given a user's userId. Returns a JSON result.
       tags:
       - Users
@@ -48,9 +50,11 @@ paths:
           description: Bad Request
         '422':
           description: Unprocessable Entity - params are invalid
+      operationId: patchUsersUsername
+      x-operation-id-source: derived
   /users/notifications/:userId:
     get:
-      summary: Recieve the users notifications.
+      summary: Recieve the users notifications
       description: Recieve the users notifications, including edited transcriptions, moderated contributions, and replies to comments. Notifications are contributions, with an additional field 'notificationType' to denote type.
       tags:
       - Users
@@ -95,6 +99,8 @@ paths:
           description: Successfully retrieved notifications
         '422':
           description: Unprocessable Entity - params are invalid
+      operationId: getUsersNotifications:userId
+      x-operation-id-source: derived
 components:
   schemas:
     usernameUpdateBody:

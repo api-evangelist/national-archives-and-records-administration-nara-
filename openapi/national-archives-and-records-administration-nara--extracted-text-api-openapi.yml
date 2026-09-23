@@ -1,8 +1,8 @@
 openapi: 3.2.0
 info:
-  title: NextGen Catalog Accounts Extracted Text API
+  title: NextGen Catalog Extracted Text API
   version: 0.2.0
-  description: "\nThis is the NextGen Catalog API application made with Express and documented with Swagger.\n\nThis API requires the use of an API key in order to access. Once you have obtained an API key, you can pass the API key into a REST API call in the x-api-key header of the request. For example, the request might look like\n\n    curl --location --request GET 'https://catalog.archives.gov/api/v2/records/search?q=constitution'\n    --header 'Content-Type: application/json'\n    --header 'x-api-key: API_KEY'\n\nwhere API_KEY is the key string of your API key.\n\nFor write operations, in addition to the API key, a user ID in the format of a Universally Unique Identifier (UUID) is required in the body of the request. For example, a request to POST a tag might look like:\n\n    curl --location --request POST 'https://catalog.archives.gov/api/v2/tags'\n    --header 'Content-Type: application/json'\n    --data-raw '{\n    \"tag\": \"example tag\",\n    \"targetNaId\": 1667751,\n    \"userId\": \"USER_UUID\"\n    }'\nwhere USER_UUID is the UUID of the user.\n\nPlease contact O&M at Catalog_API@nara.gov for an API Key."
+  description: This is the NextGen Catalog API application made with Express and documented with Swagger.
 servers:
 - url: https://catalog.archives.gov/api/v2/
 tags:
@@ -10,7 +10,7 @@ tags:
 paths:
   /extractedText/{naId}:
     get:
-      summary: Get extracted text for a given naid and digital object ID.
+      summary: Get extracted text for a given naid and digital object ID
       description: Returns a list of extracted text for a given naid and digital object ID.
       tags:
       - Extracted Text
@@ -41,27 +41,10 @@ paths:
           description: No matching records found.
         '500':
           description: Internal server error.
+      operationId: getExtractedTextByNaId
+      x-operation-id-source: derived
 components:
   parameters:
-    paramPage:
-      in: query
-      name: page
-      description: Page number of the paginated result set in which to return.
-      required: false
-      schema:
-        default: 1
-        maximum: 10000
-        type: integer
-      example: 20
-    paramObjectIdInQuery:
-      in: query
-      name: objectId
-      description: Unique ID given to an object
-      required: true
-      schema:
-        maximum: 30
-        type: integer
-      example: 152951242
     paramLimit:
       in: query
       name: limit
@@ -81,3 +64,22 @@ components:
         maximum: 30
         type: integer
       example: 146919092
+    paramPage:
+      in: query
+      name: page
+      description: Page number of the paginated result set in which to return.
+      required: false
+      schema:
+        default: 1
+        maximum: 10000
+        type: integer
+      example: 20
+    paramObjectIdInQuery:
+      in: query
+      name: objectId
+      description: Unique ID given to an object
+      required: true
+      schema:
+        maximum: 30
+        type: integer
+      example: 152951242
