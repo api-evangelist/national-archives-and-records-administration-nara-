@@ -92,17 +92,15 @@ components:
         maximum: 1000
         type: integer
       example: 75
-    paramAvailability:
-      in: query
-      name: availability
-      description: An array of online availability values
+    paramPathNaId:
+      in: path
+      name: naId
+      description: Unique, NARA-specific identifier given to each record.
       required: false
       schema:
-        enum:
-        - fullyDigitized
-        - unrestrictedOnly
-        type: string
-      example: fullyDigitized, unrestrictedOnly
+        maximum: 30
+        type: integer
+      example: 146919092
     paramPage:
       in: query
       name: page
@@ -113,15 +111,15 @@ components:
         maximum: 10000
         type: integer
       example: 20
-    paramPathNaId:
-      in: path
+    paramNaId:
+      in: query
       name: naId
-      description: Unique, NARA-specific identifier given to each record.
+      description: An array of NARA-specific identifiers, each of which is unique to a single record.
       required: false
       schema:
-        maximum: 30
-        type: integer
-      example: 146919092
+        maximum: 10000
+        type: string
+      example: 146919092, 146919093
     paramAvailabilityStatus:
       in: query
       name: availabilityStatus
@@ -133,15 +131,17 @@ components:
         - inactive
         type: string
       example: active, inactive
-    paramNaId:
+    paramAvailability:
       in: query
-      name: naId
-      description: An array of NARA-specific identifiers, each of which is unique to a single record.
+      name: availability
+      description: An array of online availability values
       required: false
       schema:
-        maximum: 10000
+        enum:
+        - fullyDigitized
+        - unrestrictedOnly
         type: string
-      example: 146919092, 146919093
+      example: fullyDigitized, unrestrictedOnly
   schemas:
     onlineAvailabilityBody:
       type: object

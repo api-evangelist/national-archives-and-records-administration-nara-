@@ -103,20 +103,6 @@ paths:
       x-operation-id-source: derived
 components:
   schemas:
-    usernameUpdateBody:
-      type: object
-      properties:
-        userId:
-          type: string
-          example: 1234
-          maximum: 100
-        userName:
-          type: string
-          example: jdoe1
-          maximum: 32
-          minimum: 2
-      required:
-      - userId
     userUpdateBody:
       type: object
       properties:
@@ -157,3 +143,17 @@ components:
       - adminUserId
       - email
       - justificationId
+    usernameUpdateBody:
+      type: object
+      properties:
+        userId:
+          type: string
+          example: 1234
+          maximum: 100
+        userName:
+          type: string
+          example: jdoe1
+          maximum: 32
+          minimum: 2
+      required:
+      - userId

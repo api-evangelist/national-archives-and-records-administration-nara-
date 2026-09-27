@@ -251,6 +251,15 @@ paths:
       x-operation-id-source: derived
 components:
   parameters:
+    paramUserId:
+      in: query
+      name: userId
+      description: Contributor's unique identifier which maps to the record.contributor.userId field
+      required: false
+      schema:
+        maximum: 50
+        type: string
+      example: 55555555-5555-5555-5555-555555555555
     paramDebug:
       in: query
       name: debug
@@ -260,15 +269,15 @@ components:
         maximum: 100
         type: boolean
       example: true
-    paramContId:
+    paramNaId:
       in: query
-      name: id
-      description: An individual contribution's unique identifier which maps to the record.contributionId field
+      name: naId
+      description: An array of NARA-specific identifiers, each of which is unique to a single record.
       required: false
       schema:
-        maximum: 50
+        maximum: 10000
         type: string
-      example: 55555555-5555-5555-5555-555555555555
+      example: 146919092, 146919093
     paramContQuery:
       in: query
       name: q
@@ -303,24 +312,15 @@ components:
         maximum: 100
         type: string
       example: johndoe1
-    paramUserId:
+    paramContId:
       in: query
-      name: userId
-      description: Contributor's unique identifier which maps to the record.contributor.userId field
+      name: id
+      description: An individual contribution's unique identifier which maps to the record.contributionId field
       required: false
       schema:
         maximum: 50
         type: string
       example: 55555555-5555-5555-5555-555555555555
-    paramNaId:
-      in: query
-      name: naId
-      description: An array of NARA-specific identifiers, each of which is unique to a single record.
-      required: false
-      schema:
-        maximum: 10000
-        type: string
-      example: 146919092, 146919093
   schemas:
     transcriptionBody:
       type: object
