@@ -182,6 +182,45 @@ paths:
       operationId: deleteCommentsByContributionId
       x-operation-id-source: derived
 components:
+  schemas:
+    commentBody:
+      type: object
+      properties:
+        comment:
+          type: string
+          example: a thoughtful comment
+          maximum: 750
+        targetNaId:
+          type: integer
+          example: 31124739
+        targetObjectId:
+          type: integer
+          example: 77852917
+        userId:
+          type: string
+          example: c2558dff-bf46-3e28-8aff-29913227beb2
+        parentContributionId:
+          type: string
+          example: 55555555-5555-5555-5555-555555555555
+        status:
+          type: string
+          default: active
+          example: inactive
+      required:
+      - comment
+      - targetNaId
+      - userId
+    commentUpdateBody:
+      type: object
+      properties:
+        comment:
+          type: string
+          example: a thoughtful edit to this comment
+          maximum: 750
+        status:
+          type: string
+          default: active
+          example: inactive
   parameters:
     paramUserId:
       in: query
@@ -210,6 +249,15 @@ components:
         maximum: 10000
         type: string
       example: 146919092, 146919093
+    paramUserName:
+      in: query
+      name: userName
+      description: Contributor's screen name which maps to the record.contributor.userName field
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: johndoe1
     paramContQuery:
       in: query
       name: q
@@ -235,15 +283,6 @@ components:
           value: photo*
           summary: Stemming with wildcards
           description: Returns results which contain one or more contributions with variations of the word "photo", such as "photograph" and "photography".
-    paramUserName:
-      in: query
-      name: userName
-      description: Contributor's screen name which maps to the record.contributor.userName field
-      required: false
-      schema:
-        maximum: 100
-        type: string
-      example: johndoe1
     paramContId:
       in: query
       name: id
@@ -253,42 +292,3 @@ components:
         maximum: 50
         type: string
       example: 55555555-5555-5555-5555-555555555555
-  schemas:
-    commentUpdateBody:
-      type: object
-      properties:
-        comment:
-          type: string
-          example: a thoughtful edit to this comment
-          maximum: 750
-        status:
-          type: string
-          default: active
-          example: inactive
-    commentBody:
-      type: object
-      properties:
-        comment:
-          type: string
-          example: a thoughtful comment
-          maximum: 750
-        targetNaId:
-          type: integer
-          example: 31124739
-        targetObjectId:
-          type: integer
-          example: 77852917
-        userId:
-          type: string
-          example: c2558dff-bf46-3e28-8aff-29913227beb2
-        parentContributionId:
-          type: string
-          example: 55555555-5555-5555-5555-555555555555
-        status:
-          type: string
-          default: active
-          example: inactive
-      required:
-      - comment
-      - targetNaId
-      - userId

@@ -82,16 +82,6 @@ paths:
       x-operation-id-source: derived
 components:
   parameters:
-    paramLimit:
-      in: query
-      name: limit
-      description: Maximum number of results returned for each page of paginated data.
-      required: false
-      schema:
-        default: 20
-        maximum: 1000
-        type: integer
-      example: 75
     paramPathNaId:
       in: path
       name: naId
@@ -101,25 +91,6 @@ components:
         maximum: 30
         type: integer
       example: 146919092
-    paramPage:
-      in: query
-      name: page
-      description: Page number of the paginated result set in which to return.
-      required: false
-      schema:
-        default: 1
-        maximum: 10000
-        type: integer
-      example: 20
-    paramNaId:
-      in: query
-      name: naId
-      description: An array of NARA-specific identifiers, each of which is unique to a single record.
-      required: false
-      schema:
-        maximum: 10000
-        type: string
-      example: 146919092, 146919093
     paramAvailabilityStatus:
       in: query
       name: availabilityStatus
@@ -131,6 +102,16 @@ components:
         - inactive
         type: string
       example: active, inactive
+    paramPage:
+      in: query
+      name: page
+      description: Page number of the paginated result set in which to return.
+      required: false
+      schema:
+        default: 1
+        maximum: 10000
+        type: integer
+      example: 20
     paramAvailability:
       in: query
       name: availability
@@ -142,6 +123,25 @@ components:
         - unrestrictedOnly
         type: string
       example: fullyDigitized, unrestrictedOnly
+    paramNaId:
+      in: query
+      name: naId
+      description: An array of NARA-specific identifiers, each of which is unique to a single record.
+      required: false
+      schema:
+        maximum: 10000
+        type: string
+      example: 146919092, 146919093
+    paramLimit:
+      in: query
+      name: limit
+      description: Maximum number of results returned for each page of paginated data.
+      required: false
+      schema:
+        default: 20
+        maximum: 1000
+        type: integer
+      example: 75
   schemas:
     onlineAvailabilityBody:
       type: object

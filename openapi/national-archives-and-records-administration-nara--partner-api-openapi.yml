@@ -261,16 +261,6 @@ paths:
       x-operation-id-source: derived
 components:
   parameters:
-    paramLimit:
-      in: query
-      name: limit
-      description: Maximum number of results returned for each page of paginated data.
-      required: false
-      schema:
-        default: 20
-        maximum: 1000
-        type: integer
-      example: 75
     paramPage:
       in: query
       name: page
@@ -281,3 +271,13 @@ components:
         maximum: 10000
         type: integer
       example: 20
+    paramLimit:
+      in: query
+      name: limit
+      description: Maximum number of results returned for each page of paginated data.
+      required: false
+      schema:
+        default: 20
+        maximum: 1000
+        type: integer
+      example: 75
