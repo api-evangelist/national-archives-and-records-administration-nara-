@@ -250,68 +250,7 @@ paths:
       operationId: postTranscriptions:contributionIdJustificationId:justificationId
       x-operation-id-source: derived
 components:
-  schemas:
-    transcriptionBody:
-      type: object
-      properties:
-        transcription:
-          type: string
-          example: a properly encoded/escaped transcription
-          maximum: 4294967295
-        targetNaId:
-          type: integer
-          example: 31124739
-        targetObjectId:
-          type: integer
-          example: 77852917
-        userId:
-          type: string
-          example: c2558dff-bf46-3e28-8aff-29913227beb2
-        status:
-          type: string
-          default: active
-          example: inactive
-      required:
-      - transcription
-      - targetNaId
-      - userId
   parameters:
-    paramUserId:
-      in: query
-      name: userId
-      description: Contributor's unique identifier which maps to the record.contributor.userId field
-      required: false
-      schema:
-        maximum: 50
-        type: string
-      example: 55555555-5555-5555-5555-555555555555
-    paramDebug:
-      in: query
-      name: debug
-      description: Turns on debug mode, showing metadata in the response body, if set to true.
-      required: false
-      schema:
-        maximum: 100
-        type: boolean
-      example: true
-    paramNaId:
-      in: query
-      name: naId
-      description: An array of NARA-specific identifiers, each of which is unique to a single record.
-      required: false
-      schema:
-        maximum: 10000
-        type: string
-      example: 146919092, 146919093
-    paramUserName:
-      in: query
-      name: userName
-      description: Contributor's screen name which maps to the record.contributor.userName field
-      required: false
-      schema:
-        maximum: 100
-        type: string
-      example: johndoe1
     paramContQuery:
       in: query
       name: q
@@ -346,3 +285,64 @@ components:
         maximum: 50
         type: string
       example: 55555555-5555-5555-5555-555555555555
+    paramUserId:
+      in: query
+      name: userId
+      description: Contributor's unique identifier which maps to the record.contributor.userId field
+      required: false
+      schema:
+        maximum: 50
+        type: string
+      example: 55555555-5555-5555-5555-555555555555
+    paramNaId:
+      in: query
+      name: naId
+      description: An array of NARA-specific identifiers, each of which is unique to a single record.
+      required: false
+      schema:
+        maximum: 10000
+        type: string
+      example: 146919092, 146919093
+    paramUserName:
+      in: query
+      name: userName
+      description: Contributor's screen name which maps to the record.contributor.userName field
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: johndoe1
+    paramDebug:
+      in: query
+      name: debug
+      description: Turns on debug mode, showing metadata in the response body, if set to true.
+      required: false
+      schema:
+        maximum: 100
+        type: boolean
+      example: true
+  schemas:
+    transcriptionBody:
+      type: object
+      properties:
+        transcription:
+          type: string
+          example: a properly encoded/escaped transcription
+          maximum: 4294967295
+        targetNaId:
+          type: integer
+          example: 31124739
+        targetObjectId:
+          type: integer
+          example: 77852917
+        userId:
+          type: string
+          example: c2558dff-bf46-3e28-8aff-29913227beb2
+        status:
+          type: string
+          default: active
+          example: inactive
+      required:
+      - transcription
+      - targetNaId
+      - userId

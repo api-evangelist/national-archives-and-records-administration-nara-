@@ -211,143 +211,6 @@ paths:
       x-operation-id-source: derived
 components:
   parameters:
-    paramUserId:
-      in: query
-      name: userId
-      description: Contributor's unique identifier which maps to the record.contributor.userId field
-      required: false
-      schema:
-        maximum: 50
-        type: string
-      example: 55555555-5555-5555-5555-555555555555
-    paramSearchAfterContribution:
-      in: query
-      name: searchAfter
-      description: 'Enables deep pagination to retrieve records beyond the first 10,000 results.  Not compatible with sort, or page parameters.
-
-
-        For the inital request use `searchAfter=*` and for all subsequent requests set `searchAfter` to the value of the sort array in the last member of `body.hits.hits` for each page.
-
-        '
-      required: false
-      schema:
-        maximum: 100
-        type: string
-      example: 55555555-5555-5555-5555-555555555555
-    paramNaId:
-      in: query
-      name: naId
-      description: An array of NARA-specific identifiers, each of which is unique to a single record.
-      required: false
-      schema:
-        maximum: 10000
-        type: string
-      example: 146919092, 146919093
-    paramIncludeTotalCount:
-      in: query
-      name: includeTotalCount
-      description: Returns the total count of results in each result.
-      required: false
-      schema:
-        maximum: 100
-        type: boolean
-      example: true
-    paramUserName:
-      in: query
-      name: userName
-      description: Contributor's screen name which maps to the record.contributor.userName field
-      required: false
-      schema:
-        maximum: 100
-        type: string
-      example: johndoe1
-    paramContUuid:
-      in: path
-      name: contributionId
-      description: An individual contribution's unique uuid identifier which maps to the contributorId field in the MySQL database
-      required: true
-      schema:
-        maximum: 50
-        type: string
-      example: 55555555-5555-5555-5555-555555555555
-    paramContUserId:
-      in: query
-      name: userId
-      description: Contributor's unique identifier which maps to the userId field in the MySQL database
-      required: true
-      schema:
-        maximum: 36
-        type: string
-      example: 55555555-5555-5555-5555-555555555555
-    paramTargetObjectId:
-      in: path
-      name: targetObjectId
-      description: Contribution's target objects's unique identifier which maps to the targetObjectId field in the MySQL database
-      required: true
-      schema:
-        maximum: 30
-        type: integer
-      example: 45710028
-    paramSortBy:
-      in: query
-      name: sortBy
-      required: false
-      schema:
-        maximum: 30
-        type: string
-        enum:
-        - contribution.asc
-        - contribution.desc
-        - createdAt.asc
-        - createdAt.desc
-        - updatedAt.asc
-        - updatedAt.desc
-      description: "Sort order:\n * `contribution.asc` - Sort by contribution, ascending from A to Z\n * `contribution.desc` - Sort by contribution, descending from Z to A\n * `createdAt.asc` - Sort by created date, ascending\n * `createdAt.desc` - Sort by created date, descending\n * `updatedAt.asc` - Sort by updated date, ascending\n * `updatedAt.desc` - Sort by updated date, descending\n * `count.asc` - Sort by aggregated tag counts, ascending, ONLY works when contributionType = tag is present\n * `count.desc` - Sort by aggregated tag counts, descending, ONLY works when contributionType = tag is present\n"
-    paramContType:
-      in: query
-      name: contributionType
-      description: Contribution type which maps to the contributionType field in the MySQL database
-      required: false
-      schema:
-        maximum: 20
-        type: string
-      example: tag
-    paramTargetPageNum:
-      in: query
-      name: targetPageNum
-      description: Contribution's target page number which maps to the targetPageNum field in the MySQL database
-      required: false
-      schema:
-        maximum: 30
-        type: integer
-      example: 1
-    paramTargetNaIdFilter:
-      in: query
-      name: targetNaId
-      description: Contribution's target record's unique identifier which maps to the targetNaId field in the MySQL database
-      required: false
-      schema:
-        maximum: 30
-        type: string
-      example: 1667758
-    paramUpdatedAtFilter:
-      in: query
-      name: updatedAt
-      description: Contribution's date of modification by which to filter
-      required: false
-      schema:
-        maximum: 30
-        type: string
-      example: '2020-01-02 07:00:00'
-    paramContStatus:
-      in: query
-      name: status
-      description: Contribution's status which maps to the status field in the MySQL database
-      required: false
-      schema:
-        maximum: 30
-        type: string
-      example: active
     paramTargetNaId:
       in: path
       name: targetNaId
@@ -357,24 +220,6 @@ components:
         maximum: 30
         type: integer
       example: 1667758
-    updatedAfter:
-      in: query
-      name: updatedAt
-      description: Compares provided timestamp to records updated timestamp, which maps to the updatedAt field in the MySQL database
-      required: false
-      schema:
-        maximum: 30
-        type: string
-      example: tag
-    paramParentContUuid:
-      in: path
-      name: parentContributionId
-      description: A contribution's parent contribution's unique uuid identifier, which maps to the parentContributorId field in the MySQL database
-      required: true
-      schema:
-        maximum: 50
-        type: string
-      example: 55555555-5555-5555-5555-555555555555
     paramContQuery:
       in: query
       name: q
@@ -400,15 +245,33 @@ components:
           value: photo*
           summary: Stemming with wildcards
           description: Returns results which contain one or more contributions with variations of the word "photo", such as "photograph" and "photography".
-    paramContId:
+    paramContUserId:
       in: query
-      name: id
-      description: An individual contribution's unique identifier which maps to the record.contributionId field
-      required: false
+      name: userId
+      description: Contributor's unique identifier which maps to the userId field in the MySQL database
+      required: true
       schema:
-        maximum: 50
+        maximum: 36
         type: string
       example: 55555555-5555-5555-5555-555555555555
+    paramNaId:
+      in: query
+      name: naId
+      description: An array of NARA-specific identifiers, each of which is unique to a single record.
+      required: false
+      schema:
+        maximum: 10000
+        type: string
+      example: 146919092, 146919093
+    paramUserName:
+      in: query
+      name: userName
+      description: Contributor's screen name which maps to the record.contributor.userName field
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: johndoe1
     paramDebug:
       in: query
       name: debug
@@ -418,6 +281,84 @@ components:
         maximum: 100
         type: boolean
       example: true
+    paramTargetPageNum:
+      in: query
+      name: targetPageNum
+      description: Contribution's target page number which maps to the targetPageNum field in the MySQL database
+      required: false
+      schema:
+        maximum: 30
+        type: integer
+      example: 1
+    paramTargetObjectId:
+      in: path
+      name: targetObjectId
+      description: Contribution's target objects's unique identifier which maps to the targetObjectId field in the MySQL database
+      required: true
+      schema:
+        maximum: 30
+        type: integer
+      example: 45710028
+    paramContStatus:
+      in: query
+      name: status
+      description: Contribution's status which maps to the status field in the MySQL database
+      required: false
+      schema:
+        maximum: 30
+        type: string
+      example: active
+    paramUserId:
+      in: query
+      name: userId
+      description: Contributor's unique identifier which maps to the record.contributor.userId field
+      required: false
+      schema:
+        maximum: 50
+        type: string
+      example: 55555555-5555-5555-5555-555555555555
+    updatedAfter:
+      in: query
+      name: updatedAt
+      description: Compares provided timestamp to records updated timestamp, which maps to the updatedAt field in the MySQL database
+      required: false
+      schema:
+        maximum: 30
+        type: string
+      example: tag
+    paramContType:
+      in: query
+      name: contributionType
+      description: Contribution type which maps to the contributionType field in the MySQL database
+      required: false
+      schema:
+        maximum: 20
+        type: string
+      example: tag
+    paramSortBy:
+      in: query
+      name: sortBy
+      required: false
+      schema:
+        maximum: 30
+        type: string
+        enum:
+        - contribution.asc
+        - contribution.desc
+        - createdAt.asc
+        - createdAt.desc
+        - updatedAt.asc
+        - updatedAt.desc
+      description: "Sort order:\n * `contribution.asc` - Sort by contribution, ascending from A to Z\n * `contribution.desc` - Sort by contribution, descending from Z to A\n * `createdAt.asc` - Sort by created date, ascending\n * `createdAt.desc` - Sort by created date, descending\n * `updatedAt.asc` - Sort by updated date, ascending\n * `updatedAt.desc` - Sort by updated date, descending\n * `count.asc` - Sort by aggregated tag counts, ascending, ONLY works when contributionType = tag is present\n * `count.desc` - Sort by aggregated tag counts, descending, ONLY works when contributionType = tag is present\n"
+    paramUpdatedAtFilter:
+      in: query
+      name: updatedAt
+      description: Contribution's date of modification by which to filter
+      required: false
+      schema:
+        maximum: 30
+        type: string
+      example: '2020-01-02 07:00:00'
     paramCreatedAtFilter:
       in: query
       name: createdAt
@@ -427,3 +368,62 @@ components:
         maximum: 30
         type: string
       example: '2020-01-01 07:00:00'
+    paramIncludeTotalCount:
+      in: query
+      name: includeTotalCount
+      description: Returns the total count of results in each result.
+      required: false
+      schema:
+        maximum: 100
+        type: boolean
+      example: true
+    paramTargetNaIdFilter:
+      in: query
+      name: targetNaId
+      description: Contribution's target record's unique identifier which maps to the targetNaId field in the MySQL database
+      required: false
+      schema:
+        maximum: 30
+        type: string
+      example: 1667758
+    paramParentContUuid:
+      in: path
+      name: parentContributionId
+      description: A contribution's parent contribution's unique uuid identifier, which maps to the parentContributorId field in the MySQL database
+      required: true
+      schema:
+        maximum: 50
+        type: string
+      example: 55555555-5555-5555-5555-555555555555
+    paramContId:
+      in: query
+      name: id
+      description: An individual contribution's unique identifier which maps to the record.contributionId field
+      required: false
+      schema:
+        maximum: 50
+        type: string
+      example: 55555555-5555-5555-5555-555555555555
+    paramSearchAfterContribution:
+      in: query
+      name: searchAfter
+      description: 'Enables deep pagination to retrieve records beyond the first 10,000 results.  Not compatible with sort, or page parameters.
+
+
+        For the inital request use `searchAfter=*` and for all subsequent requests set `searchAfter` to the value of the sort array in the last member of `body.hits.hits` for each page.
+
+        '
+      required: false
+      schema:
+        maximum: 100
+        type: string
+      example: 55555555-5555-5555-5555-555555555555
+    paramContUuid:
+      in: path
+      name: contributionId
+      description: An individual contribution's unique uuid identifier which maps to the contributorId field in the MySQL database
+      required: true
+      schema:
+        maximum: 50
+        type: string
+      example: 55555555-5555-5555-5555-555555555555
